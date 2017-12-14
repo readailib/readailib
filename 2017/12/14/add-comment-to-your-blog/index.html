@@ -71,7 +71,7 @@
     <div class="article-content">
       <p>今天尝试了一下不同得评论系统，现在将我设置评论系统的安装方法以及设置步骤总结出来，分享给大家.</p>
 <section id="disqus" class="level2">
-<h2>1. Disqus</h2>
+<h2>1.Disqus</h2>
 <p><a href="https://disqus.com/">disqus</a>是一个支持多社交账号和自家的账号的评论插件，是一个广泛使用的评论插件，主要依赖于你必须要在<a href="https://disqus.com/">disqus</a>进行设置。但是墙内的用户无法使用，这是比较不方便的地方。</p>
 <p>首先需要创建并设置disqus，进入<a href="https://disqus.com/admin/create/">管理界面</a>，按照图1进行填写.</p>
 <p><img src="http://olrs8j04a.bkt.clouddn.com/17-12-14/66883796.jpg" /></p>
@@ -97,7 +97,7 @@
 </center>
 </section>
 <section id="gitment" class="level2">
-<h2>2. gitment</h2>
+<h2>2.gitment</h2>
 <p>首先<a href="https://github.com/settings/applications/new">Register a new OAuth application</a>，填写要求</p>
 <p><img src="http://olrs8j04a.bkt.clouddn.com/17-12-14/65761478.jpg?imageView2/2/w/720" /></p>
 <center style="color:blue">
@@ -129,29 +129,76 @@ gitment.render(&#39;container&#39;)
 <pre class="html"><code>&lt;!-- {{ partial &quot;disqus.html&quot; .}} --&gt;
 {{ partial &quot;gitment.html&quot; .}}
 </code></pre>
-<p>设置完成之后，需要提交到你的gitpage上面进行渲染，然后才可以使用.</p>
+<p>设置完成之后，需要提交到你的gitpage上面进行渲染，然后才可以使用.可能需要首次授权之后才可以使用，最后完成之后是这样的.</p>
+<p><img src="http://olrs8j04a.bkt.clouddn.com/17-12-14/21477741.jpg?imageView2/2/w/720" /></p>
+<center style="color:blue">
+图7 gitment完成之后的样子
+</center>
+</section>
+<section id="gitalk" class="level2">
+<h2>3.gitalk</h2>
+<p>首先<a href="https://github.com/settings/applications/new">Register a new OAuth application</a>，填写要求</p>
+<p><img src="http://olrs8j04a.bkt.clouddn.com/17-12-14/65761478.jpg?imageView2/2/w/720" /></p>
+<center style="color:blue">
+图8 Register a new OAuth application Principle
+</center>
+<p>注册完成之后会返回下面的画面，记住<em>client_id</em> 和 <em>client_secret</em>就行了。</p>
+<p><img src="http://olrs8j04a.bkt.clouddn.com/17-12-14/27006178.jpg?imageView2/2/w/720" /></p>
+<center style="color:blue">
+图9 记住<em>client_id</em> 和 <em>client_secret</em>
+</center>
+<p>然后在 <code>themes\hugo-lithium-theme\layouts\partials</code>文件中添加一个新的文件<code>gitalk.html</code>，文件内容如下</p>
+<pre class="html"><code>&lt;div id=&quot;gitalk-container&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/gitalk/dist/gitalk.css&quot;&gt;
+&lt;script src=&quot;https://unpkg.com/gitalk/dist/gitalk.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+      var gitalk = new Gitalk({
+        clientID: &#39;a98bac7d9ab86f4813de&#39;,
+        clientSecret: &#39;307c20444af8207286b5f78f7a5ed941786edad0&#39;,
+        repo: &#39;readailib&#39;,
+        owner: &#39;rh01&#39;,
+        admin: [&#39;rh01&#39;],
+        body: location.href,
+      });
+      gitalk.render(&#39;gitalk-container&#39;);
+ &lt;/script&gt;</code></pre>
+<p><strong>Note</strong>：上面配置需要注意的是<em>repo</em>是指<em>owner</em>的github仓库，必须要存在！</p>
+<p>然后对<code>\themes\hugo-lithium-theme\layouts\_default\single.html</code>进行修改，注释掉引用<em>disqus.html</em>模板和<em>gitment.html</em>的语句，即如下所示.</p>
+<pre class="html"><code>  &lt;!-- {{ partial &quot;disqus.html&quot; .}} --&gt;
+  &lt;!-- {{ partial &quot;gitment.html&quot; .}} --&gt;
+  {{ partial &quot;gitalk.html&quot; .}}</code></pre>
+<p>设置完成之后，需要提交到你的gitpage上面进行渲染，然后才可以使用.可能需要首次授权之后才可以使用，最后完成之后是这样的.</p>
+<img src="http://olrs8j04a.bkt.clouddn.com/17-12-14/69406570.jpg" />
+<center style="color:blue">
+图10 gitalk完成之后的样子
+</center>
+</section>
+<section id="conclusion" class="level2">
+<h2>4.Conclusion</h2>
+<p>本文主要介绍了完整配置，介绍比较匆匆，如果有什么问题可以在下面留言.</p>
 </section>
 
     </div>
   </article>
 
   
-  <div id="container"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-var gitment = new Gitment({
-  id: 'location.href', 
-  owner: 'rh01',
-  repo: 'readailib',
-  oauth: {
-    client_id: '0319565cc33060a8cae6',
-    client_secret: 'b802a1cda8ed9bc40f2143c044dfdd16eda768ba',
-  },
-})
-gitment.render('container')
-</script>
   
+  <div id="gitalk-container"></div>
+</div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: 'a98bac7d9ab86f4813de',
+        clientSecret: '307c20444af8207286b5f78f7a5ed941786edad0',
+        repo: 'readailib',
+        owner: 'rh01',
+        admin: ['rh01'],
+        body: location.href,
+      });
+      gitalk.render('gitalk-container');
+ </script>
 
 
 
