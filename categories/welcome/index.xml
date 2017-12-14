@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on ReadAILib Official Website </title>
-    <link>/post/</link>
-    <description>Recent content in Posts on ReadAILib Official Website </description>
+    <title>Welcome on ReadAILib Official Website </title>
+    <link>/categories/welcome/</link>
+    <description>Recent content in Welcome on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 14 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/welcome/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,16 +18,6 @@
       
       <guid>/2017/12/14/welcome-to-readailib/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>test</title>
-      <link>/2017/12/14/test/</link>
-      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/14/test/</guid>
-      <description>TestThis is a test page.
-</description>
     </item>
     
   </channel>
