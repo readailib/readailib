@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on ReadAILib Official Website </title>
-    <link>/post/</link>
-    <description>Recent content in Posts on ReadAILib Official Website </description>
+    <title>Blog on ReadAILib Official Website </title>
+    <link>/categories/blog/</link>
+    <description>Recent content in Blog on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 14 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -28,28 +28,6 @@ disqusShortname = &amp;quot;readailib&amp;quot;然后就可以启用了.效果�
 图5 Register a new OAuth application Principle注册完成之后会返回下面的画面，记住client_id 和 client_secret就行了。
 图6 记住client_id 和 client_secret然后在 themes\hugo-lithium-theme\layouts\partials文件中添加一个新的文件gitment.html，文件内容如下
 &amp;lt;div id=&amp;quot;container&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://imsun.github.io/gitment/style/default.css&amp;quot;&amp;gt;&amp;lt;script src=&amp;quot;https://imsun.github.io/gitment/dist/gitment.browser.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;script&amp;gt;var gitment = new Gitment({id: &amp;#39;location.href&amp;#39;, // owner: &amp;#39;rh01&amp;#39;,repo: &amp;#39;readailib&amp;#39;,oauth: {client_id: &amp;#39;3724d1f38c45d652612b&amp;#39;,client_secret: &amp;#39;cc24fc9ed88bf9eddd44f1319a7056e5d8690d12&amp;#39;,},})gitment.</description>
-    </item>
-    
-    <item>
-      <title>Welcome to ReadAILib</title>
-      <link>/2017/12/14/welcome-to-readailib/</link>
-      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/14/welcome-to-readailib/</guid>
-      <description>Hello Everyone, Welcome to ReadAILib.
-大家好，本网站主要是由blogdown和Hugo生成的静态网站，为了方便起见，这里傻瓜式地照搬了yihui的模板（默认），这些都不是关键，本网站不是营利性网站，是一个学习交流性质的网站，主要方向为AI，虚拟化，集群，容器，DevOps，分布式，物联网等技术。
-我会尽力将我所做过的和正在做的整理出来，以供学习和交流，广交有共同兴趣的朋友，如果你对我未来的设想或者我的博客内容有什么建议的，可以直接向我提供您有价值的建议，或者直接留言.
-总之一句话，接受批评，接受建议!如果你未来期望与我合作，很期待你与我联系.</description>
-    </item>
-    
-    <item>
-      <title>test</title>
-      <link>/2017/12/14/test/</link>
-      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/14/test/</guid>
-      <description>TestThis is a test page.
-</description>
     </item>
     
   </channel>

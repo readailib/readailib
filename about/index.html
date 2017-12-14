@@ -68,22 +68,22 @@
   </article>
 
   
+  <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: 'location.href', 
+  owner: 'rh01',
+  repo: 'readailib',
+  oauth: {
+    client_id: '0319565cc33060a8cae6',
+    client_secret: 'b802a1cda8ed9bc40f2143c044dfdd16eda768ba',
+  },
+})
+gitment.render('container')
+</script>
   
-  <div id="gitalk-container"></div>
-</div>
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-      var gitalk = new Gitalk({
-        clientID: 'a98bac7d9ab86f4813de',
-        clientSecret: '307c20444af8207286b5f78f7a5ed941786edad0',
-        repo: 'readailib',
-        owner: 'rh01',
-        admin: ['rh01'],
-        body: location.href,
-      });
-      gitalk.render('gitalk-container');
- </script>
 
 
 

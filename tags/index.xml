@@ -21,6 +21,33 @@
     </item>
     
     <item>
+      <title>Disqus</title>
+      <link>/tags/disqus/</link>
+      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/disqus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gitalk</title>
+      <link>/tags/gitalk/</link>
+      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/gitalk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gitment</title>
+      <link>/tags/gitment/</link>
+      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/gitment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Test</title>
       <link>/tags/test/</link>
       <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
