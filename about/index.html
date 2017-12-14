@@ -68,33 +68,27 @@
   </article>
 
   
-<section id="comments">
-  <div id="disqus_thread"></div>
-  <script>
-  var disqus_config = function () {
-  
-  };
-  (function() {
-    var inIFrame = function() {
-      var iframe = true;
-      try { iframe = window.self !== window.top; } catch (e) {}
-      return iframe;
-    };
-    if (inIFrame()) return;
-    var d = document, s = d.createElement('script');
-    s.src = '//readailib.disqus.com/embed.js'; s.async = true;
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</section>
-
+  <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: 'location.href', 
+  owner: 'rh01',
+  repo: 'readailib',
+  oauth: {
+    client_id: '3724d1f38c45d652612b',
+    client_secret: 'cc24fc9ed88bf9eddd44f1319a7056e5d8690d12',
+  },
+})
+gitment.render('container')
+</script>
 
 
 </main>
 
       <footer class="footer">
+        
         <center>
           <img src="http://www.readailib.com/images/cc.png">
         </center>
