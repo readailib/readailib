@@ -21,6 +21,13 @@ h6 {
   color: #222;
 }
 
+
+img{
+    max-width:100%;
+    height:auto;
+}
+
+
 a {
   outline: none;
 }
@@ -246,6 +253,8 @@ code {
   margin-left: 2px;
 }
 
+
+
 @media (min-width: 600px) {
   .header {
     padding: 25px 0;
@@ -309,6 +318,8 @@ code {
   .footer-links {
     font-size: inherit;
   }
+
+
 }
 
 @media print {
