@@ -41,6 +41,15 @@ code {
   position: relative;
 }
 
+.caption {
+  color: blue;
+  text-align: center;
+}
+
+.figure {
+  text-align: center;
+}
+
 .header {
   padding: 20px 0;
   position: relative;
