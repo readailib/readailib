@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Template on ReadAILib Official Website </title>
+    <link>/categories/template/</link>
+    <description>Recent content in Template on ReadAILib Official Website </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/template/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Template of Rmarkdown</title>
+      <link>/2017/12/15/template-of-rmarkdown/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/15/template-of-rmarkdown/</guid>
+      <description>GitHub DocumentsThis is an R Markdown format used for publishing markdown documents to GitHub. When you click the Knit button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+Including CodeYou can include R code in the document as follows:
+summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.</description>
+    </item>
+    
+  </channel>
+</rss>
