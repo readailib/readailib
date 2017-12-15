@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Beamer on ReadAILib Official Website </title>
+    <link>/categories/beamer/</link>
+    <description>Recent content in Beamer on ReadAILib Official Website </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/beamer/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Beamer 样式</title>
+      <link>/2017/12/15/beamer-%E6%A0%B7%E5%BC%8F/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/15/beamer-%E6%A0%B7%E5%BC%8F/</guid>
+      <description>R Markdown This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+ Slide with Bullets  Bullet 1 Bullet 2 Bullet 3   Slide with R Output summary(cars) ## speed dist ## Min.</description>
+    </item>
+    
+    <item>
+      <title>Beamer 样式</title>
+      <link>/2017/12/15/beamer-%E6%A0%B7%E5%BC%8F/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/15/beamer-%E6%A0%B7%E5%BC%8F/</guid>
+      <description>title: &amp;ldquo;Untitled&amp;rdquo;
+output: slidy_presentation R Markdown This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+Slide with Bullets  Bullet 1 Bullet 2 Bullet 3  Slide with R Output summary(cars)  ## speed dist ## Min.</description>
+    </item>
+    
+    <item>
+      <title>Beamer 样式</title>
+      <link>/2017/12/15/beamer-%E6%A0%B7%E5%BC%8F/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/15/beamer-%E6%A0%B7%E5%BC%8F/</guid>
+      <description>title: &amp;ldquo;Untitled&amp;rdquo;
+output: slidy_presentation R Markdown This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+Slide with Bullets  Bullet 1 Bullet 2 Bullet 3  Slide with R Output summary(cars)  ## speed dist ## Min.</description>
+    </item>
+    
+  </channel>
+</rss>

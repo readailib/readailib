@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>About</title>
+      <title>关于ReadAILib</title>
       <link>/about/</link>
       <pubDate>Thu, 14 Dec 2017 21:48:51 -0700</pubDate>
       
@@ -22,7 +22,18 @@
     </item>
     
     <item>
-      <title>CTeX Template for Rstudio</title>
+      <title>&lt;引用&gt;Rmarkdown模板</title>
+      <link>/2017/12/15/template-of-rmarkdown/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/15/template-of-rmarkdown/</guid>
+      <description>GitHub DocumentsThis is an R Markdown format used for publishing markdown documents to GitHub. When you click the Knit button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+Including CodeYou can include R code in the document as follows:
+summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.</description>
+    </item>
+    
+    <item>
+      <title>CTeX样式</title>
       <link>/2017/12/15/ctex-template-for-rstudio/</link>
       <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
       
@@ -40,7 +51,7 @@ options(digits = 4)fit = lm(dist ~ speed, data = cars)coef(summary(fit))## Es
     </item>
     
     <item>
-      <title>Template for Blog</title>
+      <title>Tufte样式</title>
       <link>/2017/12/15/tufte-template-for-blog/</link>
       <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
       
@@ -49,36 +60,6 @@ options(digits = 4)fit = lm(dist ~ speed, data = cars)coef(summary(fit))## Es
 ---title: &amp;quot;一个Tufte样式示例&amp;quot;author: &amp;quot;张三&amp;quot;ctex: yesoutput:tufte::tufte_handout:latex_engine: xelatextufte::tufte_html: default---章节标题Tufte样式不主张太深的章节目录，一般仅仅使用一级标题（Markdown中用一个井号#）和二级标题（两个井号）。
 插图边栏插图插图在Tufte的书中非常常见，我们可以使用三种插图：边栏图、全宽图、主栏图。先说边栏图：使用knitr代码段选项fig.margin = TRUE即可将图形放置在边栏中，如：
 library(ggplot2)## Warning: 程辑包&amp;#39;ggplot2&amp;#39;是用R版本3.3.3 来建造的mtcars2 &amp;lt;- mtcarsmtcars2$am &amp;lt;- factor(mtcars$am, labels = c(&amp;#39;automatic&amp;#39;, &amp;#39;manual&amp;#39;))ggplot(mtcars2, aes(hp, mpg, color = am)) +geom_point() + geom_smooth() +theme(legend.position = &amp;#39;bottom&amp;#39;)## `geom_smooth()` using method = &amp;#39;loess&amp;#39;Figure 1: MPG与horsepower两个变量的散点图；颜色代表自动挡或手动挡。注意我们使用代码段选项fig.cap设定了图的标题。当然我们也可以设置图的长宽。</description>
-    </item>
-    
-    <item>
-      <title>Template of Rmarkdown</title>
-      <link>/2017/12/15/template-of-rmarkdown/</link>
-      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/15/template-of-rmarkdown/</guid>
-      <description>GitHub DocumentsThis is an R Markdown format used for publishing markdown documents to GitHub. When you click the Knit button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
-Including CodeYou can include R code in the document as follows:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.</description>
-    </item>
-    
-    <item>
-      <title>Add Comment to Your Blog</title>
-      <link>/2017/12/14/add-comment-to-your-blog/</link>
-      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/14/add-comment-to-your-blog/</guid>
-      <description>今天尝试了一下不同得评论系统，现在将我设置评论系统的安装方法以及设置步骤总结出来，分享给大家.
-1.Disqusdisqus是一个支持多社交账号和自家的账号的评论插件，是一个广泛使用的评论插件，主要依赖于你必须要在disqus进行设置。但是墙内的用户无法使用，这是比较不方便的地方。
-首先需要创建并设置disqus，进入管理界面，按照图1进行填写.
-图1 填写要求填写完成之后，点击Create Site按钮，就可以进行下一步配置.
-图2 配置要求说明填写完成后，就可以点击Complete Setup，完成配置，但是重要的一点不要忘记是，必须要记住disqusShortname，那你可以通过下面的方式进行查询，比如
-图3 disqusShortname查看方式完成之后，就可以在blogdown里面的config.toml中进行配置了，
-disqusShortname = &amp;quot;readailib&amp;quot;然后就可以启用了.效果如下
-图4 disqus效果2.gitment首先Register a new OAuth application，填写要求
-图5 Register a new OAuth application Principle注册完成之后会返回下面的画面，记住client_id 和 client_secret就行了。
-图6 记住client_id 和 client_secret然后在 themes\hugo-lithium-theme\layouts\partials文件中添加一个新的文件gitment.html，文件内容如下
-&amp;lt;div id=&amp;quot;container&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://imsun.github.io/gitment/style/default.css&amp;quot;&amp;gt;&amp;lt;script src=&amp;quot;https://imsun.github.io/gitment/dist/gitment.browser.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;script&amp;gt;var gitment = new Gitment({id: &amp;#39;location.href&amp;#39;, // owner: &amp;#39;rh01&amp;#39;,repo: &amp;#39;readailib&amp;#39;,oauth: {client_id: &amp;#39;3724d1f38c45d652612b&amp;#39;,client_secret: &amp;#39;cc24fc9ed88bf9eddd44f1319a7056e5d8690d12&amp;#39;,},})gitment.</description>
     </item>
     
     <item>
@@ -101,6 +82,25 @@ disqusShortname = &amp;quot;readailib&amp;quot;然后就可以启用了.效果�
       <guid>/2017/12/14/test/</guid>
       <description>TestThis is a test page.
 </description>
+    </item>
+    
+    <item>
+      <title>为我的博客安装评论插件</title>
+      <link>/2017/12/14/add-comment-to-your-blog/</link>
+      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/14/add-comment-to-your-blog/</guid>
+      <description>今天尝试了一下不同得评论系统，现在将我设置评论系统的安装方法以及设置步骤总结出来，分享给大家.
+1.Disqusdisqus是一个支持多社交账号和自家的账号的评论插件，是一个广泛使用的评论插件，主要依赖于你必须要在disqus进行设置。但是墙内的用户无法使用，这是比较不方便的地方。
+首先需要创建并设置disqus，进入管理界面，按照图1进行填写.
+图1 填写要求填写完成之后，点击Create Site按钮，就可以进行下一步配置.
+图2 配置要求说明填写完成后，就可以点击Complete Setup，完成配置，但是重要的一点不要忘记是，必须要记住disqusShortname，那你可以通过下面的方式进行查询，比如
+图3 disqusShortname查看方式完成之后，就可以在blogdown里面的config.toml中进行配置了，
+disqusShortname = &amp;quot;readailib&amp;quot;然后就可以启用了.效果如下
+图4 disqus效果2.gitment首先Register a new OAuth application，填写要求
+图5 Register a new OAuth application Principle注册完成之后会返回下面的画面，记住client_id 和 client_secret就行了。
+图6 记住client_id 和 client_secret然后在 themes\hugo-lithium-theme\layouts\partials文件中添加一个新的文件gitment.html，文件内容如下
+&amp;lt;div id=&amp;quot;container&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://imsun.github.io/gitment/style/default.css&amp;quot;&amp;gt;&amp;lt;script src=&amp;quot;https://imsun.github.io/gitment/dist/gitment.browser.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;script&amp;gt;var gitment = new Gitment({id: &amp;#39;location.href&amp;#39;, // owner: &amp;#39;rh01&amp;#39;,repo: &amp;#39;readailib&amp;#39;,oauth: {client_id: &amp;#39;3724d1f38c45d652612b&amp;#39;,client_secret: &amp;#39;cc24fc9ed88bf9eddd44f1319a7056e5d8690d12&amp;#39;,},})gitment.</description>
     </item>
     
   </channel>

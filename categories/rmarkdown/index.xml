@@ -12,7 +12,18 @@
     
     
     <item>
-      <title>CTeX Template for Rstudio</title>
+      <title>&lt;引用&gt;Rmarkdown模板</title>
+      <link>/2017/12/15/template-of-rmarkdown/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/15/template-of-rmarkdown/</guid>
+      <description>GitHub DocumentsThis is an R Markdown format used for publishing markdown documents to GitHub. When you click the Knit button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+Including CodeYou can include R code in the document as follows:
+summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.</description>
+    </item>
+    
+    <item>
+      <title>CTeX样式</title>
       <link>/2017/12/15/ctex-template-for-rstudio/</link>
       <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
       
@@ -30,7 +41,7 @@ options(digits = 4)fit = lm(dist ~ speed, data = cars)coef(summary(fit))## Es
     </item>
     
     <item>
-      <title>Template for Blog</title>
+      <title>Tufte样式</title>
       <link>/2017/12/15/tufte-template-for-blog/</link>
       <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
       
@@ -39,17 +50,6 @@ options(digits = 4)fit = lm(dist ~ speed, data = cars)coef(summary(fit))## Es
 ---title: &amp;quot;一个Tufte样式示例&amp;quot;author: &amp;quot;张三&amp;quot;ctex: yesoutput:tufte::tufte_handout:latex_engine: xelatextufte::tufte_html: default---章节标题Tufte样式不主张太深的章节目录，一般仅仅使用一级标题（Markdown中用一个井号#）和二级标题（两个井号）。
 插图边栏插图插图在Tufte的书中非常常见，我们可以使用三种插图：边栏图、全宽图、主栏图。先说边栏图：使用knitr代码段选项fig.margin = TRUE即可将图形放置在边栏中，如：
 library(ggplot2)## Warning: 程辑包&amp;#39;ggplot2&amp;#39;是用R版本3.3.3 来建造的mtcars2 &amp;lt;- mtcarsmtcars2$am &amp;lt;- factor(mtcars$am, labels = c(&amp;#39;automatic&amp;#39;, &amp;#39;manual&amp;#39;))ggplot(mtcars2, aes(hp, mpg, color = am)) +geom_point() + geom_smooth() +theme(legend.position = &amp;#39;bottom&amp;#39;)## `geom_smooth()` using method = &amp;#39;loess&amp;#39;Figure 1: MPG与horsepower两个变量的散点图；颜色代表自动挡或手动挡。注意我们使用代码段选项fig.cap设定了图的标题。当然我们也可以设置图的长宽。</description>
-    </item>
-    
-    <item>
-      <title>Template of Rmarkdown</title>
-      <link>/2017/12/15/template-of-rmarkdown/</link>
-      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/15/template-of-rmarkdown/</guid>
-      <description>GitHub DocumentsThis is an R Markdown format used for publishing markdown documents to GitHub. When you click the Knit button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
-Including CodeYou can include R code in the document as follows:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.</description>
     </item>
     
   </channel>
