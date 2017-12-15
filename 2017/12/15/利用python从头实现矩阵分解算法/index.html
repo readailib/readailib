@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<title>利用python从头实现矩阵分解算法 - ReadAILib Official Website </title>
+<meta property="og:title" content="利用python从头实现矩阵分解算法 - ReadAILib Official Website ">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/readailib">GitHub</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCTOuJy4b9E89zCwffX-qC3A">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">利用python从头实现矩阵分解算法</h1>
+
+    
+    <span class="article-date">2017/12/15</span>
+    
+
+    <div class="article-content">
+      <p>该程序主要是我的《矩阵分析与应用》课程的大作业的解决方案及程序说明。大作业的要求为：</p>
+<blockquote>
+<p>要求完成课堂上讲的关于矩阵分解的<strong>LU</strong>、<strong>QR（Gram-Schmidt）</strong>、<strong>Orthogonal Reduction (Householder reduction 和Givens reduction)</strong>程序实现，要求如下：</p>
+</blockquote>
+<blockquote>
+<ol type="1">
+<li>一个综合程序，根据选择参数的不同，实现不同的矩阵分解；</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" type="1">
+<li>可以用<code>matlab</code>等编写程序，需附上简单的程序说明，比如参数代表什么意思，输入什么，输出什么等等；</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3" type="1">
+<li>一定是可执行文件，例如<code>.m</code>文件等,不能是<code>word</code>或者<code>txt</code>文档。附上源代码，不能为直接调用<code>matlab</code>等函数库.</li>
+</ol>
+</blockquote>
+<section class="level2">
+<h2>程序说明</h2>
+<p>项目的地址为<a href="https://github.com/rh01/matrix-decomposition" class="uri">https://github.com/rh01/matrix-decomposition</a></p>
+<pre class="text"><code>- factorization.py
+- utils.py</code></pre>
+<section id="utils.py" class="level3">
+<h3>utils.py</h3>
+<p>共有两个源文件组成，其中utils文件主要是一些实现好的工具函数，有</p>
+<pre class="python"><code>def mult_matrix(M, N):
+    &quot;&quot;&quot;Multiply square matrices of same dimension M and N&quot;&quot;&quot;
+
+def pivot_matrix(M):
+    &quot;&quot;&quot;Returns the pivoting matrix for M, used in Doolittle&#39;s method.&quot;&quot;&quot;
+
+def trans_matrix(M):
+    &quot;&quot;&quot;Take the transpose of a matrix.&quot;&quot;&quot;
+    
+def norm(x):
+    &quot;&quot;&quot;Return the Euclidean norm of the vector x.&quot;&quot;&quot;
+
+def Q_i(Q_min, i, j, k):
+    &quot;&quot;&quot;Construct the Q_t matrix by left-top padding the matrix Q                 
+    with elements from the identity matrix.&quot;&quot;&quot;</code></pre>
+<p>由于实现的为矩阵运算，并且未使用到高级的矩阵运算工具软件<strong>numpy</strong>，因此程序里面的数据结构为python的基本数据结构<code>list</code>，所以说整个工程相对来说计算比较复杂。所以我们提前写好了简化计算的函数工具.</p>
+</section>
+<section id="factorization.py" class="level3">
+<h3>factorization.py</h3>
+<p>这个是主函数实现部分，基本上所有的算法都在这个文件中实现，将函数的结构列在下面:</p>
+<pre class="python"><code>def LU_decomposition(A, verbose=False):
+    &quot;&quot;&quot;Performs an LU Decomposition of A (which must be square)         
+    into PA = LU. The function returns P, L and U.&quot;&quot;&quot;
+    
+def Gram_Schimidt(A,verbose=False):
+    &quot;&quot;&quot;Performs a Gram Schimidt based QR Decomposition of the 
+    matrix A. The function returns Q, an orthogonal matrix and R, an    
+    upper triangular matrix such that A = QR.&quot;&quot;&quot;
+
+
+def householder_reduction(A, verbose=False):
+    &quot;&quot;&quot;Performs a Householder Reflections based QR Decomposition of the 
+    matrix A. The function returns Q, an orthogonal matrix and R, an    
+    upper triangular matrix such that A = QR.&quot;&quot;&quot;
+    
+def Givens_reduction(A,verbose=False):
+    &quot;&quot;&quot;Performs a Givens Reflections based QR Decomposition of the
+    matrix A. The function returns Q, an orthogonal matrix and R, an
+    upper triangular matrix such that A = QR.&quot;&quot;&quot;
+</code></pre>
+</section>
+</section>
+<section class="level2">
+<h2>测试部分</h2>
+<section id="plu_decomposition" class="level3">
+<h3>PLU_decomposition</h3>
+<pre class="python"><code>the A matrix is:
+[[12, -51, 4], [6, 167, -68], [-4, 24, -41]]
+please choose the way to decompose A . 
+Press &#39;1&#39; to realize the PLU_decomposition of A. 
+Press &#39;2&#39; to realize the Gram_Schimidt of A.
+Press &#39;3&#39; to realize the householder_reduction of A.
+Press &#39;4&#39; to realize the Givens_reduction of A.
+please choose the mode:1
+The L matrix is
+[[1.0, 0.0, 0.0], [0.5, 1.0, 0.0], [-0.3333333333333333, 0.03636363636363636, 1.0]]
+The U matrix is
+[[12.0, -51.0, 4.0], [0.0, 192.5, -70.0], [0.0, 0.0, -37.121212121212125]]
+</code></pre>
+</section>
+<section id="gram_schimidt" class="level3">
+<h3>Gram_Schimidt</h3>
+<pre class="python"><code>the A matrix is:
+[[12, -51, 4], [6, 167, -68], [-4, 24, -41]]
+please choose the way to decompose A . 
+Press &#39;1&#39; to realize the PLU_decomposition of A. 
+Press &#39;2&#39; to realize the Gram_Schimidt of A.
+Press &#39;3&#39; to realize the householder_reduction of A.
+Press &#39;4&#39; to realize the Givens_reduction of A.
+please choose the mode:2
+QR decomposition in numpy is 
+(array([[-0.85714286,  0.39428571,  0.33142857],
+       [-0.42857143, -0.90285714, -0.03428571],
+       [ 0.28571429, -0.17142857,  0.94285714]]), array([[ -14.,  -21.,   14.],
+       [   0., -175.,   70.],
+       [   0.,    0.,  -35.]]))</code></pre>
+</section>
+</section>
+
+        <hr />
+    </div>
+
+  </article>
+
+
+
+  
+  
+  <div id="gitalk-container"></div>
+</div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: 'a98bac7d9ab86f4813de',
+        clientSecret: '307c20444af8207286b5f78f7a5ed941786edad0',
+        repo: 'readailib',
+        owner: 'rh01',
+        admin: ['rh01'],
+        body: location.href,
+      });
+      gitalk.render('gitalk-container');
+ </script>
+
+
+
+</main>
+
+      <footer class="footer">
+
+        <center>
+          <img src="http://www.readailib.com/images/cc.png" width="88px">
+        </center>
+        
+        <ul class="footer-links">
+
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" width="22" height="22"></a>
+          </li>
+        </ul>
+        <span style="margin: 3px">
+
+        
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/Dockerfile.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/python.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

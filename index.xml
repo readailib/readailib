@@ -63,6 +63,19 @@ library(ggplot2)## Warning: 程辑包&amp;#39;ggplot2&amp;#39;是用R版本3.3.
     </item>
     
     <item>
+      <title>利用python从头实现矩阵分解算法</title>
+      <link>/2017/12/15/%E5%88%A9%E7%94%A8python%E4%BB%8E%E5%A4%B4%E5%AE%9E%E7%8E%B0%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/15/%E5%88%A9%E7%94%A8python%E4%BB%8E%E5%A4%B4%E5%AE%9E%E7%8E%B0%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E7%AE%97%E6%B3%95/</guid>
+      <description>该程序主要是我的《矩阵分析与应用》课程的大作业的解决方案及程序说明。大作业的要求为：
+ 要求完成课堂上讲的关于矩阵分解的LU、QR（Gram-Schmidt）、Orthogonal Reduction (Householder reduction 和Givens reduction)程序实现，要求如下：
+  一个综合程序，根据选择参数的不同，实现不同的矩阵分解；    可以用matlab等编写程序，需附上简单的程序说明，比如参数代表什么意思，输入什么，输出什么等等；    一定是可执行文件，例如.m文件等,不能是word或者txt文档。附上源代码，不能为直接调用matlab等函数库.   程序说明 项目的地址为https://github.com/rh01/matrix-decomposition
+- factorization.py - utils.py utils.py 共有两个源文件组成，其中utils文件主要是一些实现好的工具函数，有
+def mult_matrix(M, N): &amp;quot;&amp;quot;&amp;quot;Multiply square matrices of same dimension M and N&amp;quot;&amp;quot;&amp;quot; def pivot_matrix(M): &amp;quot;&amp;quot;&amp;quot;Returns the pivoting matrix for M, used in Doolittle&amp;#39;s method.&amp;quot;&amp;quot;&amp;quot; def trans_matrix(M): &amp;quot;&amp;quot;&amp;quot;Take the transpose of a matrix.&amp;quot;&amp;quot;&amp;quot; def norm(x): &amp;quot;&amp;quot;&amp;quot;Return the Euclidean norm of the vector x.</description>
+    </item>
+    
+    <item>
       <title>Welcome to ReadAILib</title>
       <link>/2017/12/14/welcome-to-readailib/</link>
       <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
