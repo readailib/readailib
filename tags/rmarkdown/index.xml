@@ -12,17 +12,6 @@
     
     
     <item>
-      <title>&lt;引用&gt;Rmarkdown模板</title>
-      <link>/2017/12/15/template-of-rmarkdown/</link>
-      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/15/template-of-rmarkdown/</guid>
-      <description>GitHub DocumentsThis is an R Markdown format used for publishing markdown documents to GitHub. When you click the Knit button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
-Including CodeYou can include R code in the document as follows:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.</description>
-    </item>
-    
-    <item>
       <title>CTeX样式</title>
       <link>/2017/12/15/ctex-template-for-rstudio/</link>
       <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
@@ -38,6 +27,17 @@ Windows和Mac用户应该都已经有自带的中文字体了。Linux用户可�
 R代码段R代码用R Markdown的语法嵌入，即三个反引号开始一段代码```{r}和三个反引号``` 结束一段代码：
 options(digits = 4)fit = lm(dist ~ speed, data = cars)coef(summary(fit))## Estimate Std. Error t value Pr(&amp;gt;|t|)## (Intercept) -17.579 6.7584 -2.601 1.232e-02## speed 3.932 0.4155 9.464 1.490e-12b = coef(fit)上面回归方程中的斜率是3.9324，完整的回归方程为：\[ Y = -17.5791 + 3.9324x\]
 画图当然也是木有问题的啦，想画就说嘛，不说我怎么知道你想画呢？</description>
+    </item>
+    
+    <item>
+      <title>Rmarkdown模板</title>
+      <link>/2017/12/15/template-of-rmarkdown/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/15/template-of-rmarkdown/</guid>
+      <description>GitHub DocumentsThis is an R Markdown format used for publishing markdown documents to GitHub. When you click the Knit button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+Including CodeYou can include R code in the document as follows:
+summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.</description>
     </item>
     
     <item>
