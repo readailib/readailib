@@ -28,19 +28,6 @@ img{
 }
 
 
-table {
-    display: table;
-    border-collapse: separate;
-    border-spacing: 2px;
-    border-color: grey;
-    margin-left: auto; 
-    margin-right: auto; 
-}
-
-
-
-
-
 a {
   outline: none;
 }
@@ -120,7 +107,7 @@ code {
 }
 
 .content {
-  max-width: 700px;
+  max-width: 705px;
   margin: 40px auto 10px;
   padding: 0 15px;
   font-size: 16px;
@@ -354,5 +341,13 @@ code {
 }
 
 
+footer.page-footer {
+    margin-top: 20px;
+    padding-top: 20px;
+    background-color: #423b3b;
+}
 
 
+.white-text {
+    color: #FFFFFF !important;
+}
