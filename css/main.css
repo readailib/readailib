@@ -120,16 +120,12 @@ code {
 }
 
 .content {
-  max-width: 780px;
+  max-width: 700px;
   margin: 40px auto 10px;
   padding: 0 15px;
   font-size: 16px;
   line-height: 1.7;
   color: #333;
-}
-
-article {
-  margin: 0 15px;
 }
 
 .article-title {
