@@ -27,6 +27,11 @@ img{
     height:auto;
 }
 
+table {
+  margin-left: auto;
+  margin-right:auto;
+}
+
 
 a {
   outline: none;
