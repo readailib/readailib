@@ -98,16 +98,6 @@ def mult_matrix(M, N): &amp;quot;&amp;quot;&amp;quot;Multiply square matrices of
     </item>
     
     <item>
-      <title>test</title>
-      <link>/2017/12/14/test/</link>
-      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/14/test/</guid>
-      <description>TestThis is a test page.
-</description>
-    </item>
-    
-    <item>
       <title>为我的博客安装评论插件</title>
       <link>/2017/12/14/add-comment-to-your-blog/</link>
       <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>

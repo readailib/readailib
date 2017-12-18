@@ -43,24 +43,19 @@
   </url>
   
   <url>
-    <loc>/2017/12/14/test/</loc>
-    <lastmod>2017-12-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/2017/12/14/add-comment-to-your-blog/</loc>
     <lastmod>2017-12-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/blog/</loc>
-    <lastmod>2017-12-17T00:00:00+00:00</lastmod>
+    <loc>/categories/blog/</loc>
+    <lastmod>2017-12-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/blog/</loc>
-    <lastmod>2017-12-14T00:00:00+00:00</lastmod>
+    <loc>/tags/blog/</loc>
+    <lastmod>2017-12-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -101,25 +96,25 @@
   </url>
   
   <url>
-    <loc>/tags/matrix/</loc>
-    <lastmod>2017-12-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/matrix/</loc>
     <lastmod>2017-12-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/pi/</loc>
-    <lastmod>2017-12-18T00:00:00+00:00</lastmod>
+    <loc>/tags/matrix/</loc>
+    <lastmod>2017-12-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/pi/</loc>
+    <lastmod>2017-12-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/pi/</loc>
     <lastmod>2017-12-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -143,13 +138,13 @@
   </url>
   
   <url>
-    <loc>/tags/rmarkdown/</loc>
+    <loc>/categories/rmarkdown/</loc>
     <lastmod>2017-12-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/rmarkdown/</loc>
+    <loc>/tags/rmarkdown/</loc>
     <lastmod>2017-12-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -169,18 +164,6 @@
   <url>
     <loc>/categories/template/</loc>
     <lastmod>2017-12-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/test/</loc>
-    <lastmod>2017-12-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/test/</loc>
-    <lastmod>2017-12-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
