@@ -68,6 +68,9 @@ table {
   /*left-margin: auto;*/
   margin-left: auto;
   margin-right: auto;
+  background: #f5f3d5;
+  border: 1px solid #eee;
+  /*border-color: grey;*/
 }
 
 
@@ -166,11 +169,11 @@ blockquote footer {
     background: #f5f3d5; /*#f8f8f8#f5f2d5*/
 }
 
+ 
 
-.gt-container {
-  background: #f5f3d5;
+.gt-container .gt-comment-admin .gt-header-comment .gt-comment-content {
+    background: #f5f3d5;
 }
-
 
 textarea {
    background: #f5f3d5;
