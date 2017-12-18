@@ -57,7 +57,9 @@ code {
     /*margin: 30px;*/
 }
 
-
+.gt-container {
+  margin: 5px;
+}
 
 table {
   /*left-margin: auto;*/
