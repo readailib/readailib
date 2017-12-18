@@ -1006,7 +1006,7 @@
   font-size: 0.875em;
   word-wrap: break-word;
   resize: vertical;
-  background-color: #f6f6f6;
+  /*background-color: #f6f6f6;*/
   outline: none;
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
@@ -1158,7 +1158,7 @@
   color: #333 !important;
 }
 .gt-container .gt-comment-admin .gt-comment-content {
-  background-color: #f6f9fe;
+  background-color: #f5f3d5;
 }
 @-webkit-keyframes gt-kf-rotate {
   0% {
