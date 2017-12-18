@@ -80,13 +80,13 @@
 <li>一定是可执行文件，例如<code>.m</code>文件等,不能是<code>word</code>或者<code>txt</code>文档。附上源代码，不能为直接调用<code>matlab</code>等函数库.</li>
 </ul>
 </blockquote>
-<section class="level2">
-<h2>程序说明</h2>
+<section class="level1">
+<h1>程序说明</h1>
 <p>项目的地址为<a href="https://github.com/rh01/matrix-decomposition" class="uri">https://github.com/rh01/matrix-decomposition</a></p>
 <pre class="text"><code>- factorization.py
 - utils.py</code></pre>
-<section id="utils.py" class="level3">
-<h3>utils.py</h3>
+<section id="utils.py" class="level2">
+<h2>utils.py</h2>
 <p>共有两个源文件组成，其中utils文件主要是一些实现好的工具函数，有</p>
 <pre class="python"><code>def mult_matrix(M, N):
     &quot;&quot;&quot;Multiply square matrices of same dimension M and N&quot;&quot;&quot;
@@ -105,8 +105,8 @@ def Q_i(Q_min, i, j, k):
     with elements from the identity matrix.&quot;&quot;&quot;</code></pre>
 <p>由于实现的为矩阵运算，并且未使用到高级的矩阵运算工具软件<strong>numpy</strong>，因此程序里面的数据结构为python的基本数据结构<code>list</code>，所以说整个工程相对来说计算比较复杂。所以我们提前写好了简化计算的函数工具.</p>
 </section>
-<section id="factorization.py" class="level3">
-<h3>factorization.py</h3>
+<section id="factorization.py" class="level2">
+<h2>factorization.py</h2>
 <p>这个是主函数实现部分，基本上所有的算法都在这个文件中实现，将函数的结构列在下面:</p>
 <pre class="python"><code>def LU_decomposition(A, verbose=False):
     &quot;&quot;&quot;Performs an LU Decomposition of A (which must be square)         
@@ -130,10 +130,10 @@ def Givens_reduction(A,verbose=False):
 </code></pre>
 </section>
 </section>
-<section class="level2">
-<h2>测试部分</h2>
-<section id="plu_decomposition" class="level3">
-<h3>PLU_decomposition</h3>
+<section class="level1">
+<h1>测试部分</h1>
+<section id="plu_decomposition" class="level2">
+<h2>PLU_decomposition</h2>
 <pre class="python"><code>the A matrix is:
 [[12, -51, 4], [6, 167, -68], [-4, 24, -41]]
 please choose the way to decompose A . 
@@ -147,7 +147,6 @@ The L matrix is
 The U matrix is
 [[12.0, -51.0, 4.0], [0.0, 192.5, -70.0], [0.0, 0.0, -37.121212121212125]]
 </code></pre>
-</section>
 <section id="gram_schimidt" class="level3">
 <h3>Gram_Schimidt</h3>
 <pre class="python"><code>the A matrix is:
@@ -164,6 +163,7 @@ QR decomposition in numpy is
        [ 0.28571429, -0.17142857,  0.94285714]]), array([[ -14.,  -21.,   14.],
        [   0., -175.,   70.],
        [   0.,    0.,  -35.]]))</code></pre>
+</section>
 </section>
 </section>
 
