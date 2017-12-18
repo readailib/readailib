@@ -36,6 +36,16 @@ code {
   background-color: rgba(0, 0, 0, 0.02);
 }
 
+.meta, .post-meta {
+    width: auto;
+    font-size: 16pt;
+    font-weight: 300;
+    margin: 0;
+    padding: .25em 0;
+    color: #7a7a7a;
+    font-style: italic;
+}
+
 .wrapper {
   overflow: hidden;
   position: relative;
