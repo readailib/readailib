@@ -171,6 +171,10 @@ blockquote footer {
   background: #f5f3d5;
 }
 
+
+textarea {
+   background: #f5f3d5;
+}
 /**/
 .nav {
   max-width: 800px;
