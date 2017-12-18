@@ -3,6 +3,8 @@ body {
   margin: 0;
   padding: 0;
   position: relative;
+  background-color: #f5f5d5;
+  font-family: Georgia, serif;
 }
 
 body {
@@ -53,7 +55,8 @@ code {
     text-align: center;
     border: 1px solid #eee;
     padding: 10px;
-    background: #f9f9f9;
+    background: #f5f3d5;
+    /*#f9f9f9;*/
     /*margin: 30px;*/
 }
 
@@ -99,7 +102,8 @@ blockquote {
 
 blockquote {
     font-size: 12pt;
-    background: #f9f9f9;
+    background: #f5f3d5;
+    /*#f9f9f9;*/
     border-left: 10px solid #ccc;
     margin: 1em 5px;
 }
@@ -145,10 +149,29 @@ blockquote, blockquote p {
 .header {
   padding: 20px 0;
   position: relative;
-  background: #f5f5f5;
+  background: #f3f5d5;  /*#f5f5f5;*/
   border-bottom: 1px solid #eaeaea;
 }
 
+blockquote footer {
+  text-align: right;
+}
+
+/*code*/
+.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    color: #333;
+    background: #f5f3d5; /*#f8f8f8#f5f2d5*/
+}
+
+
+.gt-container {
+  background: #f5f3d5;
+}
+
+/**/
 .nav {
   max-width: 800px;
   margin: 0 auto;
