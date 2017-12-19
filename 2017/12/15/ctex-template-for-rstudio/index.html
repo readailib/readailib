@@ -91,7 +91,8 @@ output: rticles::ctex
 <section id="r" class="level1">
 <h1>R代码段</h1>
 <p>R代码用R Markdown的语法嵌入，即三个反引号开始一段代码<code>```{r}</code>和三个反引号<code>```</code> 结束一段代码：</p>
-<pre class="r"><code>options(digits = 4)
+<pre class="r"><code>par(bg = &quot;#f5f5d5&quot;)
+options(digits = 4)
 fit = lm(dist ~ speed, data = cars)
 coef(summary(fit))</code></pre>
 <pre><code>##             Estimate Std. Error t value  Pr(&gt;|t|)
@@ -100,7 +101,8 @@ coef(summary(fit))</code></pre>
 <pre class="r"><code>b = coef(fit)</code></pre>
 <p>上面回归方程中的斜率是3.9324，完整的回归方程为：<span class="math display">\[ Y = -17.5791 + 3.9324x\]</span></p>
 <p>画图当然也是木有问题的啦，想画就说嘛，不说我怎么知道你想画呢？</p>
-<pre class="r"><code>par(mar = c(4, 4, .1, .1), las = 1)
+<pre class="r"><code>par(bg = &quot;#f5f5d5&quot;)
+par(mar = c(4, 4, .1, .1), las = 1)
 plot(cars, pch = 19)
 abline(fit, col = &#39;red&#39;)</code></pre>
 <div class="figure"><span id="fig:scatter"></span>

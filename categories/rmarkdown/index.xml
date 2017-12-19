@@ -25,8 +25,7 @@
 ---documentclass: ctexartoutput: rticles::ctex---rticles::ctex的参数都是普通的pdf_document参数，参见文档rmarkdown包的文档，这里就不赘述了。
 Windows和Mac用户应该都已经有自带的中文字体了。Linux用户可以另外下载 Fandol字体2，它号称是免费的，不过我们也没太搞清楚它的来头。把那些.otf字体文件下载下来保存到~/.fonts文件夹下，然后命令行切换到那里，运行fc-cache -fv。
 R代码段R代码用R Markdown的语法嵌入，即三个反引号开始一段代码```{r}和三个反引号``` 结束一段代码：
-options(digits = 4)fit = lm(dist ~ speed, data = cars)coef(summary(fit))## Estimate Std. Error t value Pr(&amp;gt;|t|)## (Intercept) -17.579 6.7584 -2.601 1.232e-02## speed 3.932 0.4155 9.464 1.490e-12b = coef(fit)上面回归方程中的斜率是3.9324，完整的回归方程为：\[ Y = -17.5791 + 3.9324x\]
-画图当然也是木有问题的啦，想画就说嘛，不说我怎么知道你想画呢？</description>
+par(bg = &amp;quot;#f5f5d5&amp;quot;)options(digits = 4)fit = lm(dist ~ speed, data = cars)coef(summary(fit))## Estimate Std. Error t value Pr(&amp;gt;|t|)## (Intercept) -17.579 6.7584 -2.601 1.232e-02## speed 3.932 0.4155 9.464 1.490e-12b = coef(fit)上面回归方程中的斜率是3.9324，完整的回归方程为：\[ Y = -17.5791 + 3.</description>
     </item>
     
     <item>
@@ -49,7 +48,7 @@ summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
       <description>引言Tufte样式在Edward Tufte的书以及物理学家费曼的教科书很常见，它的一个显著特点就是边栏的使用。例如脚注和边栏注解，以及放在边栏里的小型插图。Tufte样式在LaTeX和HTML/CSS中都有实现1。我们将这两种实现都纳入了tufte包。若需要LaTeX/PDF输出，使用输出格式tufte_handout即可，类似地，tufte_book可以用来输出PDF书，tufte_html生成HTML网页。这些输出格式可以在YAML元数据中指定，或者传给rmarkdown::render()函数。若对rmarkdown包不熟悉，可参见 @R-rmarkdown。
 ---title: &amp;quot;一个Tufte样式示例&amp;quot;author: &amp;quot;张三&amp;quot;ctex: yesoutput:tufte::tufte_handout:latex_engine: xelatextufte::tufte_html: default---章节标题Tufte样式不主张太深的章节目录，一般仅仅使用一级标题（Markdown中用一个井号#）和二级标题（两个井号）。
 插图边栏插图插图在Tufte的书中非常常见，我们可以使用三种插图：边栏图、全宽图、主栏图。先说边栏图：使用knitr代码段选项fig.margin = TRUE即可将图形放置在边栏中，如：
-library(ggplot2)## Warning: 程辑包&amp;#39;ggplot2&amp;#39;是用R版本3.3.3 来建造的mtcars2 &amp;lt;- mtcarsmtcars2$am &amp;lt;- factor(mtcars$am, labels = c(&amp;#39;automatic&amp;#39;, &amp;#39;manual&amp;#39;))ggplot(mtcars2, aes(hp, mpg, color = am)) +geom_point() + geom_smooth() +theme(legend.position = &amp;#39;bottom&amp;#39;)## `geom_smooth()` using method = &amp;#39;loess&amp;#39;Figure 1: MPG与horsepower两个变量的散点图；颜色代表自动挡或手动挡。注意我们使用代码段选项fig.cap设定了图的标题。当然我们也可以设置图的长宽。</description>
+library(ggplot2)par(bg = &amp;quot;#f5f5d5&amp;quot;)mtcars2 &amp;lt;- mtcarsmtcars2$am &amp;lt;- factor(mtcars$am, labels = c(&amp;#39;automatic&amp;#39;, &amp;#39;manual&amp;#39;))ggplot(mtcars2, aes(hp, mpg, color = am)) +geom_point() + geom_smooth() +theme(legend.position = &amp;#39;bottom&amp;#39;)+ theme(panel.background = element_rect(fill = &amp;#39;#f5f5d5&amp;#39;, colour = &amp;#39;#f5f5d5&amp;#39;))## `geom_smooth()` using method = &amp;#39;loess&amp;#39;Figure 1: MPG与horsepower两个变量的散点图；颜色代表自动挡或手动挡。注意我们使用代码段选项fig.</description>
     </item>
     
   </channel>

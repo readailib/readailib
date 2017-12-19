@@ -91,15 +91,15 @@ output:
 <section class="level2">
 <h2>边栏插图</h2>
 <p>插图在Tufte的书中非常常见，我们可以使用三种插图：边栏图、全宽图、主栏图。先说边栏图：使用<strong>knitr</strong>代码段选项<code>fig.margin = TRUE</code>即可将图形放置在边栏中，如：</p>
-<pre class="r"><code>library(ggplot2)</code></pre>
-<pre><code>## Warning: 程辑包&#39;ggplot2&#39;是用R版本3.3.3 来建造的</code></pre>
-<pre class="r"><code>mtcars2 &lt;- mtcars
+<pre class="r"><code>library(ggplot2)
+par(bg = &quot;#f5f5d5&quot;)
+mtcars2 &lt;- mtcars
 mtcars2$am &lt;- factor(
   mtcars$am, labels = c(&#39;automatic&#39;, &#39;manual&#39;)
 )
 ggplot(mtcars2, aes(hp, mpg, color = am)) +
   geom_point() + geom_smooth() +
-  theme(legend.position = &#39;bottom&#39;)</code></pre>
+  theme(legend.position = &#39;bottom&#39;)+ theme(panel.background = element_rect(fill = &#39;#f5f5d5&#39;, colour = &#39;#f5f5d5&#39;))</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39;</code></pre>
 <div class="figure"><span id="fig:fig-margin"></span>
 <img src="/post/2017-12-15-tufte-template-for-blog_files/figure-html/fig-margin-1.png" alt="MPG与horsepower两个变量的散点图；颜色代表自动挡或手动挡。" width="336" />
@@ -120,8 +120,9 @@ Figure 1: MPG与horsepower两个变量的散点图；颜色代表自动挡或手
 <section class="level2">
 <h2>全宽插图</h2>
 <p>代码段选项<code>fig.fullwidth = TRUE</code>可以使得一幅图占用全部页宽，例如：</p>
-<pre class="r"><code>ggplot(diamonds, aes(carat, price)) + geom_smooth() +
-  facet_grid(~ cut)</code></pre>
+<pre class="r"><code>par(bg = &quot;#f5f5d5&quot;)
+ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+  facet_grid(~ cut) + theme(panel.background = element_rect(fill = &#39;#f5f5d5&#39;, colour = &#39;#f5f5d5&#39;))</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;gam&#39;</code></pre>
 <div class="figure"><span id="fig:fig-fullwidth"></span>
 <img src="/post/2017-12-15-tufte-template-for-blog_files/figure-html/fig-fullwidth-1.png" alt="一幅全宽图形。" width="960" />
@@ -134,7 +135,7 @@ Figure 2: 一幅全宽图形。
 <section class="level2">
 <h2>主栏插图</h2>
 <p>默认情况下，R代码段生成的图形放置在主栏里，其标题放在边栏中，例如：</p>
-<pre class="r"><code>ggplot(diamonds, aes(cut, price)) + geom_boxplot()</code></pre>
+<pre class="r"><code>ggplot(diamonds, aes(cut, price)) + geom_boxplot() + theme(panel.background = element_rect(fill = &#39;#f5f5d5&#39;, colour = &#39;#f5f5d5&#39;))</code></pre>
 <div class="figure"><span id="fig:fig-main"></span>
 <img src="/post/2017-12-15-tufte-template-for-blog_files/figure-html/fig-main-1.png" alt="一幅主栏插图。" width="672" />
 <p class="caption">
