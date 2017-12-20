@@ -6,9 +6,9 @@
 <meta name="generator" content="Hugo 0.31.1" />
 
 
-<title>在树莓派上搭建邮件服务器(一) - ReadAILib Official Website </title>
-<meta property="og:title" content="在树莓派上搭建邮件服务器(一) - ReadAILib Official Website ">
-<meta property="og:author" content="在树莓派上搭建邮件服务器(一) - {        map[]}">
+<title>在树莓派上搭建邮件服务器 - ReadAILib Official Website </title>
+<meta property="og:title" content="在树莓派上搭建邮件服务器 - ReadAILib Official Website ">
+<meta property="og:author" content="在树莓派上搭建邮件服务器 - {        map[]}">
 
 
 
@@ -61,7 +61,7 @@
   <article class="article">
     
 
-    <h1 class="article-title" style="text-align: center">在树莓派上搭建邮件服务器(一)</h1>
+    <h1 class="article-title" style="text-align: center">在树莓派上搭建邮件服务器</h1>
 
     
     
@@ -149,6 +149,84 @@ sudo /usr/lib/citadel-server/setup</code></pre>
 4. Next it will ask you to set a password for the administrator account. Set this to something secure so you’re not easily hacked.<br />
 5 You can now skip through the rest of the questions. Simply press enter to skip the questions and not change anything.</p>
 </blockquote>
+</section>
+<section id="-citadel-" class="level1">
+<h1>配置 Citadel 邮件服务器</h1>
+<p>由于已经安装完成，并且安装了一些Web服务器，那么现在打开一个浏览器，输入http://hostname 或者http://localhost 就可以看到web界面下的Citadel服务器</p>
+<blockquote>
+如果你不知道你的hostname是什么，你可以通过下面的命令进行查询
+<pre class="bash"><code class="hljs">hostname -i</code></pre>
+</blockquote>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<img src="/post/2017-12-20-mail-server-rpi_files/figure-html/unnamed-chunk-9-1.png" alt="登陆界面 " width="912" />
+<p class="caption">
+Figure 9: 登陆界面
+</p>
+</div>
+<p>使用上面安装时的用户名和密码</p>
+<ul>
+<li>admin</li>
+<li>123456</li>
+</ul>
+<p>登陆进去之后，你可以看到Citadel的仪器盘，可以通过选中相关的term进行详细的配置.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="/post/2017-12-20-mail-server-rpi_files/figure-html/unnamed-chunk-10-1.png" alt="Citadel的仪器" width="912" />
+<p class="caption">
+Figure 10: Citadel的仪器
+</p>
+</div>
+<p>此时进入administrator进行管理员配置,注意只有管理员权限的用户才可以使用该选项，对于一般网络用户是不可见的.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
+<img src="/post/2017-12-20-mail-server-rpi_files/figure-html/unnamed-chunk-11-1.png" alt="进入管理员界面" width="912" />
+<p class="caption">
+Figure 11: 进入管理员界面
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="/post/2017-12-20-mail-server-rpi_files/figure-html/unnamed-chunk-12-1.png" alt="将主机名设置为DNS解析后的全球域名" width="912" />
+<p class="caption">
+Figure 12: 将主机名设置为DNS解析后的全球域名
+</p>
+</div>
+<p>编辑SMTP服务器的参数</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
+<img src="/post/2017-12-20-mail-server-rpi_files/figure-html/unnamed-chunk-13-1.png" alt="SMTP服务配置" width="912" />
+<p class="caption">
+Figure 13: SMTP服务配置
+</p>
+</div>
+<p>然后进入系统级别的配置，包括更改域名和相关的反垃圾，反病毒设置。</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-14"></span>
+<img src="/post/2017-12-20-mail-server-rpi_files/figure-html/unnamed-chunk-14-1.png" alt="进入系统配置" width="912" />
+<p class="caption">
+Figure 14: 进入系统配置
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="/post/2017-12-20-mail-server-rpi_files/figure-html/unnamed-chunk-15-1.png" alt="添加本地的主机名别名" width="912" />
+<p class="caption">
+Figure 15: 添加本地的主机名别名
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
+<img src="/post/2017-12-20-mail-server-rpi_files/figure-html/unnamed-chunk-16-1.png" alt="完成上面的配置后，重启服务器" width="912" />
+<p class="caption">
+Figure 16: 完成上面的配置后，重启服务器
+</p>
+</div>
+<blockquote>
+一般情况下，重启之后，就可以正常使用了，但是我们忘记了一个很重要的步骤，就是设置DNS记录，一般情况下，需要设置A记录，MX记录即可。 <img src="http://olrs8j04a.bkt.clouddn.com/17-12-20/11642203.jpg">
+<center class="cap">
+<caption>
+图1 这是我的DNS解析
+</caption>
+</center>
+</blockquote>
+</section>
+<section class="level1">
+<h1>结语</h1>
+<p>配置很简单，相比较vps来说，并且很稳定，拥有一个属于自己的邮箱，是一件很cool的事情，关于反垃圾，反病毒的设置可以参考我下面给出的参考链接。</p>
+<p>说实话，我感觉反垃圾什么的并没什么卵用！上面主要作学习用，因为快速并且稳定的配置会使得我们的工作效率大大提高的。</p>
 </section>
 <section class="footnotes">
 <hr />
