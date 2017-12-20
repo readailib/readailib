@@ -6,10 +6,33 @@
     <description>Recent content in Posts on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 20 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>在树莓派上搭建邮件服务器(一)</title>
+      <link>/2017/12/20/mail-server-rpi/</link>
+      <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/20/mail-server-rpi/</guid>
+      <description>上篇文章介绍了利用树莓派搭建AP，那么有了AP之后，由于小编是一名在校的学生，将我的树莓派和我宿舍的路由器连接上网之后，我的树莓派就拥有了全球唯一可访问的地址了，这样的话就可以为所欲为了.
+说到为什么搭建邮件服务器，为什么要使用树莓派呢？为什么不使用VPS呢？
+有所不知，现在VPS（国外的）是严格要求的，不允许在他们的服务器上搭建邮件服务的!这让小编很慌啊，上次搭建了一次，可以发但是不可以接受邮件，这让我很受伤，因此我要在我树莓派上下功夫了，功夫不负有心人呢，我在下面po下我的教程，教程大部分来自该处1。
+安装 Citadel 邮件服务器更新软件包sudo apt-get update将我们的软件包升级到最新版本.sudo apt-get upgrade安装Citadel 邮件服务器sudo apt-get install citadel-suiteFigure 1: leave the field set to 0.0.0.0 as this allows Citadel to listen on all incoming addresses.Figure 2: Now for the user authentication mode we’re going to keep this set to internal.Figure 3: Select admin usernameFigure 4: Select admin passwordFigure 5: Select Web ServerFigure 6: Select HTTP PortFigure 7: Select HTTPs PortFigure 8: Select LanguageExtra Steps</description>
+    </item>
+    
+    <item>
+      <title>树莓派搭建OpenCV环境</title>
+      <link>/2017/12/20/opencv-rpi/</link>
+      <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/20/opencv-rpi/</guid>
+      <description>本文主要介绍如何在树莓派上配置和安装OpenCV，本文原文出处1.
+扩大文件系统由于编译安装OpenCV需要的空间很大，所以应该做的第一件事是扩展文件系统，以包括micro-SD卡上的所有可用空间：
+sudo raspi-configFigure 1: 扩展文件系统 --图4-1 扩展文件系统 --安装依赖sudo apt-get install build-essential cmake pkg-config -ysudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev -ysudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev -y sudo apt-get install libxvidcore-dev libx264-dev -ysudo apt-get install libgtk2.0-dev -ysudo apt-get install libatlas-base-dev gfortran -y sudo apt-get install python2.7-dev python3-dev -y下载OpenCV源代码cd ~wget -O opencv.zip https://github.</description>
+    </item>
     
     <item>
       <title>Display Image Using R</title>
@@ -18,15 +41,6 @@
       
       <guid>/2017/12/19/display-image-using-r/</guid>
       <description>{r fig-margin, echo=FALSE, fig.cap=&amp;quot;这是一个神经网络的图。&amp;quot;, fig.height=3.5, fig.margin=TRUE, warning=FALSE, background=&amp;quot;#f5f5d5&amp;quot;, cache=FALSE}# need png packagelibrary(png)#Replace the directory and file information with your infoima &amp;lt;- readPNG(&amp;quot;C:\\Users\\Shine\\Desktop\\readailib\\themes\\hugo-lithium-theme\\static\\images\\logo.png&amp;quot;)grid::grid.raster(ima)Figure 1: 这是一个神经网络的图。</description>
-    </item>
-    
-    <item>
-      <title>将树莓派打造成一个无线路由</title>
-      <link>/2017/12/18/%E5%B0%86%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E6%88%90%E4%B8%80%E4%B8%AA%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1/</link>
-      <pubDate>Mon, 18 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/18/%E5%B0%86%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E6%88%90%E4%B8%80%E4%B8%AA%E6%97%A0%E7%BA%BF%E8%B7%AF%E7%94%B1/</guid>
-      <description></description>
     </item>
     
     <item>

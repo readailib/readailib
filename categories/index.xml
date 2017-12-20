@@ -30,6 +30,15 @@
     </item>
     
     <item>
+      <title>Mail Server</title>
+      <link>/categories/mail-server/</link>
+      <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/mail-server/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Math</title>
       <link>/categories/math/</link>
       <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
@@ -50,7 +59,7 @@
     <item>
       <title>Pi</title>
       <link>/categories/pi/</link>
-      <pubDate>Mon, 18 Dec 2017 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/pi/</guid>
       <description></description>
@@ -59,7 +68,7 @@
     <item>
       <title>Raspberry</title>
       <link>/categories/raspberry/</link>
-      <pubDate>Mon, 18 Dec 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/raspberry/</guid>
       <description></description>
@@ -71,6 +80,15 @@
       <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/rmarkdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rpi</title>
+      <link>/categories/rpi/</link>
+      <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/rpi/</guid>
       <description></description>
     </item>
     

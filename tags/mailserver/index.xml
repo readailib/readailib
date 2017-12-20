@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mailserver on ReadAILib Official Website </title>
+    <link>/tags/mailserver/</link>
+    <description>Recent content in Mailserver on ReadAILib Official Website </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 20 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/mailserver/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>在树莓派上搭建邮件服务器(一)</title>
+      <link>/2017/12/20/mail-server-rpi/</link>
+      <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/20/mail-server-rpi/</guid>
+      <description>上篇文章介绍了利用树莓派搭建AP，那么有了AP之后，由于小编是一名在校的学生，将我的树莓派和我宿舍的路由器连接上网之后，我的树莓派就拥有了全球唯一可访问的地址了，这样的话就可以为所欲为了.
+说到为什么搭建邮件服务器，为什么要使用树莓派呢？为什么不使用VPS呢？
+有所不知，现在VPS（国外的）是严格要求的，不允许在他们的服务器上搭建邮件服务的!这让小编很慌啊，上次搭建了一次，可以发但是不可以接受邮件，这让我很受伤，因此我要在我树莓派上下功夫了，功夫不负有心人呢，我在下面po下我的教程，教程大部分来自该处1。
+安装 Citadel 邮件服务器更新软件包sudo apt-get update将我们的软件包升级到最新版本.sudo apt-get upgrade安装Citadel 邮件服务器sudo apt-get install citadel-suiteFigure 1: leave the field set to 0.0.0.0 as this allows Citadel to listen on all incoming addresses.Figure 2: Now for the user authentication mode we’re going to keep this set to internal.Figure 3: Select admin usernameFigure 4: Select admin passwordFigure 5: Select Web ServerFigure 6: Select HTTP PortFigure 7: Select HTTPs PortFigure 8: Select LanguageExtra Steps</description>
+    </item>
+    
+  </channel>
+</rss>

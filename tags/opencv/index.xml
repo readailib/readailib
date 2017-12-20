@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Opencv on ReadAILib Official Website </title>
+    <link>/tags/opencv/</link>
+    <description>Recent content in Opencv on ReadAILib Official Website </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 20 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/opencv/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>树莓派搭建OpenCV环境</title>
+      <link>/2017/12/20/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BAopencv%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/20/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%90%AD%E5%BB%BAopencv%E7%8E%AF%E5%A2%83/</guid>
+      <description>扩大文件系统 由于编译安装OpenCV需要的空间很大，所以应该做的第一件事是扩展文件系统，以包括micro-SD卡上的所有可用空间：
+sudo raspi-config  Figure 1: 扩展文件系统   Figure 2: 这是一个神经网络的图。   -- 图4-1 扩展文件系统 --  安装依赖 sudo apt-get install build-essential cmake pkg-config -y sudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev -y sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev -y sudo apt-get install libxvidcore-dev libx264-dev -y sudo apt-get install libgtk2.0-dev -y sudo apt-get install libatlas-base-dev gfortran -y sudo apt-get install python2.7-dev python3-dev -y  下载OpenCV源代码 cd ~ wget -O opencv.</description>
+    </item>
+    
+  </channel>
+</rss>

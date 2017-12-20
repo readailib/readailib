@@ -20,6 +20,11 @@
 
 
 
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
 <link rel="stylesheet" href="/css/fonts.css" media="all">
 <link rel="stylesheet" href="/css/main.css" media="all">
 
@@ -60,11 +65,151 @@
 
     
     
-    <div class="post-meta" style="text-align: center">  <a href="http://github.com/rh01">rh01</a>  &nbsp;•&nbsp; 2017/12/18 &nbsp;•&nbsp; 0 min read </div>
+    <div class="post-meta" style="text-align: center">  <a href="http://github.com/rh01">rh01</a>  &nbsp;•&nbsp; 2017/12/18 &nbsp;•&nbsp; 2 min read </div>
     
 
     <div class="article-content">
-      
+      <p>拥有一个树莓派之后玩转它怎么少了将它配置成一个AP，配置的方法很多，作者也是在本科的时候做项目时阅览过相关的教程，国内的一些教程比较杂，并且琐碎，不直接，因此作者主要借鉴了这篇国外的部落格<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<section class="level1">
+<h1>安装必需的包</h1>
+<ol type="1">
+<li>hostapd</li>
+<li>dnsmasq</li>
+</ol>
+<pre class="bash"><code>sudo apt-get install dnsmasq hostapd</code></pre>
+</section>
+<section class="level1">
+<h1>配置网卡</h1>
+<p>将wlan1（购买的网卡）配置一个静态IP地址, 首先告诉树莓派DHCP获取IP时忽略WLAN1</p>
+<pre class="bash"><code>sudo nano /etc/dhcpcd.conf</code></pre>
+<p>在文件的最后添加：</p>
+<pre class="bash"><code>denyinterfaces wlan1  </code></pre>
+<p>配置静态IP</p>
+<pre class="bash"><code>sudo nano /etc/network/interfaces</code></pre>
+<p>文件内容如下：</p>
+<pre class="bash"><code>allow-hotplug wlan1  
+iface wlan1 inet static  
+    address 172.24.1.1
+    netmask 255.255.255.0
+    network 172.24.1.0
+    broadcast 172.24.1.255
+#    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</code></pre>
+<p>重启DHCP服务。</p>
+<pre class="bash"><code>sudo apt-get install dhcpcd5 #如果没有这个服务
+sudo service dhcpcd restart</code></pre>
+<p>然后重启WLAN1设备以适应配置</p>
+<pre class="bash"><code>sudo ifdown wlan1; sudo ifup wlan1</code></pre>
+</section>
+<section id="hostapd" class="level1">
+<h1>编辑HOSTAPD文件</h1>
+<pre class="bash"><code>sudo nano /etc/hostapd/hostapd.conf</code></pre>
+<p>内容是：</p>
+<pre class="bash"><code># This is the name of the WiFi interface we configured above
+interface=wlan1
+
+# Use the nl80211 driver with the brcmfmac driver
+driver=nl80211
+
+# This is the name of the network
+ssid=Pi3-AP
+
+# Use the 2.4GHz band
+hw_mode=g
+
+# Use channel 6
+channel=6
+
+# Enable 802.11n
+ieee80211n=1
+
+# Enable WMM
+wmm_enabled=1
+
+# Enable 40MHz channels with 20ns guard interval
+ht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]
+
+# Accept all MAC addresses
+macaddr_acl=0
+
+# Use WPA authentication
+auth_algs=1
+
+# Require clients to know the network name
+ignore_broadcast_ssid=0
+
+# Use WPA2
+wpa=2
+
+# Use a pre-shared key
+wpa_key_mgmt=WPA-PSK
+
+# The network passphrase
+wpa_passphrase=123456789
+
+# Use AES, instead of TKIP
+rsn_pairwise=CCMP</code></pre>
+<p>检查配置是否起作用：</p>
+<pre class="bash"><code>sudo /usr/sbin/hostapd /etc/hostapd/hostapd.conf</code></pre>
+<p>如果成功，则会在你的移动设备上（智能手机）上检测到Pi3-AP的路由。如果你尝试连接，则不会成功分配地址，因为还没有做完！</p>
+<p>因为我们还需要告诉hostapd在启动时启动时查找配置文件。使用</p>
+<pre class="bash"><code>sudo nano /etc/default/hostapd</code></pre>
+<p>打开默认配置文件，找到该行</p>
+<pre class="bash"><code>#DAEMON_CONF=&quot;&quot;</code></pre>
+<p>并且用下面这行替换掉</p>
+<pre class="bash"><code>DAEMON_CONF=&quot;/etc/hostapd/hostapd.conf&quot;.</code></pre>
+</section>
+<section id="dnsmasq" class="level1">
+<h1>配置DNSMASQ</h1>
+<pre class="bash"><code>sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig  
+sudo nano /etc/dnsmasq.conf  </code></pre>
+<p>将下面的内容粘贴上去：</p>
+<pre class="bash"><code>interface=wlan1      # Use interface wlan0  
+listen-address=172.24.1.1 # Explicitly specify the address to listen on  
+bind-interfaces      # Bind to the interface to make sure we aren&#39;t sending things elsewhere  
+server=8.8.8.8       # Forward DNS requests to Google DNS  
+domain-needed        # Don&#39;t forward short names  
+bogus-priv           # Never forward addresses in the non-routed address spaces.  
+dhcp-range=172.24.1.50,172.24.1.150,12h # Assign IP addresses between 172.24.1.50 and 172.24.1.150 with a 12 hour lease time</code></pre>
+</section>
+<section id="ipv4-" class="level1">
+<h1>建立IPV4 转发</h1>
+<pre class="bash"><code>sudo nano /etc/sysctl.conf</code></pre>
+<p>去掉</p>
+<pre class="bash"><code>#net.ipv4.ip_forward=1</code></pre>
+<p>前面的#</p>
+<pre class="bash"><code>sudo sh -c &quot;echo 1 &gt; /proc/sys/net/ipv4/ip_forward&quot;</code></pre>
+<p>上面这条命令是立即激活转发！</p>
+<p>还需要通过在wlan0接口和wlan1接口之间配置NAT来分享Pi的互联网连接到我们通过WiFi连接的设备。可以使用以下命令来执行此操作：</p>
+<pre class="bash"><code>sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE  
+sudo iptables -A FORWARD -i wlan0 -o wlan1 -m state --state RELATED,ESTABLISHED -j ACCEPT  
+sudo iptables -A FORWARD -i wlan1 -o wlan0 -j ACCEPT</code></pre>
+<p>但是，我们需要在每次重新启动Pi时应用这些规则，运行下面的命令</p>
+<pre class="bash"><code>sudo sh -c &quot;iptables-save &gt; /etc/iptables.ipv4.nat&quot;</code></pre>
+<p>为了避免每次重启都需要运行该命令，打开</p>
+<pre class="bash"><code>sudo nano /etc/rc.local</code></pre>
+<p>在exit 0前添加一行</p>
+<pre><code>iptables-restore &lt; /etc/iptables.ipv4.nat  </code></pre>
+</section>
+<section class="level1">
+<h1>重启完成配置</h1>
+<pre class="bash"><code>sudo service hostapd start  
+sudo service dnsmasq start  </code></pre>
+</section>
+<section class="level1">
+<h1>注意事项</h1>
+<ol type="1">
+<li>树莓派3和树莓派2的配置过程是不一样的，上面的配置过程仅适用于树莓派3.</li>
+<li>上面的配置是WLAN1做AP，WLAN0将数据流转发给WLAN1的，那么转发也可以做以太网和wlan0转发，以太网和wlan1转发。过程类似。</li>
+<li>为了激活，必须重启！</li>
+</ol>
+</section>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://frillip.com/using-your-raspberry-pi-3-as-a-wifi-access-point-with-hostapd/" class="uri">https://frillip.com/using-your-raspberry-pi-3-as-a-wifi-access-point-with-hostapd/</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+
         <hr />
 
     </div>
@@ -93,6 +238,20 @@ Subscribe to our <a href="/index.xml" type="application/rss+xml" target="_blank"
 
     
     
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/Dockerfile.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/python.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
 
     
 
