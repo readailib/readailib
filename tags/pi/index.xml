@@ -25,7 +25,7 @@ denyinterfaces wlan1 配置静态IP
 sudo nano /etc/network/interfaces文件内容如下：
 allow-hotplug wlan1 iface wlan1 inet static address 172.24.1.1netmask 255.255.255.0network 172.24.1.0broadcast 172.24.1.255# wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf重启DHCP服务。
 sudo apt-get install dhcpcd5 #如果没有这个服务sudo service dhcpcd restart然后重启WLAN1设备以适应配置
-sudo ifdown wlan1; sudo ifup wlan13.1.3 配置HOSTAPD文件sudo nano /etc/hostapd/hostapd.conf内容是：
+sudo ifdown wlan1; sudo ifup wlan1配置HOSTAPD文件sudo nano /etc/hostapd/hostapd.conf内容是：
 # This is the name of the WiFi interface we configured aboveinterface=wlan1# Use the nl80211 driver with the brcmfmac driverdriver=nl80211# This is the name of the networkssid=Pi3-AP# Use the 2.</description>
     </item>
     

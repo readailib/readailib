@@ -100,8 +100,9 @@ iface wlan1 inet static
 sudo service dhcpcd restart</code></pre>
 <p>然后重启WLAN1设备以适应配置</p>
 <pre class="bash"><code>sudo ifdown wlan1; sudo ifup wlan1</code></pre>
-<section id="hostapd" class="level3">
-<h3>3.1.3 配置HOSTAPD文件</h3>
+</section>
+<section id="hostapd" class="level1">
+<h1>配置HOSTAPD文件</h1>
 <pre class="bash"><code>sudo nano /etc/hostapd/hostapd.conf</code></pre>
 <p>内容是：</p>
 <pre class="bash"><code># This is the name of the WiFi interface we configured above
@@ -157,7 +158,6 @@ rsn_pairwise=CCMP</code></pre>
 <pre class="bash"><code>#DAEMON_CONF=&quot;&quot;</code></pre>
 <p>并且用下面这行替换掉</p>
 <pre class="bash"><code>DAEMON_CONF=&quot;/etc/hostapd/hostapd.conf&quot;.</code></pre>
-</section>
 </section>
 <section id="dnsmasq" class="level1">
 <h1>配置DNSMASQ</h1>
