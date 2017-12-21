@@ -6,10 +6,28 @@
     <description>Recent content in Blog on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>在树莓派上配置AP</title>
+      <link>/2017/12/21/aphot-rpi/</link>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/21/aphot-rpi/</guid>
+      <description>有了一个新的树莓派之后，如果不将它配置成AP热点，你就失去了他的其中的一个优势，如果你的家里面没有无限路由器或者你的家里信号不能遍及，树莓派是你最好的选择，利用流量包转发的优势，大大地节约了成本，并且他支持多种转发机制，这是很重要的特点，是你的网络随时处于移动状态，不像传统的路由器，如果固定到某个地方之后就不能动了，而树莓派是一个可以移动的热点。稳定是最主要的特点。
+本文参考1。
+必需的包hostapddnsmasqsudo apt-get install dnsmasq hostapd配置网卡将wlan1（购买的网卡）配置一个静态IP地址, 首先告诉树莓派DHCP获取IP时忽略WLAN1
+sudo nano /etc/dhcpcd.conf在文件的最后添加：
+denyinterfaces wlan1 配置静态IP
+sudo nano /etc/network/interfaces文件内容如下：
+allow-hotplug wlan1 iface wlan1 inet static address 172.24.1.1netmask 255.255.255.0network 172.24.1.0broadcast 172.24.1.255# wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf重启DHCP服务。
+sudo apt-get install dhcpcd5 #如果没有这个服务sudo service dhcpcd restart然后重启WLAN1设备以适应配置
+sudo ifdown wlan1; sudo ifup wlan13.1.3 配置HOSTAPD文件sudo nano /etc/hostapd/hostapd.conf内容是：
+# This is the name of the WiFi interface we configured aboveinterface=wlan1# Use the nl80211 driver with the brcmfmac driverdriver=nl80211# This is the name of the networkssid=Pi3-AP# Use the 2.</description>
+    </item>
     
     <item>
       <title>Display Image Using R</title>
@@ -18,15 +36,6 @@
       
       <guid>/2017/12/19/display-image-using-r/</guid>
       <description>{r fig-margin, echo=FALSE, fig.cap=&amp;quot;这是一个神经网络的图。&amp;quot;, fig.height=3.5, fig.margin=TRUE, warning=FALSE, background=&amp;quot;#f5f5d5&amp;quot;, cache=FALSE}# need png packagelibrary(png)#Replace the directory and file information with your infoima &amp;lt;- readPNG(&amp;quot;C:\\Users\\Shine\\Desktop\\readailib\\themes\\hugo-lithium-theme\\static\\images\\logo.png&amp;quot;)grid::grid.raster(ima)Figure 1: 这是一个神经网络的图。</description>
-    </item>
-    
-    <item>
-      <title>在树莓派上安装和配置邮件服务</title>
-      <link>/2017/12/17/install-and-configurate-mail-server-for-raspberry-pi-3/</link>
-      <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/17/install-and-configurate-mail-server-for-raspberry-pi-3/</guid>
-      <description></description>
     </item>
     
     <item>

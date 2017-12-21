@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<title>过拟合和正则化 - ReadAILib Official Website </title>
+<meta property="og:title" content="过拟合和正则化 - ReadAILib Official Website ">
+<meta property="og:author" content="过拟合和正则化 - {        map[]}">
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/readailib">GitHub</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCTOuJy4b9E89zCwffX-qC3A">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title" style="text-align: center">过拟合和正则化</h1>
+
+    
+    
+    <div class="post-meta" style="text-align: center">  <a href="http://github.com/rh01">rh01</a>  &nbsp;•&nbsp; 2017/12/21 &nbsp;•&nbsp; 2 min read </div>
+    
+
+    <div class="article-content">
+      <p>该笔记是来自 Andrew Ng 的 Machine Learning 课程的第三周:<strong>多分类和过拟合技术</strong>的课堂记录，过拟合是机器学习优化的部分，主要讲解了以下几个内容:</p>
+<ul>
+<li>多类别的分类问题</li>
+<li>过/欠拟合问题</li>
+<li>解决过拟合的方法
+<ul>
+<li>正则化方法</li>
+</ul></li>
+</ul>
+<section class="level1">
+<h1>多类别的分类问题</h1>
+<p>在现实生活中多类别的问题更常见，比如：</p>
+<ul>
+<li>Email:邮件的自动分类，e.g. work,friends,family,hobby</li>
+<li>医疗诊断：Notil,Cold,Flu</li>
+<li>天气预测：Sunny,Cloudy,Rain,Snow</li>
+</ul>
+<p>在涉及到多分类问题，我们往往采取一种“One VS All”算法！在二分类问题上<span class="math inline">\(Y = \{0,1\}\)</span>，在多分类上，我们将扩大<span class="math inline">\(Y\)</span>的定义，即<span class="math inline">\(Y = \{0,1,…,n\}\)</span>。多分类的任务转化为<span class="math inline">\(n + 1\)</span>个（<strong>+ 1因为索引从0开始</strong>）二分类问题；在每一个二分类任务，预测的“<span class="math inline">\(Y\)</span>”是一个类概率。</p>
+<span class="math display">\[\begin{align*}
+&amp; y \in \lbrace0, 1 ... n\rbrace \\
+&amp; h_\theta^{(0)}(x) = P(y = 0 | x ; \theta) \\
+&amp; h_\theta^{(1)}(x) = P(y = 1 | x ; \theta) \\
+&amp; \cdots \\
+&amp; h_\theta^{(n)}(x) = P(y = n | x ; \theta) \\
+&amp; \mathrm{prediction} = \max_i( h_\theta ^{(i)}(x) )
+\end{align*}\]</span>
+<p>我们基本上是选择其中一个类别的数据作为<strong>positive</strong>，然后将所有其他的类别数据为<strong>negative</strong>，这样将问题转化为一个二分类问题，反复这样做，对每一种情况应用<strong>二元logistic回归</strong>，然后将所有情况中预测的最高的那个类作为我们的预测。下图 显示了如何将3个类进行分类：</p>
+<p><img src="http://olrs8j04a.bkt.clouddn.com/17-12-21/50713193.jpg" /></p>
+<ul>
+<li>对于每一个类训练一个二元逻辑回归分类器来预测<span class="math inline">\(y=1\)</span>的概率.</li>
+<li>对于一个新的测试样本x，选择<span class="math inline">\(h_{\theta}\)</span>最大的那一个类.</li>
+</ul>
+</section>
+<section class="level1">
+<h1>过/欠拟合问题</h1>
+<p>机器学习的目的不仅仅对训练集的拟合效果好，在测试集上我也要达到一样好！所以往往在机器学习建模时往往出现过拟合问题，就是对训练数据的预测达到100%，但是在测试集上的效果很差！还有一种情况就是在训练集上的效果低，这叫欠拟合问题，如图所示</p>
+<p><img src="http://olrs8j04a.bkt.clouddn.com/17-12-21/26710244.jpg" /></p>
+<p>考虑<span class="math inline">\(x \in \mathbb{R}\)</span>预测<span class="math inline">\(y\)</span>的问题。上图的最左边的图显示了<span class="math inline">\(y = \theta_{0} + \theta_1 x\)</span>拟合数据集<span class="math inline">\(\mathrm{X}\)</span>的结果。我们看到数据不是真的在直线上，所以拟合程度不是很好。相反，如果我们添加了一个额外的特征<span class="math inline">\(x^2\)</span>，用<span class="math inline">\(y = \theta_0 + \theta_1x + \theta_2x^2\)</span>来拟合<span class="math inline">\(y\)</span>,那么我们获得一个稍微更好的数据拟合（见中图）。看起来添加的特征越多越好，然而，增加太多特征也有一个危险：最右边的图是拟合5阶多项式<span class="math inline">\(y = \sum_{j=0} ^5 \theta_j x^j\)</span>的结果，可以看到即使曲线完美地拟合了所有数据，但是也不会是个很好的模型。左边的图片是一个<strong>欠拟合</strong>的例子，而右侧的图就是过拟合的例子。</p>
+<p><strong>欠拟合（高偏差，低方差）</strong>，它通常是由于假说函数过于简单或使用的特征太少而造成的。另一个极端，<strong>过拟合(低偏差，高方差)</strong>，它通常是由一个复杂的假说函数或者特征太太多引起的，而导致模型不能很好的泛化<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。</p>
+<p>解决过拟合问题两个主要策略：</p>
+<ul>
+<li>减少特征数量
+<ul>
+<li>人工检查变量的数目，决定哪些变量重要，哪些变量不重要.</li>
+<li>模型选择算法</li>
+</ul></li>
+<li>正则化
+<ul>
+<li>当我们有很多特征变量时，其中每一个变量都能对预测产生一点影响.</li>
+<li>保留所有特性，但减少参数<span class="math inline">\(\theta_j\)</span>的大小</li>
+</ul></li>
+</ul>
+</section>
+<section class="level1">
+<h1>修改代价函数</h1>
+<p>如果模型（假设/说函数）出现过拟合，我们可以减轻部分权重<span class="math inline">\(\theta_j\)</span>，进而增加他们的代价。比如说，我们想让下面的函数看起来更加像二次方程</p>
+<span class="math display">\[\begin{align*}
+&amp;\theta_0 + \theta_1x + \theta_2x^2 + \theta_3x^3 + \theta_4x^4
+\end{align*}\]</span>
+<p>所以我们减弱<span class="math inline">\(\theta_3x^3\)</span>和<span class="math inline">\(\theta_4x^4\)</span>的影响.实际上, 如果不去掉这些特征或者改变假设函数<span class="math inline">\(h_{\theta}(x)\)</span>的形式, 我们可以改变我们的代价函数：</p>
+<span class="math display">\[\begin{align*}
+&amp;min_\theta\ \dfrac{1}{2m}\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + 1000\cdot\theta_3^2 + 1000\cdot\theta_4^2
+\end{align*}\]</span>
+<p>在公式后面增加了两项用来增加<span class="math inline">\(\theta_3\)</span>和<span class="math inline">\(\theta_4\)</span>的代价，为了使得我们的代价函数接近0,所以不得不将<span class="math inline">\(\theta_3\)</span>和<span class="math inline">\(\theta_4\)</span>的值接近于0。在假说函数中，将大大降低<span class="math inline">\(\theta_3x^3\)</span>和<span class="math inline">\(\theta_4x^4\)</span>的值。因此,可以看到新的假设 (<strong>由粉红色曲线描述</strong>) 看起来更像一个二次函数,并且也更好的拟合我们训练数据。</p>
+<p><img src="http://olrs8j04a.bkt.clouddn.com/17-12-21/91568480.jpg" /></p>
+<p>我们还可以将所有的<span class="math inline">\(\theta\)</span>参数求和来进行正则化处理,在代价函数最后增加一个<strong>正则项</strong> <span class="math inline">\(\lambda \sum_{j=1}^n \theta_j^2\)</span>，其中<span class="math inline">\(\lambda\)</span>是一个正则化参数（<strong>超参数</strong>）.如下所示. <span class="math display">\[\begin{align*}
+&amp;min_\theta\ \dfrac{1}{2m}\  \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + \lambda\ \sum_{j=1}^n \theta_j^2
+\end{align*}\]</span></p>
+</section>
+<section class="level1">
+<h1>给线性回归模型增加正则项</h1>
+<section id="gradient-descent-for-fixed-linear-regression" class="level2">
+<h2>Gradient Descent For Fixed Linear Regression</h2>
+<span class="math display">\[\begin{align*} 
+&amp; \text{Repeat}\ \lbrace \\
+&amp; \ \ \ \ \theta_0 := \theta_0 - \alpha\ \frac{1}{m}\ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})x_0^{(i)} \\
+&amp; \ \ \ \ \theta_j := \theta_j - \alpha\ \left[ \left( \frac{1}{m}\ \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})x_j^{(i)} \right) + \frac{\lambda}{m}\theta_j \right] &amp;\ \ \ \ \ \ \ \ \ \ j \in \lbrace 1,2...n\rbrace\\
+&amp; \rbrace 
+\end{align*}\]</span>
+<p>其中上面的<span class="math inline">\(\theta_j\)</span>的更新公式也可以这样写：<span class="math display">\[\theta_j := \theta_j(1 - \alpha\frac{\lambda}{m}) - \alpha\frac{1}{m}\sum_{i=1}^m(h_\theta(x^{(i)}) - y^{(i)})x_j^{(i)}\]</span>.</p>
+</section>
+<section id="normal-equation" class="level2">
+<h2>Normal Equation</h2>
+<span class="math display">\[\begin{align*}
+&amp; \theta = \left( X^TX + \lambda \cdot L \right)^{-1} X^Ty, \; \text{where}\ \ L = \begin{bmatrix} 0 &amp; &amp; &amp; &amp; \\
+ &amp; 1 &amp; &amp; &amp; \\
+ &amp; &amp; 1 &amp; &amp; \\
+  &amp; &amp; &amp; \ddots &amp; \\
+   &amp; &amp; &amp; &amp; 1 \\
+\end{bmatrix}_{(n+1)×(n+1)}
+\end{align*}\]</span>
+<p><strong>前面提到过</strong>,如果 <span class="math inline">\(m &lt; n\)</span>, 那么 <span class="math inline">\(X^TX\)</span> 是不可逆矩阵。然而, 当我们添加<span class="math inline">\(\lambda L\)</span>后 <span class="math inline">\(X^TX\)</span>变得可逆了。</p>
+</section>
+</section>
+<section class="level1">
+<h1>给逻辑回归模型增加正则项</h1>
+<section id="cost-function" class="level2">
+<h2>Cost Function</h2>
+<span class="math display">\[\begin{align}
+J(\theta) &amp;= - \frac{1}{m} \sum_{i=1}^m \large[ y^{(i)}\ \log (h_\theta (x^{(i)})) + (1 - y^{(i)})\ \log (1 - h_\theta(x^{(i)})) \large]\\
+\rightarrow J(\theta) &amp;= - \frac{1}{m} \sum_{i=1}^m \large[ y^{(i)}\ \log (h_\theta (x^{(i)})) + (1 - y^{(i)})\ \log (1 - h_\theta(x^{(i)}))\large] + \frac{\lambda}{2m}\sum_{j=1}^n \theta_j^2
+\end{align}\]</span>
+<p>公式(2)的第二个sum项<span class="math inline">\(\sum_{j=1}^n \theta_j^2\)</span>中的<span class="math inline">\(\theta_j\)</span>不包括<span class="math inline">\(\theta_0\)</span>!</p>
+</section>
+<section id="gradient-descent-for-fixed-logistic-regression" class="level2">
+<h2>Gradient Descent For Fixed Logistic Regression}</h2>
+<p><img src="http://olrs8j04a.bkt.clouddn.com/17-12-21/82289725.jpg" /></p>
+</section>
+</section>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>泛化指一个假设模型能够应用到新的样本数据的能力<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+
+        <hr />
+
+    </div>
+
+
+  </article>
+
+      <footer class="footer">
+
+        
+
+          <div class="generic-box">
+Subscribe to our <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>.
+
+  <div class="share-page">
+<div class="share-links" style="text-align:center;">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</div>
+</div>
+
+
+</div>
+
+        
+      </footer>
+
+    
+    
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-111305334-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
+
+
+  
+  
+
+  <div id="gitalk-container"></div>
+</div>
+
+<link rel="stylesheet" href="/css/gitalk.css" media="all">
+<style type="text/css">
+	
+.gt-container .gt-comment-admin .gt-header-comment .gt-comment-content {
+    background-color: #f5f3d5;
+}
+
+textarea {
+   background-color: #f5f3d5;
+}
+</style>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: 'a98bac7d9ab86f4813de',
+        clientSecret: '307c20444af8207286b5f78f7a5ed941786edad0',
+        repo: 'readailib',
+        owner: 'rh01',
+        admin: ['rh01'],
+        body: location.href,
+      });
+      gitalk.render('gitalk-container');
+ </script>
+
+
+
+</main>
+
+

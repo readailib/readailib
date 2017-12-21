@@ -6,7 +6,7 @@
     <description>Recent content in Categories on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Blog</title>
       <link>/categories/blog/</link>
-      <pubDate>Tue, 19 Dec 2017 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/blog/</guid>
       <description></description>
@@ -23,7 +23,7 @@
     <item>
       <title>Comment</title>
       <link>/categories/comment/</link>
-      <pubDate>Tue, 19 Dec 2017 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/comment/</guid>
       <description></description>
@@ -57,20 +57,20 @@
     </item>
     
     <item>
-      <title>Pi</title>
-      <link>/categories/pi/</link>
-      <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
+      <title>Ml</title>
+      <link>/categories/ml/</link>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/categories/pi/</guid>
+      <guid>/categories/ml/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Raspberry</title>
-      <link>/categories/raspberry/</link>
-      <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
+      <title>Pi</title>
+      <link>/categories/pi/</link>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/categories/raspberry/</guid>
+      <guid>/categories/pi/</guid>
       <description></description>
     </item>
     
@@ -95,7 +95,7 @@
     <item>
       <title>Technique</title>
       <link>/categories/technique/</link>
-      <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/technique/</guid>
       <description></description>

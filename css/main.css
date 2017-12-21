@@ -87,7 +87,7 @@ h2, .h2 {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Lato","Helvetica Neue",Helvetica, "华文细黑",sans-serif;
+    font-family: "Lato","Helvetica Neue",Helvetica,sans-serif;
     font-weight: 900;
     line-height: 1.25;
     margin-top: 1em;

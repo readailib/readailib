@@ -6,13 +6,53 @@
     <description>Recent content in Pi on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/pi/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>树莓派搭建OpenCV环境</title>
+      <title>在树莓派上配置AP</title>
+      <link>/2017/12/21/aphot-rpi/</link>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/21/aphot-rpi/</guid>
+      <description>有了一个新的树莓派之后，如果不将它配置成AP热点，你就失去了他的其中的一个优势，如果你的家里面没有无限路由器或者你的家里信号不能遍及，树莓派是你最好的选择，利用流量包转发的优势，大大地节约了成本，并且他支持多种转发机制，这是很重要的特点，是你的网络随时处于移动状态，不像传统的路由器，如果固定到某个地方之后就不能动了，而树莓派是一个可以移动的热点。稳定是最主要的特点。
+本文参考1。
+必需的包hostapddnsmasqsudo apt-get install dnsmasq hostapd配置网卡将wlan1（购买的网卡）配置一个静态IP地址, 首先告诉树莓派DHCP获取IP时忽略WLAN1
+sudo nano /etc/dhcpcd.conf在文件的最后添加：
+denyinterfaces wlan1 配置静态IP
+sudo nano /etc/network/interfaces文件内容如下：
+allow-hotplug wlan1 iface wlan1 inet static address 172.24.1.1netmask 255.255.255.0network 172.24.1.0broadcast 172.24.1.255# wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf重启DHCP服务。
+sudo apt-get install dhcpcd5 #如果没有这个服务sudo service dhcpcd restart然后重启WLAN1设备以适应配置
+sudo ifdown wlan1; sudo ifup wlan13.1.3 配置HOSTAPD文件sudo nano /etc/hostapd/hostapd.conf内容是：
+# This is the name of the WiFi interface we configured aboveinterface=wlan1# Use the nl80211 driver with the brcmfmac driverdriver=nl80211# This is the name of the networkssid=Pi3-AP# Use the 2.</description>
+    </item>
+    
+    <item>
+      <title>机器学习简介</title>
+      <link>/2017/12/21/introduction-machine-learning/</link>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/21/introduction-machine-learning/</guid>
+      <description>该笔记是来自 Andrew Ng 的 Machine Learning 课程的第一周的课堂记录，主要讲解了以下几个内容:
+机器学习的定义机器学习的分类第一类：监督学习第二类：学习理论第三类：非监督学习第四类：强化学习什么是机器学习？非正式定义1959年， Arthur Samuel1非正式地定义了机器学习：“在不直接针对问题进行编程的情况下，赋予计算机学习能力的一个研究领域”。
+西洋棋就是一个例子，西洋棋自己和自己下棋。由于计算机程序的处理速度非常快，所以Arthur Samuel让计算机与计算机自己下了成千上万盘棋，逐渐地，西洋棋意识到了怎样的局势能使自己胜利，什么样的局势导致自己失败，它会反复地自我学习：“如果让对手占据这些地方时，那么我输的概率可能比较大”，或者“如果我占据这些地方时，我胜利的概率比较大”。在1959年，奇迹出现，他的西洋棋程序的棋艺远远超过西洋棋程序的作者！
+过去人们的看法是计算机除了做程序明确让其做的事情，除外它什么都不能做，但是Arthur Samuel做到了！
+现代化的定义Tom Mitchell在1998年提出现代化的机器学习的定义：“一个合理的学习问题应该是这样定义的：对于一个计算机程序来说，给它一个任务\(T\)和一个性能评测方法\(P\)，如果在经验\(E\)的影响下，\(P\)对\(T\)的测量结果得到了改进，那么就说明程序从中学习到了经验\(E\).
+比如对于西洋棋那个例子来说：
+\(E\) - 程序成千上万次的自我练习\(T\) - 下棋\(P\) - 它与人类棋手对奕的概率监督学习回归问题下面是给予一组房屋大小与对应的房屋价格的数据进行拟合的例子：
+通过学习来预测房屋价格的问题是监督学习问题的一个例子，之所以成为监督学习，是因为我们这个算法提供了一组房屋的大小(\(size\))和一组某种程度上可以堪称正确答案的房屋价格\(Price\)的数据。比如(1000, 30)等。
+监督问题的学习，给算法提供了一组”正确“的输入和”标准“答案，之后，我们希望算法能够去学习标准输入和标准答案之间的联系，以尝试对于我们提供的其他输入来给我们提供更为标准的答案。
+分类问题分类问题是监督学习问题中的另一类问题，它与回归问题最大的区别在于，此时的数据是离散的我而不是连续的.
+下面是给予肿瘤的大小和对应的肿瘤是否是恶性（1）或者良性（0），来进行拟合学习最佳的分类决策线。其中
+数据是一组关于乳腺癌的数据，\(X\)代表肿瘤的大小，\(Y\)代表肿瘤的是否为恶性目标是让一个算法学会预测一个肿瘤是否是恶性或良性很显然，这是一个2分类问题。具体如图2所示：下面考虑一组多个输入变量（多个特征）的数据，下面以两个特征进行举例说明。其中\(X\)表示肿瘤的大小，\(Y\)表示患者的年龄，对于图中的样本数据的表示进行说明：’o’表示良性，’x’表示为恶性，目标是找出最佳的分类决策边界。如图3所示：如果你的数据不能在二维，三维甚至任何有限维空间表示出来，如果你觉得数据实际上存在于无线维空间中该怎么办？
+solution:支持向量机算法2，可以将数据映射到无限维空间，所以他不仅能处理像之前例子中的两个特征所表示的数据，而且还可以处理无限种特征.
+学习理论学习理论主要主要试图了解一下什么算法能够很好地近似不同的函数，并且试图了解一些诸如需要多少训练集数据，测试集数据这样的问题，还比如算法优化，欠拟合和过拟合等问题。</description>
+    </item>
+    
+    <item>
+      <title>在树莓派上搭建OpenCV环境</title>
       <link>/2017/12/20/opencv-rpi/</link>
       <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
       
@@ -20,15 +60,6 @@
       <description>本文主要介绍如何在树莓派上配置和安装OpenCV，本文原文出处1.
 扩大文件系统由于编译安装OpenCV需要的空间很大，所以应该做的第一件事是扩展文件系统，以包括micro-SD卡上的所有可用空间：
 sudo raspi-configFigure 1: 扩展文件系统 --图4-1 扩展文件系统 --安装依赖sudo apt-get install build-essential cmake pkg-config -ysudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev -ysudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev -y sudo apt-get install libxvidcore-dev libx264-dev -ysudo apt-get install libgtk2.0-dev -ysudo apt-get install libatlas-base-dev gfortran -y sudo apt-get install python2.7-dev python3-dev -y下载OpenCV源代码cd ~wget -O opencv.zip https://github.</description>
-    </item>
-    
-    <item>
-      <title>在树莓派上安装和配置邮件服务</title>
-      <link>/2017/12/17/install-and-configurate-mail-server-for-raspberry-pi-3/</link>
-      <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/17/install-and-configurate-mail-server-for-raspberry-pi-3/</guid>
-      <description></description>
     </item>
     
   </channel>

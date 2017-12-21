@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<title>朴素贝叶斯算法 - ReadAILib Official Website </title>
+<meta property="og:title" content="朴素贝叶斯算法 - ReadAILib Official Website ">
+<meta property="og:author" content="朴素贝叶斯算法 - {        map[]}">
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/readailib">GitHub</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCTOuJy4b9E89zCwffX-qC3A">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title" style="text-align: center">朴素贝叶斯算法</h1>
+
+    
+    
+    <div class="post-meta" style="text-align: center">  <a href="http://github.com/rh01">rh01</a>  &nbsp;•&nbsp; 2017/12/21 &nbsp;•&nbsp; 2 min read </div>
+    
+
+    <div class="article-content">
+      <p>本节主要讲解三个基本算法的之一：<strong>朴素贝叶斯算法</strong>，该算法主要是依据<strong>贝叶斯规则/公式/推理</strong>，它的主要作用在于，它和其他将要讲述的<strong><span class="math inline">\(k\)</span>近邻算法</strong>，<strong>感知机算法</strong>都一样，你的算法设计出来之后，至少你的算法的<strong>performance</strong>要比这三类算法的效果要好！另外贝叶斯学习算法基于一些统计上的假设而成立的，因此贝叶斯学习算法又称为统计学习的算法必须学习的算法.本节主要有以下部分内容：</p>
+<ul>
+<li>Bayes’ Rule</li>
+<li>Applying Baye’s Rule to Classification</li>
+<li>The Posterior Probability :<span class="math inline">\(\mathrm{P}(C|x) = \frac{\mathrm{P}(C)\mathrm{P}(x|C)}{\mathrm{P}(x)}\)</span></li>
+<li>Extend to Multi-class classification</li>
+<li>Naive Bayes for Classification</li>
+<li>Zero-frequency Problem</li>
+</ul>
+<section class="level1">
+<h1>贝叶斯定理/公式/规则</h1>
+<p>假设<span class="math inline">\(\{B_1,B_2,...,B_k\}\)</span>是<span class="math inline">\(S\)</span>集合的<strong>划分</strong>且对于<span class="math inline">\(i=0,1,...,k\)</span>有<span class="math inline">\(\mathrm{P}(B_i) &gt; 0\)</span>，那么 <span class="math display">\[\mathrm{P}(B_j|A) = \frac{\mathrm{P}(A|B_j)\mathrm{P}(B_j)}{\sum_{i=1}^k \mathrm{P}(A|B_i)\mathrm{P}(B_i)}\]</span></p>
+</section>
+<section class="level1">
+<h1>在分类问题上应用贝叶斯分类器</h1>
+<section class="level2">
+<h2>例子：信用卡评估：高风险/低风险</h2>
+<p>信用卡评估是这样的一个过程，银行通过对用户的历史交易信息来进行选择的，如果该用户在过去的交易中按时缴纳了本金和利息，并且银行从中获益，那么这些用户是属于<strong>低风险的</strong>，如果他们没有按时缴纳本金和利息或者拒绝还款的话，这类用户比银行定义为<strong>高风险的用户</strong>.</p>
+<p>我们现在的任务就是来学习如何对用户进行分类 vs <strong>低风险</strong>.那么我们现在有以下用户的每年的收入信息和消费信息，我们们用两个<strong>随机变量</strong> <span class="math inline">\(X_1\)</span> 和 <span class="math inline">\(X_2\)</span> 来表示.用户的信用度可以用伯努利随机变量<span class="math inline">\(\mathrm{C} = 1\)</span> 和 <span class="math inline">\(\mathrm{C} = 0\)</span> 来表示。其中<span class="math inline">\(C=0\)</span>表示这是一个低风险的用户，<span class="math inline">\(C=0\)</span>表示这是一个高风险的用户。</p>
+<p>当一个新的用户来进行贷款时，他提供他的每年的收入和消费，即<span class="math inline">\(X_1 = x_1\)</span> 和 <span class="math inline">\(X_2 = x_2\)</span>.如果我们知道信用度C的概率受限于观测值<span class="math inline">\(X = [x_1, x_2]\)</span>，并且有 <span class="math display">\[\begin{align*}
+&amp;\mathrm{if} \; \; \mathrm{P}(C = 1|[x_1 , x_2 ]) &gt; 0.5, \; then \; \mathrm{C}=1 \\
+&amp;\mathrm{if} \; \; \mathrm{P}(C = 1|[x_1 , x_2 ]) \leq 0.5, \; then \; \mathrm{C} = 0
+\end{align*}\]</span></p>
+<p>我们估计的误差建立在<span class="math inline">\(1 − max{\mathrm{P}(C = 1|[x_1 , x_2 ]),\mathrm{P}(C = 0|[x_1 , x_2 ])} &lt; 0.5\)</span>，一般地，有<span class="math inline">\(P(\mathrm{C} = 1|[x_1 , x_2 ]) +\mathrm{P}(C = 0|[x_1 , x_2 ]) = 1\)</span>。</p>
+</section>
+<section id="mathrmpcx-fracmathrmpcmathrmpxcmathrmpx" class="level2">
+<h2>后验概率<span class="math inline">\(\mathrm{P}(C|x) = \frac{\mathrm{P}(C)\mathrm{P}(x|C)}{\mathrm{P}(x)}\)</span></h2>
+<p>其中，对于标题的概率公式又叫做贝叶斯公式，它主要思想是利用先验来估计后验，即<span class="math inline">\(P(C = 1)\)</span> 叫做C=1的先验概率，比如信用卡评估问题上，我们已经有了大量的历史客户数据，<span class="math inline">\(P(C = 1)\)</span>表示在这些数据中高风险的人占总人数的比例，肯定地，这是我们知道的！所以被称作先验概率。</p>
+<ul>
+<li><span class="math inline">\(P(x|C )\)</span>被称作类的似然，它是条件概率，意思为一个事件在已知属于C类的情况下，事件x发生的概率,</li>
+<li><span class="math inline">\(P(x)\)</span>表示事件x发生的概率，不管它是正类还是负类,</li>
+<li><span class="math inline">\(P(C=0|x) + P(C=1|x) = 1\)</span>，来源于事件的划分。</li>
+</ul>
+<p>另外还有以下性质：</p>
+<ul>
+<li><span class="math inline">\(P(X 1 , X 2 )\)</span>表示随机变量<span class="math inline">\(X_1\)</span>和<span class="math inline">\(X_2\)</span>的联合概率</li>
+<li>在假设前提下，两个随机变量是条件概率独立，有<span class="math inline">\(P(X 1 , X 2 |C ) = P(X 1 |C )P(X 2 |C )\)</span>，这是贝叶斯规则重要的假设。尽管假非常简单，但是在实际应用中十分关键。</li>
+</ul>
+<p>现在我们将问题扩展到多类分类问题上，即<span class="math inline">\(C_i ,\; i = 1, 2, . . . , K\)</span>.比如，在数字识别问题上，输入是一个2值化的图像，目标总共有10类，即0-9，我们可以认为这K类看作是输入空间的一个划分。那么贝叶斯分类器是将最高的后验概率的类看作是目标类，也就是<span class="math inline">\(\mathrm{P}(C_i |x) = \mathrm{max}_k \mathrm{P}(C_k |x)\)</span>.同样地，对于多类分类问题，我们可以将所有的属性/特征看作是一个随机变量，那么对于贝叶斯分类器将该样本分为No.1类的概率为<span class="math inline">\(Pr (y = 1|x) = Pr (y = 1|\mathbf{X}_1 = x_1 , \mathbf{X}_2 = x_2 , . . . , \mathbf{X}_n = x_n )\)</span>.</p>
+<p>但是朴素贝叶斯分类七有两个不合理的假设： 1. 每个属性/特征的重要性是一样的 2. 所有属性/特征都是条件概率独立的，有 <span class="math display">\[Pr (y = 1|x) = \frac{1}{Pr(\mathbf{X} = x)} \Pi_{i=1}^{n} Pr (\mathbf{X}_i = x_i |y = 1)\]</span></p>
+</section>
+</section>
+<section class="level1">
+<h1>天气数据的例子</h1>
+</section>
+
+        <hr />
+
+    </div>
+
+
+  </article>
+
+      <footer class="footer">
+
+        
+
+          <div class="generic-box">
+Subscribe to our <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>.
+
+  <div class="share-page">
+<div class="share-links" style="text-align:center;">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</div>
+</div>
+
+
+</div>
+
+        
+      </footer>
+
+    
+    
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-111305334-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
+
+
+  
+  
+
+  <div id="gitalk-container"></div>
+</div>
+
+<link rel="stylesheet" href="/css/gitalk.css" media="all">
+<style type="text/css">
+	
+.gt-container .gt-comment-admin .gt-header-comment .gt-comment-content {
+    background-color: #f5f3d5;
+}
+
+textarea {
+   background-color: #f5f3d5;
+}
+</style>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: 'a98bac7d9ab86f4813de',
+        clientSecret: '307c20444af8207286b5f78f7a5ed941786edad0',
+        repo: 'readailib',
+        owner: 'rh01',
+        admin: ['rh01'],
+        body: location.href,
+      });
+      gitalk.render('gitalk-container');
+ </script>
+
+
+
+</main>
+
+

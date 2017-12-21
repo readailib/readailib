@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on ReadAILib Official Website </title>
-    <link>/post/</link>
-    <description>Recent content in Posts on ReadAILib Official Website </description>
+    <title>Ml on ReadAILib Official Website </title>
+    <link>/tags/ml/</link>
+    <description>Recent content in Ml on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 21 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/ml/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -27,24 +27,6 @@
 注意： 在学习的时候，有一个区别，\(loss function\)描述的是单个样本误差，而\(cost\) \(function\)描述整个训练集的误差。
 同样地，为了更好的下文描述，将其简化：
 \[J(\theta_{0},\theta_{1}) = \frac{1}{2m}\sum_{i=1}^{m}(h_{\theta}(x^{(i)})- y^{(i)})^{2}\]</description>
-    </item>
-    
-    <item>
-      <title>在树莓派上配置AP</title>
-      <link>/2017/12/21/aphot-rpi/</link>
-      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/21/aphot-rpi/</guid>
-      <description>有了一个新的树莓派之后，如果不将它配置成AP热点，你就失去了他的其中的一个优势，如果你的家里面没有无限路由器或者你的家里信号不能遍及，树莓派是你最好的选择，利用流量包转发的优势，大大地节约了成本，并且他支持多种转发机制，这是很重要的特点，是你的网络随时处于移动状态，不像传统的路由器，如果固定到某个地方之后就不能动了，而树莓派是一个可以移动的热点。稳定是最主要的特点。
-本文参考1。
-必需的包hostapddnsmasqsudo apt-get install dnsmasq hostapd配置网卡将wlan1（购买的网卡）配置一个静态IP地址, 首先告诉树莓派DHCP获取IP时忽略WLAN1
-sudo nano /etc/dhcpcd.conf在文件的最后添加：
-denyinterfaces wlan1 配置静态IP
-sudo nano /etc/network/interfaces文件内容如下：
-allow-hotplug wlan1 iface wlan1 inet static address 172.24.1.1netmask 255.255.255.0network 172.24.1.0broadcast 172.24.1.255# wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf重启DHCP服务。
-sudo apt-get install dhcpcd5 #如果没有这个服务sudo service dhcpcd restart然后重启WLAN1设备以适应配置
-sudo ifdown wlan1; sudo ifup wlan13.1.3 配置HOSTAPD文件sudo nano /etc/hostapd/hostapd.conf内容是：
-# This is the name of the WiFi interface we configured aboveinterface=wlan1# Use the nl80211 driver with the brcmfmac driverdriver=nl80211# This is the name of the networkssid=Pi3-AP# Use the 2.</description>
     </item>
     
     <item>
@@ -136,124 +118,6 @@ solution:支持向量机算法2，可以将数据映射到无限维空间，所�
 我们可以尝试使用线性回归加上一个合适的来实现分类问题，如图所示，\(h_{\theta}(x) = \theta^{T}x\)，则基于阈值0.5的分类器算法如下： \[\begin{align*}&amp;amp; h_\theta(x) \geq 0.5 \rightarrow y = 1 \\&amp;amp; h_\theta(x) &amp;lt; 0.5 \rightarrow y = 0 \end{align*}\]
 但是这将存在一个很大问题，该算法并不具有鲁棒性，即假设我们有观测到了一个非常大的尺寸的恶性肿瘤，将其作为实例加入到我们的训练集中，这样将会我们之前的假说\(h\)发生很大变化，如图中最右侧的那个点加入到训练集中，将对\(h(x)\)影响很大，这时将0.5作为阈值来预测肿瘤是否为恶性就不再合适了。虽然很容易构造出模型来，但用原来的线性回归模型解决分类问题的这种方法表现很差。直观地说，也没有任何道理，通过图很容易看出，存在\(h_{\theta}(x)&amp;gt;1\)或者\(h_{\theta}(x)&amp;lt;0\)，但，\(Y \in \{0,1\}\)。为了解决这个问题，我们改变\(h_{\theta}(x)\)的形式，使得输出变量\(0 \leq h_{\theta}(x) \leq 1\).我们将使用\(Sigmoid\)来表示假说函数，也叫为逻辑函数，又因为逻辑函数的输入为\(\theta^{T}x\)，所以我们的模型又叫做逻辑回归模型.
 逻辑回归模型为： \[\begin{align*}&amp;amp; h_\theta (x) = g ( \theta^T x )\\&amp;amp; z = \theta^T x \\&amp;amp;g(z) = \dfrac{1}{1 + e^{-z}}\end{align*}\]</description>
-    </item>
-    
-    <item>
-      <title>在树莓派上搭建OpenCV环境</title>
-      <link>/2017/12/20/opencv-rpi/</link>
-      <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/20/opencv-rpi/</guid>
-      <description>本文主要介绍如何在树莓派上配置和安装OpenCV，本文原文出处1.
-扩大文件系统由于编译安装OpenCV需要的空间很大，所以应该做的第一件事是扩展文件系统，以包括micro-SD卡上的所有可用空间：
-sudo raspi-configFigure 1: 扩展文件系统 --图4-1 扩展文件系统 --安装依赖sudo apt-get install build-essential cmake pkg-config -ysudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev -ysudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev -y sudo apt-get install libxvidcore-dev libx264-dev -ysudo apt-get install libgtk2.0-dev -ysudo apt-get install libatlas-base-dev gfortran -y sudo apt-get install python2.7-dev python3-dev -y下载OpenCV源代码cd ~wget -O opencv.zip https://github.</description>
-    </item>
-    
-    <item>
-      <title>在树莓派上搭建邮件服务器</title>
-      <link>/2017/12/20/mail-server-rpi/</link>
-      <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/20/mail-server-rpi/</guid>
-      <description>上篇文章介绍了利用树莓派搭建AP，那么有了AP之后，由于小编是一名在校的学生，将我的树莓派和我宿舍的路由器连接上网之后，我的树莓派就拥有了全球唯一可访问的地址了，这样的话就可以为所欲为了.
-说到为什么搭建邮件服务器，为什么要使用树莓派呢？为什么不使用VPS呢？
-有所不知，现在VPS（国外的）是严格要求的，不允许在他们的服务器上搭建邮件服务的!这让小编很慌啊，上次搭建了一次，可以发但是不可以接受邮件，这让我很受伤，因此我要在我树莓派上下功夫了，功夫不负有心人呢，我在下面po下我的教程，教程大部分来自该处1。
-安装 Citadel 邮件服务器更新软件包sudo apt-get update将我们的软件包升级到最新版本.sudo apt-get upgrade安装Citadel 邮件服务器sudo apt-get install citadel-suiteFigure 1: leave the field set to 0.0.0.0 as this allows Citadel to listen on all incoming addresses.Figure 2: Now for the user authentication mode we’re going to keep this set to internal.Figure 3: Select admin usernameFigure 4: Select admin passwordFigure 5: Select Web ServerFigure 6: Select HTTP PortFigure 7: Select HTTPs PortFigure 8: Select LanguageExtra Steps</description>
-    </item>
-    
-    <item>
-      <title>Display Image Using R</title>
-      <link>/2017/12/19/display-image-using-r/</link>
-      <pubDate>Tue, 19 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/19/display-image-using-r/</guid>
-      <description>{r fig-margin, echo=FALSE, fig.cap=&amp;quot;这是一个神经网络的图。&amp;quot;, fig.height=3.5, fig.margin=TRUE, warning=FALSE, background=&amp;quot;#f5f5d5&amp;quot;, cache=FALSE}# need png packagelibrary(png)#Replace the directory and file information with your infoima &amp;lt;- readPNG(&amp;quot;C:\\Users\\Shine\\Desktop\\readailib\\themes\\hugo-lithium-theme\\static\\images\\logo.png&amp;quot;)grid::grid.raster(ima)Figure 1: 这是一个神经网络的图。</description>
-    </item>
-    
-    <item>
-      <title>CTeX样式</title>
-      <link>/2017/12/15/ctex-template-for-rstudio/</link>
-      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/15/ctex-template-for-rstudio/</guid>
-      <description>引言中文LaTeX文档并非难题。当然这句话得站在巨人 CTeX 的肩膀上才能说，它让我们只需要一句
-\documentclass{ctexart} % 或者ctexrep/ctexbook或者
-\usepackage{ctex}就轻松搞定中文LaTeX排版问题。跨平台通用的LaTeX编译却是个小难题，主要是没有一种跨平台通用且免费的中文字体。好吧，你们Windows用户永远有宋体黑体，你们Mac用户有华文字体，而我们苦逼Linux用户在编译LaTeX文档就没那么简单了1，是啊，我们有文泉驿，但我们要是用了文泉驿之后把文档发给你们八成不能编译，因为你们没有安装文泉驿。
-字体和选项LaTeX包ctex支持若干种字体选项，如果你是ctex老用户，请注意这里我们要求的最低版本是2.2，你可能需要升级你的LaTeX包。从版本2.0开始，ctex支持根据不同操作系统自动选择中文字体，简直是为人类进步作出了巨大贡献，我们再也不必费尽口舌向用户解释“啊，你用Windows啊，那么你该使用什么字体；啊，你用Mac啊，又该如何如何”。
-下面的YAML元数据应该能满足多数用户的需求，主要设置两项参数：文档类为ctexart（当然也可以是别的类），输出格式为rticles::ctex，其默认LaTeX引擎为XeLaTeX（真的，别纠结你的旧爱PDFLaTeX了）。
----documentclass: ctexartoutput: rticles::ctex---rticles::ctex的参数都是普通的pdf_document参数，参见文档rmarkdown包的文档，这里就不赘述了。
-Windows和Mac用户应该都已经有自带的中文字体了。Linux用户可以另外下载 Fandol字体2，它号称是免费的，不过我们也没太搞清楚它的来头。把那些.otf字体文件下载下来保存到~/.fonts文件夹下，然后命令行切换到那里，运行fc-cache -fv。
-R代码段R代码用R Markdown的语法嵌入，即三个反引号开始一段代码```{r}和三个反引号``` 结束一段代码：
-par(bg = &amp;quot;#f5f5d5&amp;quot;)options(digits = 4)fit = lm(dist ~ speed, data = cars)coef(summary(fit))## Estimate Std. Error t value Pr(&amp;gt;|t|)## (Intercept) -17.579 6.7584 -2.601 1.232e-02## speed 3.932 0.4155 9.464 1.490e-12b = coef(fit)上面回归方程中的斜率是3.9324，完整的回归方程为：\[ Y = -17.5791 + 3.</description>
-    </item>
-    
-    <item>
-      <title>Rmarkdown模板</title>
-      <link>/2017/12/15/template-of-rmarkdown/</link>
-      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/15/template-of-rmarkdown/</guid>
-      <description>GitHub DocumentsThis is an R Markdown format used for publishing markdown documents to GitHub. When you click the Knit button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
-Including CodeYou can include R code in the document as follows:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.</description>
-    </item>
-    
-    <item>
-      <title>Tufte样式</title>
-      <link>/2017/12/15/tufte-template-for-blog/</link>
-      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/15/tufte-template-for-blog/</guid>
-      <description>引言Tufte样式在Edward Tufte的书以及物理学家费曼的教科书很常见，它的一个显著特点就是边栏的使用。例如脚注和边栏注解，以及放在边栏里的小型插图。Tufte样式在LaTeX和HTML/CSS中都有实现1。我们将这两种实现都纳入了tufte包。若需要LaTeX/PDF输出，使用输出格式tufte_handout即可，类似地，tufte_book可以用来输出PDF书，tufte_html生成HTML网页。这些输出格式可以在YAML元数据中指定，或者传给rmarkdown::render()函数。若对rmarkdown包不熟悉，可参见 @R-rmarkdown。
----title: &amp;quot;一个Tufte样式示例&amp;quot;author: &amp;quot;张三&amp;quot;ctex: yesoutput:tufte::tufte_handout:latex_engine: xelatextufte::tufte_html: default---章节标题Tufte样式不主张太深的章节目录，一般仅仅使用一级标题（Markdown中用一个井号#）和二级标题（两个井号）。
-插图边栏插图插图在Tufte的书中非常常见，我们可以使用三种插图：边栏图、全宽图、主栏图。先说边栏图：使用knitr代码段选项fig.margin = TRUE即可将图形放置在边栏中，如：
-library(ggplot2)par(bg = &amp;quot;#f5f5d5&amp;quot;)mtcars2 &amp;lt;- mtcarsmtcars2$am &amp;lt;- factor(mtcars$am, labels = c(&amp;#39;automatic&amp;#39;, &amp;#39;manual&amp;#39;))ggplot(mtcars2, aes(hp, mpg, color = am)) +geom_point() + geom_smooth() +theme(legend.position = &amp;#39;bottom&amp;#39;)+ theme(panel.background = element_rect(fill = &amp;#39;#f5f5d5&amp;#39;, colour = &amp;#39;#f5f5d5&amp;#39;))## `geom_smooth()` using method = &amp;#39;loess&amp;#39;Figure 1: MPG与horsepower两个变量的散点图；颜色代表自动挡或手动挡。注意我们使用代码段选项fig.</description>
-    </item>
-    
-    <item>
-      <title>利用python从头实现矩阵分解算法</title>
-      <link>/2017/12/15/%E5%88%A9%E7%94%A8python%E4%BB%8E%E5%A4%B4%E5%AE%9E%E7%8E%B0%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E7%AE%97%E6%B3%95/</link>
-      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/15/%E5%88%A9%E7%94%A8python%E4%BB%8E%E5%A4%B4%E5%AE%9E%E7%8E%B0%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E7%AE%97%E6%B3%95/</guid>
-      <description>该程序主要是我的《矩阵分析与应用》课程的大作业的解决方案及程序说明。大作业的要求为：
- 要求完成课堂上讲的关于矩阵分解的LU、QR（Gram-Schmidt）、Orthogonal Reduction (Householder reduction 和Givens reduction)程序实现，要求如下：
- 一个综合程序，根据选择参数的不同，实现不同的矩阵分解；
- 可以用matlab等编写程序，需附上简单的程序说明，比如参数代表什么意思，输入什么，输出什么等等；
- 一定是可执行文件，例如.m文件等,不能是word或者txt文档。附上源代码，不能为直接调用matlab等函数库.   程序说明 项目的地址为https://github.com/rh01/matrix-decomposition
-- factorization.py - utils.py utils.py 共有两个源文件组成，其中utils文件主要是一些实现好的工具函数，有
-def mult_matrix(M, N): &amp;quot;&amp;quot;&amp;quot;Multiply square matrices of same dimension M and N&amp;quot;&amp;quot;&amp;quot; def pivot_matrix(M): &amp;quot;&amp;quot;&amp;quot;Returns the pivoting matrix for M, used in Doolittle&amp;#39;s method.&amp;quot;&amp;quot;&amp;quot; def trans_matrix(M): &amp;quot;&amp;quot;&amp;quot;Take the transpose of a matrix.&amp;quot;&amp;quot;&amp;quot; def norm(x): &amp;quot;&amp;quot;&amp;quot;Return the Euclidean norm of the vector x.&amp;quot;&amp;quot;&amp;quot; def Q_i(Q_min, i, j, k): &amp;quot;&amp;quot;&amp;quot;Construct the Q_t matrix by left-top padding the matrix Q with elements from the identity matrix.</description>
-    </item>
-    
-    <item>
-      <title>Welcome to ReadAILib</title>
-      <link>/2017/12/14/welcome-to-readailib/</link>
-      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/14/welcome-to-readailib/</guid>
-      <description>Hello Everyone, Welcome to ReadAILib.
-大家好，本网站主要是由blogdown和Hugo生成的静态网站，为了方便起见，这里傻瓜式地照搬了yihui的模板（默认），这些都不是关键，本网站不是营利性网站，是一个学习交流性质的网站，主要方向为AI，虚拟化，集群，容器，DevOps，分布式，物联网等技术。
-我会尽力将我所做过的和正在做的整理出来，以供学习和交流，广交有共同兴趣的朋友，如果你对我未来的设想或者我的博客内容有什么建议的，可以直接向我提供您有价值的建议，或者直接留言.
-总之一句话，接受批评，接受建议!如果你未来期望与我合作，很期待你与我联系.</description>
-    </item>
-    
-    <item>
-      <title>为我的博客安装评论插件</title>
-      <link>/2017/12/14/add-comment-to-your-blog/</link>
-      <pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/14/add-comment-to-your-blog/</guid>
-      <description>今天尝试了一下不同得评论系统，现在将我设置评论系统的安装方法以及设置步骤总结出来，分享给大家.
-1.Disqusdisqus是一个支持多社交账号和自家的账号的评论插件，是一个广泛使用的评论插件，主要依赖于你必须要在disqus进行设置。但是墙内的用户无法使用，这是比较不方便的地方。
-首先需要创建并设置disqus，进入管理界面，按照图1进行填写.
-图1 填写要求填写完成之后，点击Create Site按钮，就可以进行下一步配置.
-图2 配置要求说明填写完成后，就可以点击Complete Setup，完成配置，但是重要的一点不要忘记是，必须要记住disqusShortname，那你可以通过下面的方式进行查询，比如
-图3 disqusShortname查看方式完成之后，就可以在blogdown里面的config.toml中进行配置了，
-disqusShortname = &amp;quot;readailib&amp;quot;然后就可以启用了.效果如下
-图4 disqus效果2.gitment首先Register a new OAuth application，填写要求
-图5 Register a new OAuth application Principle注册完成之后会返回下面的画面，记住client_id 和 client_secret就行了。
-图6 记住client_id 和 client_secret然后在 themes\hugo-lithium-theme\layouts\partials文件中添加一个新的文件gitment.html，文件内容如下
-&amp;lt;div id=&amp;quot;container&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://imsun.github.io/gitment/style/default.css&amp;quot;&amp;gt;&amp;lt;script src=&amp;quot;https://imsun.github.io/gitment/dist/gitment.browser.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;script&amp;gt;var gitment = new Gitment({id: &amp;#39;location.href&amp;#39;, // owner: &amp;#39;rh01&amp;#39;,repo: &amp;#39;readailib&amp;#39;,oauth: {client_id: &amp;#39;3724d1f38c45d652612b&amp;#39;,client_secret: &amp;#39;cc24fc9ed88bf9eddd44f1319a7056e5d8690d12&amp;#39;,},})gitment.</description>
     </item>
     
   </channel>

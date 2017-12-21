@@ -6,10 +6,28 @@
     <description>Recent content in Matrix on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/matrix/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>多项式回归</title>
+      <link>/2017/12/21/polynomial-regression/</link>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/21/polynomial-regression/</guid>
+      <description>该笔记是来自 Andrew Ng 的 Machine Learning 课程的第二周:多项式回归的课堂记录，有了合适的特征之后，我们发现线性回归并不适用于所有数据，有时我们需要曲线来适应我们的数据，因此引出多项式回归模型，主要讲解了以下几个内容:
+将多项式回归模型转换为线性模型正规方程将多项式回归模型转换为线性模型什么是多项式模型？比如一个二次模型\[h_{\theta} = \theta_{0} + \theta_{1}x + \theta_{2}x^2\],三次模型\[h_{\theta} = \theta_{0} + \theta_{1}x + \theta_{2}x^2 + \theta_{3}x^3\]
+通常情况下，在模型进行选择时，首先要观察数据，然后再决定准备尝试什么样的模型，比如下面图 中的数据分布，我们可以通过观察可以看到，数据的分布用线性模型并不能达到很好的效果，所以在这里尝试用一个多项式模型来拟合我们的训练数据。
+可以尝试多项式函数表示我们的模型：
+\[h_{\theta} = \theta_{0} + \theta_{1}x + \theta_{2}x^2\]
+或者
+\[h_{\theta} = \theta_{0} + \theta_{1}x + \theta_{2}x^2 + \theta_{3}x^3\]
+或者
+\[h_{\theta} = \theta_{0} + \theta_{1}x + \theta_{2}x^{\frac{1}{2}}\]
+有趣的是，如果我们对这些高次项进行替换，比如在\(h_{\theta} = \theta_{0} + \theta_{1}x + \theta_{2}x^2\)中，将 \[x_{2} := x^{2}\] 将可以转换为\(h_{\theta} = \theta_{0} + \theta_{1}x + \theta_{2}x_{2}\)，这样转换为多变量线性回归模型了。</description>
+    </item>
     
     <item>
       <title>Display Image Using R</title>
