@@ -142,7 +142,7 @@ P(y_1,y_2,y_3) &amp;= \sum_{q_1=1}^{k} \sum_{q_2=1}^{k} \sum_{q_3=1}^{k} P(y_1,y
 &amp;= \sum_{q_1=1}^{k} \sum_{q_2=1}^{k} \sum_{q_3=1}^{k} P(y_3|q_3)P(q_3|q_2)P(y_2|q_2)P(y_1,q_1,q_2) \\
 &amp;= \sum_{q_1=1}^{k} \sum_{q_2=1}^{k} \sum_{q_3=1}^{k} P(y_3|q_3)P(q_3|q_2)P(y_2|q_2)P(q_2|q_1)P(y_1|q_1)P(q_1) 
 \end{align*}\]</span>
-<p>但是发现除了A和B我们已知，还无法计算<span class="math inline">\(P(y_1,y_2,y_3)\)</span>，还需要知道<span class="math inline">\(P(q_1)\)</span>的分布情况，所以在这里引出了另外一个条件，<span class="math inline">\(P(q_1)\)</span>的分布。也就是初始状态概率。为了符号化，这里<span class="math inline">\(\pi\)</span>是初始状态概率向量$= (_i) <span class="math inline">\(： 其中\)</span>_i = P(i_1 = q_i)<span class="math inline">\(， 是时刻t＝1处于状态\)</span>q_i$ 的概率。</p>
+<p>但是发现除了A和B我们已知，还无法计算<span class="math inline">\(P(y_1,y_2,y_3)\)</span>，还需要知道<span class="math inline">\(P(q_1)\)</span>的分布情况，所以在这里引出了另外一个条件，<span class="math inline">\(P(q_1)\)</span>的分布。也就是初始状态概率。为了符号化，这里<span class="math inline">\(\pi\)</span>是初始状态概率向量<span class="math inline">\(\pi = (\pi_i)\)</span>： 其中<span class="math inline">\(\pi_i = P(i_1 = q_i)\)</span>， 是时刻t＝1处于状态<span class="math inline">\(q_i\)</span> 的概率。</p>
 <p><strong>总结：</strong> 隐马尔可夫模型由初始状态概率向量<span class="math inline">\(\pi\)</span>、状态转移概率矩阵<span class="math inline">\(A\)</span>和观测概率矩阵<span class="math inline">\(B\)</span>决定。<span class="math inline">\(\pi\)</span>和<span class="math inline">\(A\)</span>决定状态序列，<span class="math inline">\(B\)</span>决定观测序列。因此，隐马尔可夫模型<span class="math inline">\(\lambda\)</span>可以用三元符号表示，即 <span class="math display">\[\lambda=(A,B,\pi)\]</span> <span class="math inline">\(A\)</span>,<span class="math inline">\(B\)</span>,<span class="math inline">\(\pi\)</span>称为隐马尔可夫模型的三要素。</p>
 </section>
 <section class="level1">
