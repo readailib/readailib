@@ -39,6 +39,15 @@
     </item>
     
     <item>
+      <title>Machine Learning</title>
+      <link>/categories/machine-learning/</link>
+      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Mail Server</title>
       <link>/categories/mail-server/</link>
       <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
@@ -98,6 +107,15 @@
       <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/rpi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Svm</title>
+      <link>/categories/svm/</link>
+      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/svm/</guid>
       <description></description>
     </item>
     

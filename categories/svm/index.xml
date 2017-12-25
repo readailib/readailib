@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Svm on ReadAILib Official Website </title>
+    <link>/categories/svm/</link>
+    <description>Recent content in Svm on ReadAILib Official Website </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/svm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>支持向量机算法</title>
+      <link>/2017/12/23/svm/</link>
+      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/23/svm/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
