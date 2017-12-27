@@ -206,7 +206,8 @@ sudo raspi-configFigure 1: 扩展文件系统 --图4-1 扩展文件系统 -
       <pubDate>Thu, 14 Dec 2017 21:48:51 -0700</pubDate>
       
       <guid>/about/</guid>
-      <description>这是@readailib的官方网站，这个网站主要用于分享容器和集群等相关的文章，该网站由@rh01创建及维护.
+      <description> 
+这是@readailib的官方网站，这个网站主要用于分享容器和集群等相关的文章，该网站由@rh01创建及维护.
 本站博文均基于署名-非商业性使用-禁止演绎 4.0 国际协议发布，若发现本站有任何侵犯您利益的内容，请及时邮件1 或留言联系，我会第一时间删除所有相关内容。
  admin@readailib.com [return]   </description>
     </item>
