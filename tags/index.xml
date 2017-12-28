@@ -119,5 +119,14 @@
       <description></description>
     </item>
     
+    <item>
+      <title>Test</title>
+      <link>/tags/test/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/test/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

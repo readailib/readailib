@@ -6,10 +6,21 @@
     <description>Recent content in Ml on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 28 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/ml/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Test</title>
+      <link>/2017/12/28/test/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/28/test/</guid>
+      <description> This is a test page.
+ Hello, This is a test page!
+ Hello, This is a Test. </description>
+    </item>
     
     <item>
       <title>支持向量机算法</title>
