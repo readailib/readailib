@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
 
     
     
-    <div class="post-meta" style="text-align: center">  <a href="http://github.com/rh01">rh01</a>  &nbsp;•&nbsp; 2017/12/23 &nbsp;•&nbsp; 2 min read </div>
+    <div class="post-meta" style="text-align: center">  <a href="http://github.com/rh01">rh01</a>  &nbsp;•&nbsp; 2017/12/23 &nbsp;•&nbsp; 4 min read </div>
     
 
     <div class="article-content">
@@ -218,7 +218,28 @@ p(Y, q_t = i|\lambda) &amp;= p(Y|q_t = i)p(q_t = i)\\
 </section>
 <section class="level1">
 <h1>学习算法</h1>
-<p>后期更新，主要讲解学习算法之EM算法，利用EM算法来学习未知参数。</p>
+<p>隐马尔可夫模型的学习，根据训练数据是包括观测序列和对应的状态序列还是只有观测序列，可以分别由监督学习与非监督学习实现。主要讲解非监督学习算法——Baum-Welch算法（也就是EM算法）。</p>
+<p>复习下EM算法： <span class="math display">\[{\theta ^{(g + 1)}} = \mathop {\arg \max }\limits_\theta  [Q(\theta ,{\theta ^{(g)}})] = \mathop {\arg \max }\limits_\theta  (\int_Z {\log (p(X,Z|\theta ))P(Z|X,{\theta ^{(g)}})dz} )\]</span></p>
+<p>在HMM中，我们把要求解的问题写成E-M的形式，如下所示： <span class="math display">\[{\lambda ^{(g + 1)}} = \mathop {\arg \max }\limits_\lambda  \left( {\underbrace {\int_{q \in Q} {\ln (p(Y,q|\lambda ))P(q,Y|{\lambda ^{(g)}})dq} }_{Q(\lambda ,{\lambda ^{(g)}})}} \right)\]</span></p>
+<p>其中， <span class="math display">\[\begin{align*}
+Q(\lambda ,{\lambda ^{(g)}}) &amp;= \int_{q \in Q} {\ln (p(Y,q|\lambda ))P(q,Y|{\lambda ^{(g)}})dq}  \\ 
+&amp;= \sum\limits_{{q_0} = 1}^k  \cdots  \sum\limits_{{q_T} = 1}^k {\left( {\ln {\pi _0} + \sum\limits_{t = 1}^T {\ln {a_q}_{_{t - 1},{q_t}} + \sum\limits_{t = 1}^T {\ln {b_{{q_t}}}({y_t})} } } \right)} p(q,Y|{\lambda ^{(g)}}) 
+\end{align*}\]</span></p>
+<p>可以看到公式里面有三个元素，现在依次求解每一项。</p>
+<p>首先求解第一项<span class="math inline">\(\sum\limits_{{q_0} = 1}^k \cdots \sum\limits_{{q_T} = 1}^k {\ln {\pi _0}} p(q,Y|{\lambda ^{(g)}})\)</span>， <span class="math display">\[\sum\limits_{{q_0} = 1}^k  \cdots  \sum\limits_{{q_T} = 1}^k {\ln {\pi _0}} p(q,Y|{\lambda ^{(g)}}){\rm{ = }}\sum\limits_{i = 1}^k {\ln {\pi _i}p({q_0} = i,Y|{\lambda ^{(g)}})}\]</span> 其中约束条件为<span class="math inline">\(\sum\limits_{i = 1}^k {{\pi _i}} = 1\)</span>。</p>
+<p>那么这种带有约束的最优化问题常用拉格朗日乘数法进行求解，即： <span class="math display">\[{\mathbb{LM}^{{\rm{term1}}}}{\rm{ = }}\sum\limits_{i = 1}^k {\ln {\pi _i}p({q_0} = i,Y|{\lambda ^{(g)}})} {\rm{ + }}\tau \left( {\sum\limits_{i = 1}^k {{\pi _i}}  - 1} \right)\]</span></p>
+<p><span class="math display">\[{{\partial {^{{\rm{term1}}}}} \over {\partial {\pi _i}}} = {{p(q,Y|{\lambda ^{(g)}})} \over {{\pi _i}}} + \tau  = 0  \; \; \; \; \; \; \; \;  {{\partial {^{{\rm{term1}}}}} \over {\partial \tau }} = \sum\limits_{i = 1}^k {{\pi _i}}  - 1 = 0 
+\]</span> <span class="math display">\[p({q_0} = i,Y|{\lambda ^{(g)}}) =  - \tau {\pi _i} \Longrightarrow \sum\limits_{i = 1}^k {p({q_0} = i,Y|{\lambda ^{(g)}})}  =  - \tau \sum\limits_{i = 1}^k {{\pi _i}}  =  - \tau\]</span></p>
+<p>因此有 <span class="math display">\[{\pi _i} = {{p({q_0} = i,Y|{\lambda ^{(g)}})} \over { - \tau }} \Longrightarrow {\pi _i} = {{p({q_0} = i,Y|{\lambda ^{(g)}})} \over {\sum\limits_{i = 1}^k {p({q_0} = i,Y|{\lambda ^{(g)}})} }}\]</span></p>
+<p>下面求解第二项<span class="math inline">\(\sum\limits_{{q_0} = 1}^k \cdots \sum\limits_{{q_T} = 1}^{k{\rm{ }}} {\sum\limits_{t = 1}^T {\ln {a_{{q_{t - 1,}}{q_t}}}} } p(q,Y|{\lambda ^{(g)}}) = \sum\limits_{i = 1}^k {\sum\limits_{j = 1}^k {\sum\limits_{t = 1}^T {\ln {a_{i,j}}p({q_{t - 1}} = i,{q_t} = j,Y|{\lambda ^{(g)}})} } }\)</span></p>
+<p>同样的是拉格朗日优化问题，此时的拉格朗日函数为 <span class="math display">\[\mathbb{LM}^{\text{term2}} = \sum\limits_{i = 1}^k {\sum\limits_{j = 1}^k {\sum\limits_{t = 1}^T {\ln {a_{i,j}}p({q_{t - 1}} = i,{q_t} = j,Y|{\lambda ^{(g)}})} } }  + \sum\limits_{i = 1}^k {{\tau _i}\left( {\sum\limits_{i = 1}^k {{\pi _i}}  - 1} \right)}\]</span></p>
+<p>第三项<span class="math inline">\(\sum\limits_{{q_0} = 1}^k \cdots \sum\limits_{{q_T} = 1}^k {\sum\limits_{t = 1}^T {\ln {b_{{q_t}}}({y_t})} } p(q,Y|{\lambda ^{(g)}}) = \sum\limits_{i = 1}^k {\sum\limits_{j = 1}^k {\sum\limits_{t = 1}^T {\ln {b_j}({y_t})p({q_t},Y|{\lambda ^{(g)}})}}}\)</span>的拉格朗日优化目标函数为</p>
+<p><span class="math display">\[\mathbb{LM}^{term3} = \sum\limits_{i = 1}^k {\sum\limits_{j = 1}^k {\sum\limits_{t = 1}^T {\ln {b_j}({y_t})p({q_t},Y|{\lambda ^{(g)}})} } }  + \sum\limits_{i = 1}^k {{\tau _i}\left( {\sum\limits_{i = 1}^k {{b_j}({y_t})}  - 1} \right)}\]</span></p>
+<p>具体解法和第一项的求解类似！</p>
+</section>
+<section class="level1">
+<h1>总结</h1>
+<p>隐马尔可夫模型作为动态模型的一种，主要对时间序列的数据进行建模，在学习算法上主要是利用E-M算法进行求解，但是总体上大大降低了计算效率，目前只介绍了离散型的动态模型，后期如果有时间，会具体介绍有关连续性的动态模型算法。</p>
 </section>
 <section class="footnotes">
 <hr />
