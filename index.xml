@@ -41,15 +41,6 @@ min.nc = 2max.nc = 8然后我们现在指定k=3，此时的建立模型的算�
     </item>
     
     <item>
-      <title>Test</title>
-      <link>/2017/12/30/test/</link>
-      <pubDate>Sat, 30 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/30/test/</guid>
-      <description>This is a test page!</description>
-    </item>
-    
-    <item>
       <title>支持向量机算法</title>
       <link>/2017/12/24/svm/</link>
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
