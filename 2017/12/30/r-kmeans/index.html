@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  	<link rel="shortcut icon" href="http://rh01.github.io/favicon.ico" type="image/x-icon" />
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<title>R实战-KMeans - ReadAILib Official Website </title>
+<meta property="og:title" content="R实战-KMeans - ReadAILib Official Website ">
+<meta property="author" content="{        map[]} - rh01">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/readailib">GitHub</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCTOuJy4b9E89zCwffX-qC3A">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title" style="text-align: center">R实战-KMeans</h1>
+
+    
+    
+    <div class="post-meta" style="text-align: center">  <a href="http://github.com/rh01" >Heng-Heng Shen</a>  &nbsp;•&nbsp; 2017/12/30 &nbsp;•&nbsp; 4 min read </div>
+    
+
+    <div class="article-content">
+      <p>本次主要讲解Kmeans实做部分，假设读者有Kmeans算法的背景下，下面是R程序，本程序对iris数据进行建模。</p>
+<section class="level2">
+<h2>安装并导入必要的程式套件</h2>
+<p>主要用到了MASS，cluster，clusterSim等套件，其中clusterSim主要作为选取合适的k值得算法。</p>
+<pre class="r"><code>#install.packages(&quot;MASS&quot;)
+library(MASS)
+#install.packages(&quot;cluster&quot;)
+library(cluster)
+#install.packages(&quot;clusterSim&quot;)
+library(clusterSim)</code></pre>
+</section>
+<section class="level2">
+<h2>导入数据</h2>
+<p>导入经典的iris数据集，数据集已经是tidy的了。</p>
+<pre class="r"><code>data(iris)</code></pre>
+</section>
+<section class="level2">
+<h2>数据建模部分</h2>
+<p><strong>注意：</strong> 现在数据的整理和探索部分就省略掉了，假定读者对iris数据集非常熟悉了，因此直接进入数据建模部分。</p>
+<p>首先定义我们要聚成几类</p>
+<pre class="r"><code>min.nc = 2
+max.nc = 8</code></pre>
+<p>然后我们现在指定k=3，此时的建立模型的算法如下：</p>
+<pre class="r"><code>## 定義模型
+result0 &lt;- kmeans(iris[, -5], centers = 3)
+print(result0)</code></pre>
+<pre><code>## K-means clustering with 3 clusters of sizes 38, 50, 62
+## 
+## Cluster means:
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1     6.850000    3.073684     5.742105    2.071053
+## 2     5.006000    3.428000     1.462000    0.246000
+## 3     5.901613    2.748387     4.393548    1.433871
+## 
+## Clustering vector:
+##   [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [36] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+##  [71] 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 1 1 1
+## [106] 1 3 1 1 1 1 1 1 3 3 1 1 1 1 3 1 3 1 3 1 1 3 3 1 1 1 1 1 3 1 1 1 1 3 1
+## [141] 1 1 3 1 1 1 3 1 1 3
+## 
+## Within cluster sum of squares by cluster:
+## [1] 23.87947 15.15100 39.82097
+##  (between_SS / total_SS =  88.4 %)
+## 
+## Available components:
+## 
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
+## [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
+## [9] &quot;ifault&quot;</code></pre>
+<pre class="r"><code>names(result0)</code></pre>
+<pre><code>## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
+## [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
+## [9] &quot;ifault&quot;</code></pre>
+<pre class="r"><code>result0[&quot;cluster&quot;]</code></pre>
+<pre><code>## $cluster
+##   [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [36] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+##  [71] 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 1 1 1
+## [106] 1 3 1 1 1 1 1 1 3 3 1 1 1 1 3 1 3 1 3 1 1 3 3 1 1 1 1 1 3 1 1 1 1 3 1
+## [141] 1 1 3 1 1 1 3 1 1 3</code></pre>
+<pre class="r"><code>result0[&quot;centers&quot;]</code></pre>
+<pre><code>## $centers
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1     6.850000    3.073684     5.742105    2.071053
+## 2     5.006000    3.428000     1.462000    0.246000
+## 3     5.901613    2.748387     4.393548    1.433871</code></pre>
+<pre class="r"><code>result0$centers</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1     6.850000    3.073684     5.742105    2.071053
+## 2     5.006000    3.428000     1.462000    0.246000
+## 3     5.901613    2.748387     4.393548    1.433871</code></pre>
+<pre class="r"><code>table(iris$Species, result0$cluster)</code></pre>
+<pre><code>##             
+##               1  2  3
+##   setosa     33 17  0
+##   versicolor  0  4 46
+##   virginica   0  0 50</code></pre>
+<pre class="r"><code>## pch 符號和col顏色
+plot(iris[, 1:2], pch=(result0$cluster), col=result0$cluster)
+## 在圖片上標出中心位置
+points(result0$centers[, 1:2], col=1:3, pch=8)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="/post/2017-12-30-r-kmeans_files/figure-html/unnamed-chunk-5-1.png" alt="聚类结果，其中*表示群中心。" width="960" />
+<p class="caption">
+Figure 1: 聚类结果，其中*表示群中心。
+</p>
+</div>
+<p>熟悉了基本的kmeans算法之后，我们现在将手动选取k值变成程序自动选择最佳的k值，那么这就需要评测标准，下面给出一个评测标准，其中这个评测标准/指标可以使用函数<code>index.DB()</code>实现.</p>
+<p>一般来说，聚类主要实现的是<strong>群内变异小，群间变异大</strong>！量化为</p>
+<span class="math display">\[\begin{align*}
+\rm{DB} \; \rm{index} &amp;= \frac{1}{c} \sum_{i} R_i \\
+R_i &amp;= max_i R_{ij}, \forall i \not = j \; \\
+R_{ij} &amp;= \frac{S_i + S_j}{||m_i - m_j||^2} \\
+S_i &amp;= \frac{1}{n_i} \sum\limits_{x \in i}^{} {{{(x - {m_i})}^2}}\\
+\end{align*}\]</span>
+<center>
+<img src="http://olrs8j04a.bkt.clouddn.com/17-12-30/76240382.jpg" />
+<p class="caption">
+图 1: K值选择的标准
+</p>
+</center>
+<p>具体的程序如下：</p>
+<pre class="r"><code>## 定義最佳分群數
+## 選擇最佳分群數
+KM &lt;- array(0, c(max.nc-min.nc+1, 1))
+for (nc in min.nc:max.nc){
+  fitkm = kmeans(iris[, 1:4], center = nc)
+  KM[nc-(min.nc-1), 1]=index.DB(iris[, -5], fitkm$cluster, centrotypes=&quot;centroids&quot;, p=2)$DB ##用来计算DB值
+}
+which(KM[, 1] == min(KM[, 1]))</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>## [1] 表示分成2（min.nc）群比較好
+
+result = kmeans(iris[, 1:4], centers = 2)
+plot(iris[, 3:4], pch=(result$cluster), col=result$cluster)
+points(result$centers[, 3:4], col=1:2, pch = 8)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<img src="/post/2017-12-30-r-kmeans_files/figure-html/unnamed-chunk-6-1.png" alt="最佳聚类结果。" width="960" />
+<p class="caption">
+Figure 2: 最佳聚类结果。
+</p>
+</div>
+</section>
+
+        <hr />
+
+    </div>
+
+
+  </article>
+
+      <footer class="footer">
+
+        
+
+          <div class="generic-box">
+Subscribe to our <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>.
+
+  <div class="share-page">
+<div class="share-links" style="text-align:center;">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</div>
+</div>
+
+
+</div>
+
+        
+      </footer>
+
+    
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/Dockerfile.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/python.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-111305334-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
+
+
+  
+  
+
+  <div id="gitalk-container"></div>
+</div>
+
+<link rel="stylesheet" href="/css/gitalk.css" media="all">
+<style type="text/css">
+	
+.gt-container .gt-comment-admin .gt-header-comment .gt-comment-content {
+    background-color: #f5f3d5;
+}
+
+textarea {
+   background-color: #f5f3d5;
+}
+</style>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: 'a98bac7d9ab86f4813de',
+        clientSecret: '307c20444af8207286b5f78f7a5ed941786edad0',
+        repo: 'readailib',
+        owner: 'rh01',
+        admin: ['rh01'],
+        body: location.href,
+      });
+      gitalk.render('gitalk-container');
+ </script>
+
+
+
+</main>
+
+
