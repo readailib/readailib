@@ -159,7 +159,10 @@ blockquote, blockquote p {
 blockquote footer {
   text-align: right;
 }
-
+.highlight pre pre {
+    border: none;
+    margin-bottom: 0;
+}
 /*code*/
 .hljs {
     display: block;
@@ -167,6 +170,7 @@ blockquote footer {
     padding: 0.5em;
     color: #333;
     background: #f5f2d5; /*#f8f8f8#f5f2d5*/
+   
 }
 
  

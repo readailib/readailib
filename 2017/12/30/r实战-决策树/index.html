@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  	<link rel="shortcut icon" href="http://rh01.github.io/favicon.ico" type="image/x-icon" />
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<title>R实战-决策树 - ReadAILib Official Website </title>
+<meta property="og:title" content="R实战-决策树 - ReadAILib Official Website ">
+<meta property="author" content="{        map[]} - rh01">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/readailib">GitHub</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCTOuJy4b9E89zCwffX-qC3A">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title" style="text-align: center">R实战-决策树</h1>
+
+    
+    
+    <div class="post-meta" style="text-align: center">  <a href="http://github.com/" >Heng-Heng Shen</a>  &nbsp;•&nbsp; 2017/12/30 &nbsp;•&nbsp; 3 min read </div>
+    
+
+    <div class="article-content">
+      <hr />
+<p>本篇内容，会继续介绍一些常用的数据挖掘模型：</p>
+<p>这里拿网络上一个公开数据(铁达尼号的乘客数据)来进行分析，<a href="http://www.rdatamining.com/data/titanic.raw.rdata?attredirects=0&d=1" target="_blank">资料载点如下</a>。</p>
+<section id="decision-tree" class="level1">
+<h1>决策树(Decision Tree)</h1>
+<p>无论在分类或预测上，决策树的算法都有很好的效果。</p>
+<p>但它最强大的地方，莫过于树状分支的结构：可以明显呈现分类的规则！与一些机器学习的方法(NN, SVM…)相比，相当容易进行解释，以及分析规则之间的关系。</p>
+<p>这里就简单用CART决策树来练习，对应的套件是<code>rpart</code>，一样使用上次铁达尼号的数据：</p>
+<pre class="r"><code># 记得要给定数据所在的路径(path)，例如：我把下载的资料放在C槽下：
+load(&quot;F:\\01_学习资料\\R\\Data-Mining-master\\Source-File\\決策樹\\titanic.raw.rdata&quot;)  #汇入.rdata檔</code></pre>
+<pre class="r"><code>require(rpart)
+
+# 先把数据区分成 train=0.8, test=0.2 
+set.seed(22)
+train.index &lt;- sample(x=1:nrow(titanic.raw), size=ceiling(0.8*nrow(titanic.raw) ))
+train &lt;- titanic.raw[train.index, ]
+test &lt;- titanic.raw[-train.index, ]
+
+# CART的模型：把存活与否的变数(Survived)当作Y，剩下的变数当作X
+cart.model&lt;- rpart(Survived ~. , 
+                    data=train)
+
+# 输出各节点的详细信息(呈现在console窗口)
+cart.model</code></pre>
+<pre><code>## n= 1761 
+## 
+## node), split, n, loss, yval, (yprob)
+##       * denotes terminal node
+## 
+##  1) root 1761 558 No (0.68313458 0.31686542)  
+##    2) Sex=Male 1398 288 No (0.79399142 0.20600858)  
+##      4) Age=Adult 1348 264 No (0.80415430 0.19584570) *
+##      5) Age=Child 50  24 No (0.52000000 0.48000000)  
+##       10) Class=3rd 37  11 No (0.70270270 0.29729730) *
+##       11) Class=1st,2nd 13   0 Yes (0.00000000 1.00000000) *
+##    3) Sex=Female 363  93 Yes (0.25619835 0.74380165)  
+##      6) Class=3rd 155  73 No (0.52903226 0.47096774) *
+##      7) Class=1st,2nd,Crew 208  11 Yes (0.05288462 0.94711538) *</code></pre>
+<p>要画出决策树(可视化)，虽然用平常的<code>plot()</code>就可以达成</p>
+<p>但rpart有专属的绘图套件<code>rpart.plot</code>，函式是<code>prp()</code></p>
+<p>说真的，用<code>prp()</code>画出来的决策树，比较好看一些：</p>
+<pre class="r"><code>require(rpart.plot) 
+par(bg = &quot;#f5f5d5&quot;)
+prp(cart.model,         # 模型
+    faclen=0,           # 呈现的变数不要缩写
+    fallen.leaves=TRUE, # 让树枝以垂直方式呈现
+    shadow.col=&quot;gray&quot;,  # 最下面的节点涂上阴影
+    # number of correct classifications / number of observations in that node
+    extra=2)  </code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="/post/2017-12-30-r-decision-tree_files/figure-html/unnamed-chunk-3-1.png" alt="决策树模型。" width="960" />
+<p class="caption">
+Figure 1: 决策树模型。
+</p>
+</div>
+<p>(最下面节点的数字，代表：<strong>number of correct classifications / number of observations in that node</strong>)</p>
+<p>根据以上决策树，可以发现<strong>是男生或女生</strong>其实很重要(因为是第一个分支规则)，其次是在船上的舱位等级。</p>
+<p>因此，我们可以这样解释：</p>
+<blockquote>
+<p>即使是女性，可是拥有的舱位若是最低下的(3rd)，则大概有一半的死亡机率(82/155=53%)；<br />
+但当妳的舱位高人一等时，则有相当高的存活机率(197/208=95%)。</p>
+</blockquote>
+<p>又或者是：</p>
+<blockquote>
+<p>当你是男性成人时，大概有八成机率会死(1084/1348=77%)</p>
+</blockquote>
+<p>以及</p>
+<blockquote>
+<p>若是男性小孩，就和舱位等级有关：高级舱位的小孩全都获救(13/13)，可是低舱位的小孩有七成机率(26/37=70%)会死。</p>
+</blockquote>
+<p><strong>(男生好可怜)</strong></p>
+<p>●也可用另一个绘图套件<code>partykit</code>，函式是<code>as.party()</code>和<code>plot()</code></p>
+<pre class="r"><code>require(partykit)   
+par(bg = &quot;#f5f5d5&quot;)
+rparty.tree &lt;- as.party(cart.model) # 转换cart决策树
+rparty.tree # 输出各节点的详细信息</code></pre>
+<pre><code>## 
+## Model formula:
+## Survived ~ Class + Sex + Age
+## 
+## Fitted party:
+## [1] root
+## |   [2] Sex in Male
+## |   |   [3] Age in Adult: No (n = 1348, err = 19.6%)
+## |   |   [4] Age in Child
+## |   |   |   [5] Class in 3rd: No (n = 37, err = 29.7%)
+## |   |   |   [6] Class in 1st, 2nd: Yes (n = 13, err = 0.0%)
+## |   [7] Sex in Female
+## |   |   [8] Class in 3rd: No (n = 155, err = 47.1%)
+## |   |   [9] Class in 1st, 2nd, Crew: Yes (n = 208, err = 5.3%)
+## 
+## Number of inner nodes:    4
+## Number of terminal nodes: 5</code></pre>
+<pre class="r"><code>plot(rparty.tree) </code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="/post/2017-12-30-r-decision-tree_files/figure-html/unnamed-chunk-4-1.png" alt="CART决策树模型。" width="960" />
+<p class="caption">
+Figure 2: CART决策树模型。
+</p>
+</div>
+<p>用这个套件画出来的图也是蛮容易一目了然的呢! 有不一样的感觉~</p>
+<p>有决策树之后，就要进行预测！</p>
+<p>还记得在线性回归使用过的<code>predict()</code>吗？这时就会派上用场啰(在这里，会同时计算预测准确率)：</p>
+<pre class="r"><code>pred &lt;- predict(cart.model, newdata=test, type=&quot;class&quot;)
+
+# 用table看预测的情况
+table(real=test$Survived, predict=pred)</code></pre>
+<pre><code>##      predict
+## real   No Yes
+##   No  278   9
+##   Yes  93  60</code></pre>
+<pre class="r"><code># 计算预测准确率 = 对角线的数量/总数量
+confus.matrix &lt;- table(real=test$Survived, predict=pred)
+sum(diag(confus.matrix))/sum(confus.matrix) # 对角线的数量/总数量</code></pre>
+<pre><code>## [1] 0.7681818</code></pre>
+<p>结果显示，模型在测试集中的预测能力大约77%，但模型的预测准确率还有提升的可能吗？我们继续对模型进行修树~</p>
+<pre class="r"><code>printcp(cart.model) # 先观察未修剪的树，CP字段代表树的成本复杂度参数</code></pre>
+<pre><code>## 
+## Classification tree:
+## rpart(formula = Survived ~ ., data = train)
+## 
+## Variables actually used in tree construction:
+## [1] Age   Class Sex  
+## 
+## Root node error: 558/1761 = 0.31687
+## 
+## n= 1761 
+## 
+##         CP nsplit rel error  xerror     xstd
+## 1 0.317204      0   1.00000 1.00000 0.034989
+## 2 0.016129      1   0.68280 0.68280 0.030966
+## 3 0.011649      2   0.66667 0.68817 0.031054
+## 4 0.010000      4   0.64337 0.66487 0.030668</code></pre>
+<pre class="r"><code>par(bg = &quot;#f5f5d5&quot;)
+plotcp(cart.model) # 画图观察未修剪的树</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="/post/2017-12-30-r-decision-tree_files/figure-html/unnamed-chunk-7-1.png" alt="未修剪的树。" width="960" />
+<p class="caption">
+Figure 3: 未修剪的树。
+</p>
+</div>
+<pre class="r"><code>prunetree_cart.model &lt;- prune(cart.model, cp = cart.model$cptable[which.min(cart.model$cptable[,&quot;xerror&quot;]),&quot;CP&quot;]) # 利用能使决策树具有最小误差的CP来修剪树</code></pre>
+<p>修剪完决策树之后，让我们重新建构一次预测模型</p>
+<pre class="r"><code>prunetree_pred &lt;- predict(prunetree_cart.model, newdata=test, type=&quot;class&quot;)
+
+# 用table看预测的情况
+table(real=test$Survived, predict=prunetree_pred)</code></pre>
+<pre><code>##      predict
+## real   No Yes
+##   No  278   9
+##   Yes  93  60</code></pre>
+<pre class="r"><code>prunetree_confus.matrix &lt;- table(real=test$Survived, predict=prunetree_pred)
+sum(diag(prunetree_confus.matrix))/sum(prunetree_confus.matrix) # 对角线的数量/总数量</code></pre>
+<pre><code>## [1] 0.7681818</code></pre>
+<p>很显然，模型的预测准确率并没有提升，一样是大约77%，这是因为我们在修剪时所挑选到满足条件的CP值为<strong>0.01</strong>，而函式<code>rpart()</code>预设的CP值就是<strong>0.01</strong>，故前后模型的结果一致。</p>
+<p>再来，我们为了避免模型过度拟合(overfitting)，故要利用K-fold Cross-Validation的方法进行交叉验证，我们使用<code>caret</code>这个套件，而K先设定为10次~</p>
+<pre class="r"><code>require(caret)
+require(e1071)
+train_control &lt;- trainControl(method=&quot;cv&quot;, number=10)
+train_control.model &lt;- train(Survived~., data=train, method=&quot;rpart&quot;, trControl=train_control)
+train_control.model</code></pre>
+<pre><code>## CART 
+## 
+## 1761 samples
+##    3 predictor
+##    2 classes: &#39;No&#39;, &#39;Yes&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 1586, 1585, 1584, 1586, 1584, 1585, ... 
+## Resampling results across tuning parameters:
+## 
+##   cp          Accuracy   Kappa    
+##   0.01164875  0.7818891  0.4095449
+##   0.01612903  0.7773564  0.4027155
+##   0.31720430  0.7052958  0.1158982
+## 
+## Accuracy was used to select the optimal model using the largest value.
+## The final value used for the model was cp = 0.01164875.</code></pre>
+<p>然而，我们一开始修剪树之后所得到的决策树模型，最佳的预测准确率大约为77%，而现在再透过交叉验证所Tune得的参数，使得模型的最佳预测准确率大约提升为78%。</p>
+</section>
+<section class="level1">
+<h1>总结</h1>
+<p>在数据挖掘领域中，决策树(Decision Tree)是相当常见的方法，例如在医学研究上，对某种特定的疾病(糖尿病，代谢症候群等)找出可以前期筛检分类，或是预测的因子时，就常以决策树的方法来进行，而决策树较为不同之处在于可用图像化来呈现结果，即使不了解背后理论，仍可解读并判断。</p>
+<p>进行决策树分析要注意的是，当样本存在类别不不衡的问题时，决策树对于小类的样本根本无能为力，模型的效能会大打折扣。</p>
+</section>
+
+        <hr />
+
+    </div>
+
+
+  </article>
+
+      <footer class="footer">
+
+        
+
+          <div class="generic-box">
+Subscribe to our <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>.
+
+  <div class="share-page">
+<div class="share-links" style="text-align:center;">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</div>
+</div>
+
+
+</div>
+
+        
+      </footer>
+
+    
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/Dockerfile.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/python.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-111305334-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
+
+
+  
+  
+
+  <div id="gitalk-container"></div>
+</div>
+
+<link rel="stylesheet" href="/css/gitalk.css" media="all">
+<style type="text/css">
+	
+.gt-container .gt-comment-admin .gt-header-comment .gt-comment-content {
+    background-color: #f5f3d5;
+}
+
+textarea {
+   background-color: #f5f3d5;
+}
+</style>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: 'a98bac7d9ab86f4813de',
+        clientSecret: '307c20444af8207286b5f78f7a5ed941786edad0',
+        repo: 'readailib',
+        owner: 'rh01',
+        admin: ['rh01'],
+        body: location.href,
+      });
+      gitalk.render('gitalk-container');
+ </script>
+
+
+
+</main>
+
+

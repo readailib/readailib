@@ -6,10 +6,24 @@
     <description>Recent content in Blog on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 23 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 30 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R实战-决策树</title>
+      <link>/2017/12/30/r%E5%AE%9E%E6%88%98-%E5%86%B3%E7%AD%96%E6%A0%91/</link>
+      <pubDate>Sat, 30 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/30/r%E5%AE%9E%E6%88%98-%E5%86%B3%E7%AD%96%E6%A0%91/</guid>
+      <description>本篇内容，会继续介绍一些常用的数据挖掘模型：
+这里拿网络上一个公开数据(铁达尼号的乘客数据)来进行分析，资料载点如下。
+决策树(Decision Tree)无论在分类或预测上，决策树的算法都有很好的效果。
+但它最强大的地方，莫过于树状分支的结构：可以明显呈现分类的规则！与一些机器学习的方法(NN, SVM…)相比，相当容易进行解释，以及分析规则之间的关系。
+这里就简单用CART决策树来练习，对应的套件是rpart，一样使用上次铁达尼号的数据：
+# 记得要给定数据所在的路径(path)，例如：我把下载的资料放在C槽下：load(&amp;quot;F:\\01_学习资料\\R\\Data-Mining-master\\Source-File\\決策樹\\titanic.raw.rdata&amp;quot;) #汇入.rdata檔require(rpart)# 先把数据区分成 train=0.8, test=0.2 set.seed(22)train.index &amp;lt;- sample(x=1:nrow(titanic.raw), size=ceiling(0.8*nrow(titanic.raw) ))train &amp;lt;- titanic.raw[train.index, ]test &amp;lt;- titanic.raw[-train.index, ]# CART的模型：把存活与否的变数(Survived)当作Y，剩下的变数当作Xcart.model&amp;lt;- rpart(Survived ~. , data=train)# 输出各节点的详细信息(呈现在console窗口)cart.model## n= 1761 ## ## node), split, n, loss, yval, (yprob)## * denotes terminal node## ## 1) root 1761 558 No (0.68313458 0.31686542) ## 2) Sex=Male 1398 288 No (0.</description>
+    </item>
     
     <item>
       <title>隐马尔可夫模型</title>
