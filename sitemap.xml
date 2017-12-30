@@ -113,14 +113,14 @@
   </url>
   
   <url>
-    <loc>/tags/blog/</loc>
-    <lastmod>2017-12-23T00:00:00+00:00</lastmod>
+    <loc>/categories/blog/</loc>
+    <lastmod>2017-12-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/blog/</loc>
-    <lastmod>2017-12-30T00:00:00+00:00</lastmod>
+    <loc>/tags/blog/</loc>
+    <lastmod>2017-12-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -167,20 +167,14 @@
   </url>
   
   <url>
-    <loc>/tags/hmm/</loc>
-    <lastmod>2017-12-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/hmm/</loc>
     <lastmod>2017-12-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/kmeans/</loc>
-    <lastmod>2017-12-30T00:00:00+00:00</lastmod>
+    <loc>/tags/hmm/</loc>
+    <lastmod>2017-12-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -191,13 +185,19 @@
   </url>
   
   <url>
-    <loc>/tags/machine-learning/</loc>
-    <lastmod>2017-12-24T00:00:00+00:00</lastmod>
+    <loc>/tags/kmeans/</loc>
+    <lastmod>2017-12-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/machine-learning/</loc>
+    <lastmod>2017-12-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/machine-learning/</loc>
     <lastmod>2017-12-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -221,20 +221,14 @@
   </url>
   
   <url>
-    <loc>/tags/matrix/</loc>
-    <lastmod>2017-12-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/matrix/</loc>
     <lastmod>2017-12-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/ml/</loc>
-    <lastmod>2017-12-30T00:00:00+00:00</lastmod>
+    <loc>/tags/matrix/</loc>
+    <lastmod>2017-12-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -245,13 +239,19 @@
   </url>
   
   <url>
-    <loc>/tags/pi/</loc>
-    <lastmod>2017-12-21T00:00:00+00:00</lastmod>
+    <loc>/tags/ml/</loc>
+    <lastmod>2017-12-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/pi/</loc>
+    <lastmod>2017-12-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/pi/</loc>
     <lastmod>2017-12-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -269,25 +269,25 @@
   </url>
   
   <url>
-    <loc>/tags/rmarkdown/</loc>
-    <lastmod>2017-12-19T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/rmarkdown/</loc>
     <lastmod>2017-12-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/rpi/</loc>
-    <lastmod>2017-12-20T00:00:00+00:00</lastmod>
+    <loc>/tags/rmarkdown/</loc>
+    <lastmod>2017-12-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/rpi/</loc>
+    <lastmod>2017-12-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/rpi/</loc>
     <lastmod>2017-12-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
