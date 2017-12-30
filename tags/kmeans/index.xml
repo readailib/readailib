@@ -23,7 +23,7 @@
 data(iris)数据建模部分注意： 现在数据的整理和探索部分就省略掉了，假定读者对iris数据集非常熟悉了，因此直接进入数据建模部分。
 首先定义我们要聚成几类
 min.nc = 2max.nc = 8然后我们现在指定k=3，此时的建立模型的算法如下：
-## 定義模型result0 &amp;lt;- kmeans(iris[, -5], centers = 3)print(result0)## K-means clustering with 3 clusters of sizes 38, 50, 62## ## Cluster means:## Sepal.Length Sepal.Width Petal.Length Petal.Width## 1 6.850000 3.073684 5.742105 2.071053## 2 5.006000 3.428000 1.462000 0.246000## 3 5.901613 2.</description>
+## 定義模型result0 &amp;lt;- kmeans(iris[, -5], centers = 3)print(result0)## K-means clustering with 3 clusters of sizes 62, 38, 50## ## Cluster means:## Sepal.Length Sepal.Width Petal.Length Petal.Width## 1 5.901613 2.748387 4.393548 1.433871## 2 6.850000 3.073684 5.742105 2.071053## 3 5.006000 3.</description>
     </item>
     
   </channel>
