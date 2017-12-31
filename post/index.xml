@@ -6,10 +6,22 @@
     <description>Recent content in Posts on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Happy New Year</title>
+      <link>/2017/12/31/happy-new-year-on-2018/</link>
+      <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/31/happy-new-year-on-2018/</guid>
+      <description>我们ReadAILib全体成员祝大家新年快乐，祝大家在2018年工作顺利，下面是每个人新年愿望！
+“2018新目标-考入自己的目标大学，一切事物都越来越好！”
+— Bing-Hao Jia“我希望在2018年能够在性格上更加成熟些，更加稳重些，为人低调些，工作积极些. 期待2018年年能去潮汕！”
+— Heng-Heng Shen</description>
+    </item>
     
     <item>
       <title>R实战-Kmeans</title>
