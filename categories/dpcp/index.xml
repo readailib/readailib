@@ -6,10 +6,20 @@
     <description>Recent content in Dpcp on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 05 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/dpcp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>分布式编程第三周课堂笔记</title>
+      <link>/2018/01/05/distributed-programming-in-java-week3-notes/</link>
+      <pubDate>Fri, 05 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/05/distributed-programming-in-java-week3-notes/</guid>
+      <description>本笔记来自课堂记录和课程网站的总结，转载请注明出处!
+Single Program Multiple Data (SPMD) ModelFigure1: SPMDLecture Summary: In this lecture, we studied the Single Program Multiple Data (SPMD) model, which can enable the use of a cluster of distributed nodes as a single parallel computer. Each node in such a cluster typically consist of a multicore processor, a local memory, and a network interface card (NIC) that enables it to communicate with other nodes in the cluster.</description>
+    </item>
     
     <item>
       <title>分布式编程第一周课堂笔记</title>
@@ -17,7 +27,8 @@
       <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/01/04/distributed-programming-in-java-week1-notes/</guid>
-      <description>Introduction to MapReduceFigure1: Introduction to MapReduceLecture Summary: In this lecture, we learned the MapReduce paradigm, which is a pattern of parallel functional programming that has been very successful in enabling “big data” computations. The input to a MapReduce style computation is a set of key-value pairs. The keys are similar to keys used in hash tables, and the functional programming approach requires that both the keys and values be immutable.</description>
+      <description>本笔记来自课堂记录和课程网站的总结，转载请注明出处!
+Introduction to MapReduceFigure1: Introduction to MapReduceLecture Summary: In this lecture, we learned the MapReduce paradigm, which is a pattern of parallel functional programming that has been very successful in enabling “big data” computations. The input to a MapReduce style computation is a set of key-value pairs. The keys are similar to keys used in hash tables, and the functional programming approach requires that both the keys and values be immutable.</description>
     </item>
     
   </channel>
