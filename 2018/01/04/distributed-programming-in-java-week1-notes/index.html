@@ -136,8 +136,8 @@ var _hmt = _hmt || [];
 <p>The motivation to divide the contribution of A in the sum by <span class="math inline">\(DEST\_COUNT(A)\)</span> is that if page A links to multiple pages, each of the successors should get a fraction of the contribution from page A.</p>
 <p>Conversely, if a page has many outgoing links, then each successor page gets a relatively smaller weightage, compared to pages that have fewer outgoing links. This is a recursive definition in general, since if (say) page <span class="math inline">\(X\)</span> links to page <span class="math inline">\(Y\)</span>, and page <span class="math inline">\(Y\)</span> links to page <span class="math inline">\(X\)</span>, then <span class="math inline">\(RANK(X)\)</span> depends on<span class="math inline">\(RANK(Y)\)</span> and vice versa. Given the recursive nature of the problem, we can use an iterative algorithm to compute all page ranks by repeatedly updating the rank values using the above formula, and stopping when the rank values have converged to some acceptable level of precision. In each iteration, the new value of <span class="math inline">\(RANK(B)\)</span> can be computed by accumulating the contributions from each predecessor page, A. A parallel implementation in Spark can be easily obtained by implementing two steps in an iteration, one for computing the contributions of each page to its successor pages by using the <span class="math inline">\(flatMapToPair()\)</span> method, and the second for computing the current rank of each page by using the <span class="math inline">\(reduceByKey()\)</span> and <span class="math inline">\(mapValues()\)</span> methods.. All the intermediate results between iterations will be kept in main memory, resulting in a much faster execution than a Hadoop version (which would store intermediate results in external storage).</p>
 </section>
-<section id="code-of-pagerank" class="level2">
-<h2>Code of PageRank</h2>
+<section id="implementation-of-pagerank" class="level2">
+<h2>Implementation of PageRank</h2>
 <pre class="java"><code>public static JavaPairRDD&lt;Integer, Double&gt; sparkPageRank(
             final JavaPairRDD&lt;Integer, Website&gt; sites,
             final JavaPairRDD&lt;Integer, Double&gt; ranks) throws UnsupportedOperationException {
@@ -166,7 +166,7 @@ var _hmt = _hmt || [];
         }</code></pre>
 </section>
 <section id="optional-reading" class="level2">
-<h2>Optional Reading:</h2>
+<h2>Optional Reading</h2>
 <ul>
 <li>Wikipedia article on the <a href="https://en.wikipedia.org/wiki/Apache_Hadoop">Apache Hadoop project</a></li>
 <li>Wikipedia article on the<a href="https://en.wikipedia.org/wiki/MapReduce">MapReduce framework</a></li>

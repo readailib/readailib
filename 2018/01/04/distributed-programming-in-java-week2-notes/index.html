@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  	<link rel="shortcut icon" href="http://rh01.github.io/favicon.ico" type="image/x-icon" />
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<title>分布式编程第二周课堂笔记 - ReadAILib Official Website </title>
+<meta property="og:title" content="分布式编程第二周课堂笔记 - ReadAILib Official Website ">
+<meta property="author" content="{        map[]} - rh01">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/readailib">GitHub</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCTOuJy4b9E89zCwffX-qC3A">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title" style="text-align: center">分布式编程第二周课堂笔记</h1>
+
+    
+    
+    <div class="post-meta" style="text-align: center">  <a href="http://github.com/" >Heng-Heng Shen</a>  &nbsp;•&nbsp; 2018/01/04 &nbsp;•&nbsp; 11 min read </div>
+    
+
+    <div class="article-content">
+      <section id="introduction-to-sockets" class="level2">
+<h2>Introduction to Sockets</h2>
+<figure>
+<img src="http://olrs8j04a.bkt.clouddn.com/18-1-4/97147203.jpg" alt="Figure1: Client and Server Programming" /><figcaption>Figure1: Client and Server Programming</figcaption>
+</figure>
+<p><strong>Lecture Summary:</strong> In this lecture, we learned about client-server programming, and how two distributed Java applications can communicate with each other using sockets. Since each application in this scenario runs on a distinct Java Virtual Machine (JVM) process, we used the terms “application’‘, “JVM’’ and”process’‘interchangeably in the lecture. For JVM A and JVM B to communicate with each other, we assumed that JVM A plays the “client’’ role and JVM B the”server’’ role. To establish the connection, the main thread in JVM B first creates a <span class="math inline">\(\mathtt{ServerSocket}\)</span> (called <span class="math inline">\(\mathtt{socket}\)</span>, say) which is initialized with a designated URL and port number. It then waits for client processes to connect to this socket by invoking the <span class="math inline">\(\mathtt {socket.accept()}\)</span> method, which returns an object of type <span class="math inline">\(\mathtt {Socket}\)</span> (called <span class="math inline">\(\mathtt {s}\)</span>, say) . The <span class="math inline">\(\mathtt {s.getInputStream}\)</span>() and <span class="math inline">\(\mathtt {s.getOutputStream()}\)</span> methods can be invoked on this object to perform read and write operations via the socket, using the same APIs that you use for file I/O via streams. Once JVM B has set up a server socket, JVM A can connect to it as a client by creating a <span class="math inline">\(\mathtt {Socket}\)</span> object with the appropriate parameters to identify JVM B’s server port. As in the server case, the <span class="math inline">\(\mathtt { getInputStream()}\)</span>and <span class="math inline">\(\mathtt {getOutputStream}\)</span>() methods can be invoked on this object to perform read and write operations. With this setup, JVM A and JVM B can communicate with each other by using read and write operations, which get implemented as messages that flow across the network. Client-server communication occurs at a lower level and scale than MapReduce, which implicitly accomplishes communication among large numbers of processes. Hence, client-server programming is typically used for building distributed applications with small numbers of processes.</p>
+</section>
+<section id="serialization-and-deserialization" class="level2">
+<h2>Serialization and Deserialization</h2>
+<figure>
+<img src="http://olrs8j04a.bkt.clouddn.com/18-1-4/61133120.jpg" alt="Figure2: Serialization and Deserialization" /><figcaption>Figure2: Serialization and Deserialization</figcaption>
+</figure>
+<p><strong>Lecture Summary:</strong> This lecture reviewed serialization and deserialization, which are essential concepts for all forms of data transfers in Java applications, including file I/O and communication in distributed applications. When communications are performed using input and output streams, as discussed in the previous lecture, the unit of data transfer is a sequence of bytes. Thus, it becomes important to serialize objects into bytes in the sender process, and to deserialize bytes into objects in the receiver process.</p>
+<p>One approach to do this is via a custom approach, in which the programmer provides custom code to perform the serialization and deserialization. However, writing custom serializers and deserializers can become complicated when nested objects are involved, e.g., if object <span class="math inline">\(\mathbb{x}\)</span> contains a field, <span class="math inline">\(\mathbb{f3}\)</span>, which points to object <span class="math inline">\(\mathbb{y}\)</span>. In this case, the serialization of object <span class="math inline">\(\mathbb{x}\)</span> by default also needs to include a serialization of object <span class="math inline">\(\mathbb{y}\)</span>. Another approach is to use XML, since XML was designed to serve as a data interchange standard. There are many application frameworks that support conversion of application objects into XML objects, which is convenient because typical XML implementations in Java include built-in serializers and deserializers. However, the downside is that there can be a lot of metadata created when converting Java objects into XML, and that metadata can add to the size of the serialized data being communicated.</p>
+<p>As a result, the default approach is to use a capability that has been present since the early days of Java, namely Java Serialization and Deserialization. This works by identifying classes that implement the <span class="math inline">\(\mathbb{Serializable}\)</span> interface, and relying on a guarantee that such classes will have built-in serializers and deserializers, analogous to classes with built-in <span class="math inline">\(\mathbb{toString()}\)</span> methods. In this situation, if object <span class="math inline">\(\mathbb{x}\)</span> is an instance of a serializable class and its field <span class="math inline">\(\mathbb{f3}\)</span> points to object <span class="math inline">\(\mathbb{y}\)</span>, then object <span class="math inline">\(\mathbb{y}\)</span> must also be an instance of a serializable class (otherwise an exception will be thrown when attempting to serialize object <span class="math inline">\(\mathbb{x}\)</span>). An important benefit of this approach is that only one copy of each object is included in the serialization, even if there may be multiple references to the object, e.g., if fields <span class="math inline">\(\mathbb{f2}\)</span> and <span class="math inline">\(\mathbb{f3}\)</span> both point to object <span class="math inline">\(\mathbb{y}\)</span>. Another benefit is that cycles in object references are handled intelligently, without getting into an infinite loop when following object references. Yet another important benefit is that this approach allows identification of fields that should be skipped during the serialization/deserialization steps because it may be unnecessary and inefficient to include them in the communication. Such fields are identified by declaring them as transient.</p>
+<p>Finally, another approach that has been advocated for decades in the context of distributed object systems is to use an Interface Definition Language (IDL) to enable serialization and communication of objects across distributed processes. A recent example of using the IDL approach can be found in Google’s Protocol Buffers framework. A notable benefit of this approach relative to Java serialization is that protocol buffers can support communication of objects across processes implemented in different languages, e.g., Java, C++, Python. The downside is that extra effort is required to enable the serialization (e.g., creating a <span class="math inline">\(\mathbb{.proto}\)</span> file as an IDL, and including an extra compile step for the IDL in the build process), which is not required when using Java serialization for communication among Java processes.</p>
+</section>
+<section id="remote-method-invocation" class="level2">
+<h2>Remote Method Invocation</h2>
+<figure>
+<img src="http://olrs8j04a.bkt.clouddn.com/18-1-4/73741541.jpg" alt="Figure3: RMI" /><figcaption>Figure3: RMI</figcaption>
+</figure>
+<p><strong>Lecture Summary:</strong> This lecture reviewed the concept of Remote Method Invocation (RMI), which extends the notion of method invocation in a sequential program to a distributed programming setting. As an example, let us consider a scenario in which a thread running on JVM A wants to invoke a method, <span class="math inline">\(\mathtt {foo()}\)</span>, on object located on JVM B. This can be accomplished using sockets and messages, but that approach would entail writing a lot of extra code for encoding and decoding the method call, its arguments, and its return value. In contrast, Java RMI provides a very convenient way to directly address this use case.</p>
+<p>To enable RMI, we run an RMI client on JVM A and an RMI server on JVM B. Further, JVM A is set up to contain a stub object or proxy object for remote object <span class="math inline">\(\mathtt {x}\)</span> located on JVM B. (In early Java RMI implementations, a skeleton objectwould also need to be allocated on the server side, JVM B, as a proxy for the shared object, but this is no longer necessary in modern implementations.) When a stub method is invoked, it transparently initiates a connection with the remote JVM containing the remote object,<span class="math inline">\(\mathtt {x}\)</span> , serializes and communicates the method parameters to the remote JVM, receives the result of the method invocation, and deserializes the result into object <span class="math inline">\(\mathtt {y}\)</span> (say) which is then passed on to the caller of method <span class="math inline">\(\mathtt {x.foo()}\)</span> as the result of the RMI call.</p>
+<p>Thus, RMI takes care of a number of tedious details related to remote communication. However, this convenience comes with a few setup requirements as well. First, objects and must be serializable, because their values need to be communicated between JVMs <span class="math inline">\(\mathtt {A}\)</span> and <span class="math inline">\(\mathtt {B}\)</span>. Second, object must be included in the RMI registry, so that it can be accessed through a global name rather than a local object reference. The registry in turn assists in mapping from global names to references to local stub objects. In summary, a key advantage of RMI is that, once this setup in place, method invocations across distributed processes can be implemented almost as simply as standard method invocations.</p>
+</section>
+<section id="multicast-sockets" class="level2">
+<h2>Multicast Sockets</h2>
+<figure>
+<img src="http://olrs8j04a.bkt.clouddn.com/18-1-4/83521105.jpg" alt="Figure4: Multicast Sockets" /><figcaption>Figure4: Multicast Sockets</figcaption>
+</figure>
+<p><strong>Lecture Summary: </strong> In this lecture, we learned about multicast sockets, which are a generalization of the standard socket interface that we studied earlier. Standard sockets can be viewed as unicast communications, in which a message is sent from a source to a single destination. Broadcast communications represent a simple extension to unicast, in which a message can be sent efficiently to all nodes in the same local area network as the sender. In contrast, multicast sockets enable a sender to efficiently send the same message to a specified set of receivers on the Internet. This capability can be very useful for a number of applications, which include news feeds, video conferencing, and multi-player games. One reason why a <span class="math inline">\(1:n\)</span> multicast socket is more efficient than <span class="math inline">\(n 1:1\)</span>sockets is because Internet routers have built-in support for the multicast capability. In recognition of this need, the Java platform includes support for a <span class="math inline">\(\mathtt {MulticastSocket}\)</span> class, which can be used to enable a process to join a group associated with a given <span class="math inline">\(\mathtt {MulticastSocket}\)</span> instance. A member of a group can send a message to all other processes in the group, and can also receive messages sent by other members. This is analogous to how members of a group-chat communicate with each other. Multicast messages are restricted to datagrams, which are usually limited in size to 64KB. Membership in the group can vary dynamically, i.e., processes can decide to join or leave a group associated with a <span class="math inline">\(\mathtt {MulticastSocket}\)</span> instance as they choose. Further, just as with group-chats, a process can be a member of multiple groups.</p>
+</section>
+<section id="publish-subscribe-pattern" class="level2">
+<h2>Publish-Subscribe Pattern</h2>
+<figure>
+<img src="http://olrs8j04a.bkt.clouddn.com/18-1-4/2237844.jpg" alt="Figure5: Publish-Subscribe Pattern" /><figcaption>Figure5: Publish-Subscribe Pattern</figcaption>
+</figure>
+<p>In this lecture, we studied the publish-subscribe pattern, which represents a further generalization of the multicast concept. In this pattern, publisher processes add messages to designated topics, and subscriber processes receive those messages by registering on the topics that they are interested in. A key advantage of this approach is that publishers need not be aware of which processes are the subscribers, and vice versa. Another advantage is that it lends itself to very efficient implementations because it can enable a number of communication optimizations, which include batching and topic partitioning across broker nodes. Yet another advantage is improved reliability, because broker nodes can replicate messages in a topic, so that if one node hosting a topic fails, the entire publish-subscribe system can continue execution with another node that contains a copy of all messages in that topic.</p>
+<p>We also studied how publish-subscribe patterns can be implemented in Java by using APIs available in the open-source Apache Kafka project. To become a publisher, a process simply needs to create a <span class="math inline">\(KafkaProducer\)</span> object, and use it to perform <span class="math inline">\(send()\)</span> operations to designated topics. Likewise, to become a consumer, a process needs to create a <span class="math inline">\(KafkaConsumer\)</span> object, which can then be used to subscribe to topics of interest. The consumer then performs repeated <span class="math inline">\(poll()\)</span> operations, each of which returns a batch of messages from the requested topics. Kafka is commonly used as to produce input for, or receive output from, MapReduce systems such as Hadoop or Spark. By storing Kafka messages as key-value pairs, data analytics applications written using MapReduce programming models can seamlessly interface with Kafka. A common use case for Kafka is to structure messages in a topic to be as key-value pairs, so that they can be conveniently used as inputs to, or outputs from, data analytics applications written in Hadoop or Spark. Each key-value message also generally includes an offset which represents the index of the message in the topic. In summary, publish-subscribe is a higher-level pattern than communicating via sockets, which is both convenient and efficient to use in situations where producers and consumers of information are set up to communicate via message groups (topics).</p>
+</section>
+<section id="implementation-of-fileserver" class="level2">
+<h2>Implementation of FileServer</h2>
+<pre class="java"><code>import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.nio.file.Files;
+
+/**
+ * A basic and very limited implementation of a file server that responds to GET
+ * requests from HTTP clients.
+ */
+public final class FileServer {
+    /**
+     * Main entrypoint for the basic file server.
+     *
+     * @param socket Provided socket to accept connections on.
+     * @param fs A proxy filesystem to serve files from. See the PCDPFilesystem
+     *           class for more detailed documentation of its usage.
+     * @throws IOException If an I/O error is detected on the server. This
+     *                     should be a fatal error, your file server
+     *                     implementation is not expected to ever throw
+     *                     IOExceptions during normal operation.
+     */
+    public void run(final ServerSocket socket, final PCDPFilesystem fs)
+            throws IOException {
+        /*
+         * Enter a spin loop for handling client requests to the provided
+         * ServerSocket object.
+         */
+        while (true) {
+
+            // TODO Delete this once you start working on your solution.
+
+
+            // TODO 1) Use socket.accept to get a Socket object
+            Socket s = socket.accept();
+
+            /*
+             * TODO 2) Using Socket.getInputStream(), parse the received HTTP
+             * packet. In particular, we are interested in confirming this
+             * message is a GET and parsing out the path to the file we are
+             * GETing. Recall that for GET HTTP packets, the first line of the
+             * received packet will look something like:
+             *
+             *     GET /path/to/file HTTP/1.1
+             */
+            InputStream stream = s.getInputStream();
+            InputStreamReader reader = new InputStreamReader(stream);
+            BufferedReader buffer = new BufferedReader(reader);
+
+            String line = buffer.readLine();
+            assert line != null;
+            assert line.startsWith(&quot;GET&quot;);
+            final String path = line.split(&quot; &quot;)[1];
+
+            // String rootDir = &quot;./&quot;;
+            final PCDPPath fullPath = new PCDPPath(path);
+
+
+            /*
+             * TODO 3) Using the parsed path to the target file, construct an
+             * HTTP reply and write it to Socket.getOutputStream(). If the file
+             * exists, the HTTP reply should be formatted as follows:
+             *
+             *   HTTP/1.0 200 OK\r\n
+             *   Server: FileServer\r\n
+             *   \r\n
+             *   FILE CONTENTS HERE\r\n
+             *
+             * If the specified file does not exist, you should return a reply
+             * with an error code 404 Not Found. This reply should be formatted
+             * as:
+             *
+             *   HTTP/1.0 404 Not Found\r\n
+             *   Server: FileServer\r\n
+             *   \r\n
+             *
+             * Don&#39;t forget to close the output stream.
+             */
+
+            OutputStream out = s.getOutputStream();
+            PrintWriter printer = new PrintWriter(out);
+
+            if(fs.readFile(fullPath) != null){
+                printer.write(&quot;HTTP/1.0 200 OK\r\n&quot;);
+                printer.write(&quot;Server: FileServer\r\n&quot;);
+                printer.write(&quot;\r\n&quot;);
+                printer.write(String.format(&quot;%s\r\n&quot;, fs.readFile(fullPath)));
+            }else{
+                printer.write(&quot;HTTP/1.0 404 Not Found\\r\\n&quot;);
+                printer.write(&quot;Server: FileServer\\r\\n&quot;);
+                printer.write(&quot;\r\n&quot;);
+            }
+
+            printer.close();
+            out.close();
+            s.close();
+        }
+    }
+}
+</code></pre>
+</section>
+<section id="optional-reading" class="level2">
+<h2>Optional Reading</h2>
+<ul>
+<li>Java tutorial titled Lesson: <a href="https://docs.oracle.com/javase/tutorial/networking/sockets/">All About Sockets</a></li>
+<li>Wikipedia article on <a href="https://en.wikipedia.org/wiki/Serialization">Serialization</a></li>
+<li>Tutorial on <a href="https://docs.oracle.com/javase/tutorial/rmi/index.html">Java RMI</a></li>
+<li>Wikipedia article on <a href="https://en.wikipedia.org/wiki/Java_remote_method_invocation">Java remote method invocation</a></li>
+<li>Documentation on <a href="https://docs.oracle.com/javase/7/docs/api/java/net/MulticastSocket.html">MulticastSocket class</a></li>
+<li>Wikipedia article on <a href="https://en.wikipedia.org/wiki/Multicast">Multicast</a></li>
+<li>Wikipedia article on the <a href="https://en.wikipedia.org/wiki/Publish-subscribe_pattern">Publish-Subscribe pattern</a></li>
+<li>Wikipedia article on the <a href="https://en.wikipedia.org/wiki/Apache_Kafka">Apache Kafka project</a></li>
+</ul>
+</section>
+
+        <hr />
+
+    </div>
+
+
+  </article>
+
+      <footer class="footer">
+
+        
+
+          <div class="generic-box">
+Subscribe to our <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>.
+
+  <div class="share-page">
+<div class="share-links" style="text-align:center;">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</div>
+</div>
+
+
+</div>
+
+        
+      </footer>
+
+    
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/Dockerfile.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/python.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-111305334-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
+
+
+  
+  
+
+  <div id="gitalk-container"></div>
+</div>
+
+<link rel="stylesheet" href="/css/gitalk.css" media="all">
+<style type="text/css">
+	
+.gt-container .gt-comment-admin .gt-header-comment .gt-comment-content {
+    background-color: #f5f3d5;
+}
+
+textarea {
+   background-color: #f5f3d5;
+}
+</style>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: 'a98bac7d9ab86f4813de',
+        clientSecret: '307c20444af8207286b5f78f7a5ed941786edad0',
+        repo: 'readailib',
+        owner: 'rh01',
+        admin: ['rh01'],
+        body: location.href,
+      });
+      gitalk.render('gitalk-container');
+ </script>
+
+
+
+</main>
+
+

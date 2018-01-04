@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>分布式编程 on ReadAILib Official Website </title>
+    <link>/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%96%E7%A8%8B/</link>
+    <description>Recent content in 分布式编程 on ReadAILib Official Website </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 04 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>分布式编程第二周课堂笔记</title>
+      <link>/2018/01/04/distributed-programming-in-java-week2-notes/</link>
+      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/04/distributed-programming-in-java-week2-notes/</guid>
+      <description>Introduction to SocketsFigure1: Client and Server ProgrammingLecture Summary: In this lecture, we learned about client-server programming, and how two distributed Java applications can communicate with each other using sockets. Since each application in this scenario runs on a distinct Java Virtual Machine (JVM) process, we used the terms “application’‘, “JVM’’ and”process’‘interchangeably in the lecture. For JVM A and JVM B to communicate with each other, we assumed that JVM A plays the “client’’ role and JVM B the”server’’ role.</description>
+    </item>
+    
+  </channel>
+</rss>

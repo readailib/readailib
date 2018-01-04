@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>分布式编程第二周课堂笔记</title>
+      <link>/2018/01/04/distributed-programming-in-java-week2-notes/</link>
+      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/04/distributed-programming-in-java-week2-notes/</guid>
+      <description>Introduction to SocketsFigure1: Client and Server ProgrammingLecture Summary: In this lecture, we learned about client-server programming, and how two distributed Java applications can communicate with each other using sockets. Since each application in this scenario runs on a distinct Java Virtual Machine (JVM) process, we used the terms “application’‘, “JVM’’ and”process’‘interchangeably in the lecture. For JVM A and JVM B to communicate with each other, we assumed that JVM A plays the “client’’ role and JVM B the”server’’ role.</description>
+    </item>
+    
+    <item>
       <title>Happy New Year</title>
       <link>/2017/12/31/happy-new-year-on-2018/</link>
       <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
