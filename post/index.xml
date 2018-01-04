@@ -6,10 +6,19 @@
     <description>Recent content in Posts on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>分布式编程第一周课堂笔记</title>
+      <link>/2018/01/04/distributed-programming-in-java-week1-notes/</link>
+      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/04/distributed-programming-in-java-week1-notes/</guid>
+      <description>Introduction to MapReduceFigure1: Introduction to MapReduceLecture Summary: In this lecture, we learned the MapReduce paradigm, which is a pattern of parallel functional programming that has been very successful in enabling “big data” computations. The input to a MapReduce style computation is a set of key-value pairs. The keys are similar to keys used in hash tables, and the functional programming approach requires that both the keys and values be immutable.</description>
+    </item>
     
     <item>
       <title>Happy New Year</title>

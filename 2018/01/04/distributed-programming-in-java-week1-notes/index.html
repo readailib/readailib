@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  	<link rel="shortcut icon" href="http://rh01.github.io/favicon.ico" type="image/x-icon" />
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<title>分布式编程第一周课堂笔记 - ReadAILib Official Website </title>
+<meta property="og:title" content="分布式编程第一周课堂笔记 - ReadAILib Official Website ">
+<meta property="author" content="{        map[]} - rh01">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/readailib">GitHub</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCTOuJy4b9E89zCwffX-qC3A">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title" style="text-align: center">分布式编程第一周课堂笔记</h1>
+
+    
+    
+    <div class="post-meta" style="text-align: center">  <a href="http://github.com/rh01" >Heng-Heng Shen</a>  &nbsp;•&nbsp; 2018/01/04 &nbsp;•&nbsp; 9 min read </div>
+    
+
+    <div class="article-content">
+      <section id="introduction-to-mapreduce" class="level2">
+<h2>Introduction to MapReduce</h2>
+<figure>
+<img src="http://olrs8j04a.bkt.clouddn.com/18-1-4/89745544.jpg" alt="Figure1: Introduction to MapReduce" /><figcaption>Figure1: Introduction to MapReduce</figcaption>
+</figure>
+<p><strong>Lecture Summary:</strong> In this lecture, we learned the MapReduce paradigm, which is a pattern of parallel functional programming that has been very successful in enabling “big data” computations. The input to a MapReduce style computation is a set of key-value pairs. The keys are similar to keys used in hash tables, and the functional programming approach requires that both the keys and values be immutable. When a user-specified map function, f, is applied on a key-value pair, <span class="math inline">\((kA,vA)\)</span>, it results in a (possibly empty) set of output key-value pairs, <span class="math inline">\({(kA1,vA1), (kA2,vA2),....}\)</span> This map function can be applied in parallel on all key-value pairs in the input set, to obtain a set of intermediate key-value pairs that is the union of all the outputs.</p>
+<p>The next operation performed in the MapReduce workflow is referred to as grouping, which groups together all intermediate key-value pairs with the same key. Grouping is performed automatically by the MapReduce framework, and need not be specified by the programmer. For example, if there are two intermediate key- value pairs, <span class="math inline">\((kA1, vA1)\)</span> and <span class="math inline">\((kB1, vB1)\)</span> with the same key, <span class="math inline">\(kA1 = kB1 =k\)</span>, then the output of grouping will associate the set of values <span class="math inline">\({vA1,vB1}\)</span> with key k. Finally, when a user-specified reduce function, g, is applied on two or more grouped values (e.g., vA1, vB1,…) associated with the same key k, it folds or reduces all those values to obtain a single output key-value pair, (k, g(vA1, vB1, . . .)), for each key, k. in the intermediate key-value set. If needed, the set of output key-value pairs can then be used as the input for a successive MapReduce computation.</p>
+<p>In the example discussed in the lecture, we assumed that the map function, f, mapped a key-value pair like (“WR”,10) to a set of intermediate key-value pairs obtained from factors of 10 to obtain the set, <span class="math inline">\({ (“WR”,2), (“WR”,5), (“WR”,10) }\)</span>, and the reduce function, g, calculated the sum of all the values with the same key to obtain <span class="math inline">\((“WR”,17)\)</span> as the output key-value pair for key “WR”. The same process can be performed in parallel for all keys to obtain the complete output key-value set.</p>
+</section>
+<section id="apache-hadoop-project" class="level2">
+<h2>Apache Hadoop Project</h2>
+<figure>
+<img src="http://olrs8j04a.bkt.clouddn.com/18-1-4/97256737.jpg" alt="Figure2: Apache Hadoop Project" /><figcaption>Figure2: Apache Hadoop Project</figcaption>
+</figure>
+<p><strong>Lecture Summary:</strong> The Apache Hadoop project is a popular open-source implementation of the Map-Reduce paradigm for distributed computing. A distributed computer can be viewed as a large set of multicore computers connected by a network, such that each computer has multiple processor cores, e.g., <span class="math inline">\(P0, P1, P2, P3, ... .\)</span> Each individual computer also has some persistent storage (e.g., hard disk, flash memory), thereby making it possible to store and operate on large volumes of data when aggregating the storage available across all the computers in a data center. The main motivation for the Hadoop project is to make it easy to write large-scale parallel programs that operate on this “big data”.</p>
+<p>The Hadoop framework allows the programmer to specify map and reduce functions in Java, and takes care of all the details of generating a large number of map tasks and reduce tasks to perform the computation as well as scheduling them across a distributed computer. A key property of the Hadoop framework is that it supports automatic fault-tolerance. Since MapReduce is essentially a functional programming model, if a node in the distributed system fails, the Hadoop scheduler can reschedule the tasks that were executing on that node with the same input elsewhere, and continue computation. This is not possible with non-functional parallelism in general, because when a non-functional task modifies some state, re-executing it may result in a different answer. The ability of the Hadoop framework to process massive volumes of data has also made it a popular target for higher-level query languages that implement SQL-like semantics on top of Hadoop.</p>
+<p>The lecture discussed the word-count example, which, despite its simplicity, is used very often in practice for document mining and text mining. In this example, we illustrated how a Hadoop map-reduce program can obtain word-counts for the distributed text “To be or not to be”. There are several other applications that have been built on top of Hadoop and other MapReduce frameworks. The main benefit of Hadoop is that it greatly simplifies the job of writing programs to process large volumes of data available in a data center.</p>
+</section>
+<section id="apache-spark-framework" class="level2">
+<h2>Apache Spark Framework</h2>
+<figure>
+<img src="http://olrs8j04a.bkt.clouddn.com/18-1-4/2963434.jpg" alt="Figure3: Apache Spark Framework" /><figcaption>Figure3: Apache Spark Framework</figcaption>
+</figure>
+<p><strong>Lecture Summary:</strong> Apache Spark is a similar, but more general, programming model than Hadoop MapReduce. Like Hadoop, Spark also works on distributed systems, but a key difference in Spark is that it makes better use of in-memory computing within distributed nodes compared to Hadoop MapReduce. This difference can have a significant impact on the performance of iterative MapReduce algorithms since the use of memory obviates the need to write intermediate results to external storage after each map/reduce step. However, this also implies that the size of data that can be processed in this manner is limited by the total size of memory across all nodes, which is usually much smaller than the size of external storage. (Spark can spill excess data to external storage if needed, but doing so reduces the performance advantage over Hadoop.)</p>
+<p>Another major difference between Spark and Hadoop MapReduce, is that the primary data type in Spark is the Resilient Distributed Dataset (RDD), which can be viewed as a generalization of sets of key-value pairs. RDDs enable Spark to support more general operations than map and reduce. Spark supports intermediate operations called Transformations (e.g., map,filter,join,…) and terminal operations called Actions (e.g., reduce,count,collect,…). As in Java streams, intermediate transformations are performed lazily, i.e., their evaluation is postponed to the point when a terminal action needs to be performed.</p>
+<p>In the lecture, we saw how the Word Count example can be implemented in Spark using Java APIs. (The Java APIs use the same underlying implementation as Scala APIs, since both APIs can be invoked in the same Java virtual machine instance.) We used the Spark flatMap() method to combine all the words in all the lines in an input file into a single RDD, followed by a mapToPair() Transform method call to emit pairs of the form, (word, 1), which can then be processed by a reduceByKey() operation to obtain the final word counts.</p>
+</section>
+<section id="tf-idf-example" class="level2">
+<h2>TF-IDF Example</h2>
+<figure>
+<img src="http://olrs8j04a.bkt.clouddn.com/18-1-4/89669571.jpg" alt="Figure4: TF-IDF" /><figcaption>Figure4: TF-IDF</figcaption>
+</figure>
+<p><strong>Lecture Summary:</strong> In this lecture, we discussed an important statistic used in information retrieval and document mining, called Term Frequency – Inverse Document Frequency (TF-IDF). The motivation for computing TF-IDF statistics is to efficiently identify documents that are most similar to each other within a large corpus.</p>
+<p>Assume that we have a set of <span class="math inline">\(N\)</span> documents <span class="math inline">\(D1,D2,…,DN\)</span>, and a set of terms <span class="math inline">\(TERM1,TERM2,…\)</span> that can appear in these documents. We can then compute total frequencies TFi,j for each term TERMi in each document Dj . We can also compute the document frequencies <span class="math inline">\(DF1,DF2,...\)</span> for each term, indicating how many documents contain that particular term, and the inverse document frequencies (IDF):<span class="math inline">\(IDF_i=N/DF_i\)</span>. The motivation for computing inverse document frequencies is to determine which terms are common and which ones are rare, and give higher weights to the rarer terms when searching for similar documents. The weights are computed as: <span class="math inline">\(Weight(TERM_{a_i},D_j)=TF_{i,j} + x log(N/DF_i)\)</span>.</p>
+<p>Using MapReduce, we can compute the <span class="math inline">\(TF_{i,j}\)</span> values by using a MAP operation to find all the occurrences of TERMi in document Dj, followed by a REDUCE operation to add up all the occurrences of TERMi as key-value pairs of the form, <span class="math inline">\(((D_j,TERM_i),TF_{i,j})\)</span> (as in the Word Count example studied earlier). These key-value pairs can also be used to compute DFi values by using a MAP operation to identify all the documents that contain TERMi and a REDUCE operation to count the number of documents that TERMi appears in. The final weights can then be easily computed from the <span class="math inline">\(TF_{i,j}\)</span> and <span class="math inline">\(DF_i\)</span> values. Since the <span class="math inline">\(TF−IDF\)</span> computation uses a fixed (not iterative) number of MAP and REDUCE operations, it is a good candidat_e for both Hadoop and Spark frameworks.</p>
+</section>
+<section id="pagerank-example" class="level2">
+<h2>PageRank Example</h2>
+<figure>
+<img src="http://olrs8j04a.bkt.clouddn.com/18-1-4/56238987.jpg" alt="Figure5: PageRank" /><figcaption>Figure5: PageRank</figcaption>
+</figure>
+<p><strong>Lecture Summary:</strong> In this lecture, we discussed the PageRank algorithm as an example of an iterative algorithm that is well suited for the Spark framework. The goal of the algorithm is to determine which web pages are more important by examining links from one page to other pages. In this algorithm, the rank of a page, B, is defined as follows, <span class="math display">\[RANK(B)=\sum_{A \in SRC(B)} \frac{RANK(A)}{DEST\_COUNT(A)}\]</span> where <span class="math inline">\(SRC(B)\)</span> is the set of pages that contain a link to B, while <span class="math inline">\(DEST\_COUNT(A)\)</span> is the total number of pages that A links to. Intuitively, the PageRank algorithm works by splitting the weight of a page A (i.e., <span class="math inline">\(RANK(A)\)</span>) among all of the pages that A links to (i.e. <span class="math inline">\(DEST\_COUNT(A)\)</span>). Each page that A links to has its own rank increased proportional to A’s own rank. As a result, pages that are linked to from many highly-ranked pages will also be highly ranked.</p>
+<p>The motivation to divide the contribution of A in the sum by <span class="math inline">\(DEST\_COUNT(A)\)</span> is that if page A links to multiple pages, each of the successors should get a fraction of the contribution from page A.</p>
+<p>Conversely, if a page has many outgoing links, then each successor page gets a relatively smaller weightage, compared to pages that have fewer outgoing links. This is a recursive definition in general, since if (say) page <span class="math inline">\(X\)</span> links to page <span class="math inline">\(Y\)</span>, and page <span class="math inline">\(Y\)</span> links to page <span class="math inline">\(X\)</span>, then <span class="math inline">\(RANK(X)\)</span> depends on<span class="math inline">\(RANK(Y)\)</span> and vice versa. Given the recursive nature of the problem, we can use an iterative algorithm to compute all page ranks by repeatedly updating the rank values using the above formula, and stopping when the rank values have converged to some acceptable level of precision. In each iteration, the new value of <span class="math inline">\(RANK(B)\)</span> can be computed by accumulating the contributions from each predecessor page, A. A parallel implementation in Spark can be easily obtained by implementing two steps in an iteration, one for computing the contributions of each page to its successor pages by using the <span class="math inline">\(flatMapToPair()\)</span> method, and the second for computing the current rank of each page by using the <span class="math inline">\(reduceByKey()\)</span> and <span class="math inline">\(mapValues()\)</span> methods.. All the intermediate results between iterations will be kept in main memory, resulting in a much faster execution than a Hadoop version (which would store intermediate results in external storage).</p>
+</section>
+<section id="code-of-pagerank" class="level2">
+<h2>Code of PageRank</h2>
+<pre class="java"><code>public static JavaPairRDD&lt;Integer, Double&gt; sparkPageRank(
+            final JavaPairRDD&lt;Integer, Website&gt; sites,
+            final JavaPairRDD&lt;Integer, Double&gt; ranks) throws UnsupportedOperationException {
+        JavaPairRDD&lt;Integer, Double&gt; newRanks =
+                sites.
+                        join(ranks).
+                        flatMapToPair(kv -&gt;{
+                            Integer websiteId = kv._1();
+                            Tuple2&lt;Website, Double&gt; value = kv._2();
+                            Website edges = kv._2()._1();
+                            Double currentRank = kv._2()._2();
+
+                        List&lt;Tuple2&lt;Integer, Double&gt;&gt; contribs = new ArrayList&lt;&gt;();
+                        Iterator&lt;Integer&gt; iter = edges.edgeIterator();
+                        while(iter.hasNext()){
+                            final int target = iter.next();
+                            contribs.add(new Tuple2(target,
+                                    currentRank / (double) edges.getNEdges()));
+                        }
+                        return contribs;
+                    });
+            return newRanks.reduceByKey((Double r1, Double r2) -&gt; r1 + r2)
+                .mapValues(v -&gt; 0.15 + v*0.85);
+
+
+        }</code></pre>
+</section>
+<section id="optional-reading" class="level2">
+<h2>Optional Reading:</h2>
+<ul>
+<li>Wikipedia article on the Apache Hadoop project</li>
+<li>Wikipedia article on the MapReduce framework</li>
+<li>Spark Programming Guide</li>
+<li>Wikipedia article on the Term Frequency – Inverse Document Frequency (TF-IDF) statistic</li>
+<li>Wikipedia article on the Apache Spark project</li>
+<li>Wikipedia article on the PageRank algorithm</li>
+</ul>
+</section>
+
+        <hr />
+
+    </div>
+
+
+  </article>
+
+      <footer class="footer">
+
+        
+
+          <div class="generic-box">
+Subscribe to our <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>.
+
+  <div class="share-page">
+<div class="share-links" style="text-align:center;">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</div>
+</div>
+
+
+</div>
+
+        
+      </footer>
+
+    
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/Dockerfile.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/python.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-111305334-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
+
+
+  
+  
+
+  <div id="gitalk-container"></div>
+</div>
+
+<link rel="stylesheet" href="/css/gitalk.css" media="all">
+<style type="text/css">
+	
+.gt-container .gt-comment-admin .gt-header-comment .gt-comment-content {
+    background-color: #f5f3d5;
+}
+
+textarea {
+   background-color: #f5f3d5;
+}
+</style>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: 'a98bac7d9ab86f4813de',
+        clientSecret: '307c20444af8207286b5f78f7a5ed941786edad0',
+        repo: 'readailib',
+        owner: 'rh01',
+        admin: ['rh01'],
+        body: location.href,
+      });
+      gitalk.render('gitalk-container');
+ </script>
+
+
+
+</main>
+
+

@@ -14,6 +14,11 @@ body {
   -moz-font-feature-settings: "liga" on;
 }
 
+figcaption {
+    display: block;
+    text-align: center;
+}
+
 h1,
 h2,
 h3,
