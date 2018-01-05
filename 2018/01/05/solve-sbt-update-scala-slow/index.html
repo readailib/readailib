@@ -7,8 +7,8 @@
 <meta name="generator" content="Hugo 0.31.1" />
 
 
-<title>sbt更新scala时速度很慢的解决方案 - ReadAILib Official Website </title>
-<meta property="og:title" content="sbt更新scala时速度很慢的解决方案 - ReadAILib Official Website ">
+<title>解决sbt更新scala速度慢 - ReadAILib Official Website </title>
+<meta property="og:title" content="解决sbt更新scala速度慢 - ReadAILib Official Website ">
 <meta property="author" content="{        map[]} - rh01">
 
 
@@ -83,7 +83,7 @@ var _hmt = _hmt || [];
   <article class="article">
     
 
-    <h1 class="article-title" style="text-align: center">sbt更新scala时速度很慢的解决方案</h1>
+    <h1 class="article-title" style="text-align: center">解决sbt更新scala速度慢</h1>
 
     
     
@@ -92,15 +92,14 @@ var _hmt = _hmt || [];
 
     <div class="article-content">
       <p>在国内如果要使用sbt更新scala时，速度是一个硬伤，因为国内访问maven库的速度确实很慢，因此在这里给出相应的解决方案。</p>
-<hr />
 <section id="sbtconfig.txt" class="level2">
 <h2>编辑sbtconfig.txt文件</h2>
-<p>打开sbt的安装位置，比如在我的机器(<span class="math inline">\(\mathtt{Windows}\)</span>)上就是<span class="math inline">\(\mathtt{E:\Program Files (x86)\sbt}\)</span>文件夹，打开文件夹下面的<span class="math inline">\(\mathtt{conf\sbtconfig.txt}\)</span>文件，增加一行</p>
+<p>打开sbt的安装位置，比如在我的机器(<span class="math inline">\(\mathtt{Windows}\)</span>)上就是<span class="math inline">\(\mathtt{E:\backslash Program Files (x86) \backslash sbt}\)</span>文件夹，打开文件夹下面的<span class="math inline">\(\mathtt{conf\backslash sbtconfig.txt}\)</span>文件，增加一行</p>
 <pre class="bash"><code>-Dsbt.override.build.repos=true</code></pre>
 </section>
-<section id=".sbt" class="level2">
-<h2>编辑用户文件夹下.sbt</h2>
-<p>打开本地用户目录，比如我的机器上上的目录为<span class="math inline">\(\mathtt{C:\Users\Shine}\)</span>目录，找到<span class="math inline">\(\mathtt{.sbt}\)</span>目录，在该目录下创建一个新的文件<span class="math inline">\(\mathtt{repositories}\)</span><strong>文件</strong>，编辑内容为</p>
+<section id="repositories" class="level2">
+<h2>编辑用户文件夹下repositories文件</h2>
+<p>打开本地用户目录，比如我的机器上上的目录为<span class="math inline">\(\mathtt{C:\backslash Users\backslash Shine}\)</span>目录，找到<span class="math inline">\(\mathtt{.sbt}\)</span>目录，在该目录下创建一个新的文件<span class="math inline">\(\mathtt{repositories}\)</span><strong>文件</strong>，编辑内容为</p>
 <pre class="bash"><code>[repositories]
 local
 aliyun-maven: http://maven.aliyun.com/nexus/content/groups/public/
@@ -113,7 +112,7 @@ maven-central</code></pre>
 </section>
 <section id="sbt" class="level2">
 <h2>重启sbt</h2>
-<p>重新打开命令行，切换到<span class="math inline">\(\mathtt{C:\Users\Shine\.sbt}\)</span>，输入<span class="math inline">\(\mathtt{sbt \; console}\)</span>命令，更新Scala.</p>
+<p>重新打开命令行，切换到<span class="math inline">\(\mathtt{C: \backslash Users \backslash Shine \backslash .sbt}\)</span>，输入<span class="math inline">\(\mathtt{sbt \; console}\)</span>命令，更新Scala.</p>
 </section>
 
         <hr />
