@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  	<link rel="shortcut icon" href="http://rh01.github.io/favicon.ico" type="image/x-icon" />
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<title>sbt更新scala时速度很慢的解决方案 - ReadAILib Official Website </title>
+<meta property="og:title" content="sbt更新scala时速度很慢的解决方案 - ReadAILib Official Website ">
+<meta property="author" content="{        map[]} - rh01">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/readailib">GitHub</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCTOuJy4b9E89zCwffX-qC3A">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title" style="text-align: center">sbt更新scala时速度很慢的解决方案</h1>
+
+    
+    
+    <div class="post-meta" style="text-align: center">  <a href="http://github.com/" >Heng-Heng Shen</a>  &nbsp;•&nbsp; 2018/01/05 &nbsp;•&nbsp; 1 min read </div>
+    
+
+    <div class="article-content">
+      <p>在国内如果要使用sbt更新scala时，速度是一个硬伤，因为国内访问maven库的速度确实很慢，因此在这里给出相应的解决方案。</p>
+<hr />
+<section id="sbtconfig.txt" class="level2">
+<h2>编辑sbtconfig.txt文件</h2>
+<p>打开sbt的安装位置，比如在我的机器(<span class="math inline">\(\mathtt{Windows}\)</span>)上就是<span class="math inline">\(\mathtt{E:\Program Files (x86)\sbt}\)</span>文件夹，打开文件夹下面的<span class="math inline">\(\mathtt{conf\sbtconfig.txt}\)</span>文件，增加一行</p>
+<pre class="bash"><code>-Dsbt.override.build.repos=true</code></pre>
+</section>
+<section id=".sbt" class="level2">
+<h2>编辑用户文件夹下.sbt</h2>
+<p>打开本地用户目录，比如我的机器上上的目录为<span class="math inline">\(\mathtt{C:\Users\Shine}\)</span>目录，找到<span class="math inline">\(\mathtt{.sbt}\)</span>目录，在该目录下创建一个新的文件<span class="math inline">\(\mathtt{repositories}\)</span><strong>文件</strong>，编辑内容为</p>
+<pre class="bash"><code>[repositories]
+local
+aliyun-maven: http://maven.aliyun.com/nexus/content/groups/public/
+aliyun-ivy: http://maven.aliyun.com/nexus/content/groups/public/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]
+typesafe: http://repo.typesafe.com/typesafe/ivy-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext], bootOnly
+sbt-plugin-ivy: http://dl.bintray.com/sbt/sbt-plugin-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]
+dl-ivy: http://dl.bintray.com/typesafe/ivy-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]
+sonatype-oss-releases
+maven-central</code></pre>
+</section>
+<section id="sbt" class="level2">
+<h2>重启sbt</h2>
+<p>重新打开命令行，切换到<span class="math inline">\(\mathtt{C:\Users\Shine\.sbt}\)</span>，输入<span class="math inline">\(\mathtt{sbt \; console}\)</span>命令，更新Scala.</p>
+</section>
+
+        <hr />
+
+    </div>
+
+
+  </article>
+
+      <footer class="footer">
+
+        
+
+          <div class="generic-box">
+Subscribe to our <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>.
+
+  <div class="share-page">
+<div class="share-links" style="text-align:center;">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</div>
+</div>
+
+
+</div>
+
+        
+      </footer>
+
+    
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/Dockerfile.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/python.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-111305334-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
+
+
+  
+  
+
+  <div id="gitalk-container"></div>
+</div>
+
+<link rel="stylesheet" href="/css/gitalk.css" media="all">
+<style type="text/css">
+	
+.gt-container .gt-comment-admin .gt-header-comment .gt-comment-content {
+    background-color: #f5f3d5;
+}
+
+textarea {
+   background-color: #f5f3d5;
+}
+</style>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: 'a98bac7d9ab86f4813de',
+        clientSecret: '307c20444af8207286b5f78f7a5ed941786edad0',
+        repo: 'readailib',
+        owner: 'rh01',
+        admin: ['rh01'],
+        body: location.href,
+      });
+      gitalk.render('gitalk-container');
+ </script>
+
+
+
+</main>
+
+
