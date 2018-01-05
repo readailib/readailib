@@ -87,7 +87,7 @@ var _hmt = _hmt || [];
 
     
     
-    <div class="post-meta" style="text-align: center">  <a href="http://github.com/rh01" >Heng-Heng Shen</a>  &nbsp;•&nbsp; 2018/01/05 &nbsp;•&nbsp; 11 min read </div>
+    <div class="post-meta" style="text-align: center">  <a href="http://github.com/rh01" >Heng-Heng Shen</a>  &nbsp;•&nbsp; 2018/01/05 &nbsp;•&nbsp; 12 min read </div>
     
 
     <div class="article-content">
@@ -180,6 +180,17 @@ var _hmt = _hmt || [];
         }
 
     }</code></pre>
+</section>
+<section id="mpi-installation" class="level2">
+<h2>MPI Installation</h2>
+<p>If you would like to test your solution on your local machine, you will need to install an MPI implementation.</p>
+<p>If you are using Ubuntu, you can install OpenMPI with the following commands:</p>
+<pre class="bash"><code>$ sudo apt-get update
+$ sudo apt-get install -y openmpi-bin libopenmpi-dev</code></pre>
+<p>If you are using Linux or Mac OS, we recommend downloading the OpenMPI implementation from:</p>
+<p><a href="https://www.open-mpi.org/software/ompi/v2.0/" class="uri">https://www.open-mpi.org/software/ompi/v2.0/</a></p>
+<p>and following the build instructions in the “User Builds” section of the included INSTALL file. Following installation, you must also add the created OpenMPI bin/ folder to your PATH and the created OpenMPI lib/ folder to your LD_LIBRARY_PATH (on Linux) or your DYLD_LIBRARY_PATH (on Mac OS).</p>
+<p>If you are on Windows or find the installation instructions for OpenMPI difficult to follow, we recommend using print statements and the Cousera autograder to test your code. The Coursera autograder automatically links in an OpenMPI implementation for you.</p>
 </section>
 <section id="optional-reading" class="level2">
 <h2>Optional Reading:</h2>
