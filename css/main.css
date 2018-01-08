@@ -39,12 +39,18 @@ a {
   outline: none;
   color: #0076df;
   text-decoration: none;
+  /*text-decoration:underline*/
 
 }
 
 code {
   background-color: rgba(0, 0, 0, 0.02);
 }
+
+.article-content a{
+  border-bottom: 1px solid #ddd;
+}
+
 
 .meta, .post-meta {
     width: auto;

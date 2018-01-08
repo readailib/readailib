@@ -99,7 +99,7 @@ You can submit a pull request directly from there without checking out the git r
 <li><p>Fork the repository <a href="https://github.com/lampepfl/progfun-wiki" class="uri">https://github.com/lampepfl/progfun-wiki</a> and check it out locally. To preview your changes, you need <a href="http://jekyllrb.com/">jekyll</a>. Navigate to your checkout and invoke <code>jekyll serve</code>, then open the page <a href="http://localhost:4000/CheatSheet.html" class="uri">http://localhost:4000/CheatSheet.html</a>.</p></li>
 </ul>
 <section id="evaluation-rules" class="level2">
-<h2>Evaluation Rules</h2>
+<h2>#Evaluation Rules</h2>
 <ul>
 <li>Call by value: evaluates the function arguments before calling the function</li>
 <li>Call by name: evaluates the function first, and then evaluates the arguments if need be</li>
@@ -114,7 +114,7 @@ You can submit a pull request directly from there without checking out the git r
     def myFct(bindings: Int*) = { ... } // bindings is a sequence of int, containing a varying # of arguments</code></pre>
 </section>
 <section id="higher-order-functions" class="level2">
-<h2>Higher order functions</h2>
+<h2>#Higher order functions</h2>
 <p>These are functions that take a function as a parameter or return functions.</p>
 <pre class="scala"><code>    // sum() returns a function that takes two integers and returns an integer  
     def sum(f: Int =&gt; Int): (Int, Int) =&gt; Int = {  
@@ -134,13 +134,13 @@ You can submit a pull request directly from there without checking out the git r
     sum(cube)(1, 10)           // same as above      </code></pre>
 </section>
 <section id="currying" class="level2">
-<h2>Currying</h2>
+<h2>#Currying</h2>
 <p>Converting a function with multiple arguments into a function with a single argument that returns another function.</p>
 <pre class="scala"><code>    def f(a: Int, b: Int): Int // uncurried version (type is (Int, Int) =&gt; Int)
     def f(a: Int)(b: Int): Int // curried version (type is Int =&gt; Int =&gt; Int)</code></pre>
 </section>
 <section id="classes" class="level2">
-<h2>Classes</h2>
+<h2>#Classes</h2>
 <pre class="scala"><code>    class MyClass(x: Int, y: Int) {           // Defines a new type MyClass with a constructor  
       require(y &gt; 0, &quot;y must be positive&quot;)    // precondition, triggering an IllegalArgumentException if not met  
       def this (x: Int) = { ... }             // auxiliary constructor   
@@ -156,7 +156,7 @@ You can submit a pull request directly from there without checking out the git r
 <p><code>this</code> references the current object, <code>assert(&lt;condition&gt;)</code> issues <code>AssertionError</code> if condition is not met. See <code>scala.Predef</code> for <code>require</code>, <code>assume</code> and <code>assert</code>.</p>
 </section>
 <section id="operators" class="level2">
-<h2>Operators</h2>
+<h2>#Operators</h2>
 <p><code>myObject myMethod 1</code> is the same as calling <code>myObject.myMethod(1)</code></p>
 <p>Operator (i.e. function) names can be alphanumeric, symbolic (e.g. <code>x1</code>, <code>*</code>, <code>+?%&amp;</code>, <code>vector_++</code>, <code>counter_=</code>)</p>
 <p>The precedence of an operator is determined by its first character, with the following increasing order of priority:</p>
@@ -174,7 +174,7 @@ You can submit a pull request directly from there without checking out the git r
 <p>Note that assignment operators have lowest precedence. (Read Scala Language Specification 2.9 sections 6.12.3, 6.12.4 for more info)</p>
 </section>
 <section id="class-hierarchies" class="level2">
-<h2>Class hierarchies</h2>
+<h2>#Class hierarchies</h2>
 <pre class="scala"><code>    abstract class TopLevel {    // abstract class  
       def method1(x: Int): Int   // abstract method  
       def method2(x: Int): Int = { ... }  
@@ -196,7 +196,7 @@ You can submit a pull request directly from there without checking out the git r
     }</code></pre>
 </section>
 <section id="class-organization" class="level2">
-<h2>Class Organization</h2>
+<h2>#Class Organization</h2>
 <ul>
 <li><p>Classes and objects are organized in packages (<code>package myPackage</code>).</p></li>
 <li><p>They can be referenced through import statements (<code>import myPackage.MyClass</code>, <code>import myPackage._</code>, <code>import myPackage.{MyClass1, MyClass2}</code>, <code>import myPackage.{MyClass1 =&gt; A}</code>)</p></li>
@@ -217,7 +217,7 @@ You can submit a pull request directly from there without checking out the git r
 </ul>
 </section>
 <section id="type-parameters" class="level2">
-<h2>Type Parameters</h2>
+<h2>#Type Parameters</h2>
 <p>Conceptually similar to C++ templates or Java generics. These can apply to classes, traits or functions.</p>
 <pre class="scala"><code>    class MyClass[T](arg1: T) { ... }  
     new MyClass[Int](1)  
@@ -228,7 +228,7 @@ You can submit a pull request directly from there without checking out the git r
     def myFct[T &gt;: Level1 &lt;: Top Level](arg: T): T = { ... }</code></pre>
 </section>
 <section id="variance" class="level2">
-<h2>Variance</h2>
+<h2>#Variance</h2>
 <p>Given <code>A &lt;: B</code></p>
 <p>If <code>C[A] &lt;: C[B]</code>, <code>C</code> is covariant</p>
 <p>If <code>C[A] &gt;: C[B]</code>, <code>C</code> is contravariant</p>
@@ -248,7 +248,7 @@ You can submit a pull request directly from there without checking out the git r
 <p>Find out more about variance in <a href="https://class.coursera.org/progfun-2012-001/lecture/81">lecture 4.4</a> and <a href="https://class.coursera.org/progfun-2012-001/lecture/83">lecture 4.5</a></p>
 </section>
 <section id="pattern-matching" class="level2">
-<h2>Pattern Matching</h2>
+<h2>#Pattern Matching</h2>
 <p>Pattern matching is used for decomposing data structures:</p>
 <pre class="scala"><code>    unknownObject match {
       case MyClass(n) =&gt; ...
@@ -267,7 +267,7 @@ You can submit a pull request directly from there without checking out the git r
     }</code></pre>
 <p>The last example shows that every pattern consists of sub-patterns: it only matches lists with at least one element, where that element is a pair. <code>x</code> and <code>y</code> are again patterns that could match only specific types.</p>
 <section id="options" class="level3">
-<h3>Options</h3>
+<h3>#Options</h3>
 <p>Pattern matching can also be used for <code>Option</code> values. Some functions (like <code>Map.get</code>) return a value of type <code>Option[T]</code> which is either a value of type <code>Some[T]</code> or the value <code>None</code>:</p>
 <pre class="scala"><code>    val myMap = Map(&quot;a&quot; -&gt; 42, &quot;b&quot; -&gt; 43)
     def getMapValue(s: String): String = {
@@ -283,7 +283,7 @@ You can submit a pull request directly from there without checking out the git r
       myMap.get(s).map(&quot;Value found: &quot; + _).getOrElse(&quot;No value found&quot;)</code></pre>
 </section>
 <section id="pattern-matching-in-anonymous-functions" class="level3">
-<h3>Pattern Matching in Anonymous Functions</h3>
+<h3>#Pattern Matching in Anonymous Functions</h3>
 <p>Pattern matches are also used quite often in anonymous functions:</p>
 <pre class="scala"><code>    val pairs: List[(Char, Int)] = (&#39;a&#39;, 2) :: (&#39;b&#39;, 3) :: Nil
     val chars: List[Char] = pairs.map(p =&gt; p match {
@@ -296,10 +296,10 @@ You can submit a pull request directly from there without checking out the git r
 </section>
 </section>
 <section id="collections" class="level2">
-<h2>Collections</h2>
+<h2>#Collections</h2>
 <p>Scala defines several collection classes:</p>
 <section id="base-classes" class="level3">
-<h3>Base Classes</h3>
+<h3>#Base Classes</h3>
 <ul>
 <li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.Iterable"><code>Iterable</code></a> (collections you can iterate on)</li>
 <li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.Seq"><code>Seq</code></a> (ordered sequences)</li>
@@ -308,7 +308,7 @@ You can submit a pull request directly from there without checking out the git r
 </ul>
 </section>
 <section id="immutable-collections" class="level3">
-<h3>Immutable Collections</h3>
+<h3>#Immutable Collections</h3>
 <ul>
 <li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.List"><code>List</code></a> (linked list, provides fast sequential access)</li>
 <li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Stream"><code>Stream</code></a> (same as List, except that the tail is evaluated only on demand)</li>
@@ -320,14 +320,14 @@ You can submit a pull request directly from there without checking out the git r
 </ul>
 </section>
 <section id="mutable-collections" class="level3">
-<h3>Mutable Collections</h3>
+<h3>#Mutable Collections</h3>
 <ul>
 <li><a href="http://www.scala-lang.org/api/current/index.html#scala.Array"><code>Array</code></a> (Scala arrays are native JVM arrays at runtime, therefore they are very performant)</li>
 <li>Scala also has mutable maps and sets; these should only be used if there are performance issues with immutable types</li>
 </ul>
 </section>
 <section id="examples" class="level3">
-<h3>Examples</h3>
+<h3>#Examples</h3>
 <pre class="scala"><code>    val fruitList = List(&quot;apples&quot;, &quot;oranges&quot;, &quot;pears&quot;)
     // Alternative syntax for lists
     val fruit = &quot;apples&quot; :: (&quot;oranges&quot; :: (&quot;pears&quot; :: Nil)) // parens optional, :: is right-associative
@@ -415,14 +415,14 @@ You can submit a pull request directly from there without checking out the git r
 </section>
 </section>
 <section id="pairs-similar-for-larger-tuples" class="level2">
-<h2>Pairs (similar for larger Tuples)</h2>
+<h2>#Pairs (similar for larger Tuples)</h2>
 <pre class="scala"><code>    val pair = (&quot;answer&quot;, 42)   // type: (String, Int)
     val (label, value) = pair   // label = &quot;answer&quot;, value = 42  
     pair._1 // &quot;answer&quot;  
     pair._2 // 42  </code></pre>
 </section>
 <section id="ordering" class="level2">
-<h2>Ordering</h2>
+<h2>#Ordering</h2>
 <p>There is already a class in the standard library that represents orderings: <code>scala.math.Ordering[T]</code> which contains comparison functions such as <code>lt()</code> and <code>gt()</code> for standard types. Types with a single natural ordering should inherit from the trait <code>scala.math.Ordered[T]</code>.</p>
 <pre class="scala"><code>    import math.Ordering  
 
@@ -431,7 +431,7 @@ You can submit a pull request directly from there without checking out the git r
     msort(fruits)   // the compiler figures out the right ordering  </code></pre>
 </section>
 <section id="for-comprehensions" class="level2">
-<h2>For-Comprehensions</h2>
+<h2>#For-Comprehensions</h2>
 <p>A for-comprehension is syntactic sugar for <code>map</code>, <code>flatMap</code> and <code>filter</code> operations on collections.</p>
 <p>The general form is <code>for (s) yield e</code></p>
 <ul>
@@ -443,7 +443,7 @@ You can submit a pull request directly from there without checking out the git r
 <li><code>e</code> is an element of the resulting collection</li>
 </ul>
 <section id="example-1" class="level3">
-<h3>Example 1</h3>
+<h3>#Example 1</h3>
 <pre class="scala"><code>    // list all combinations of numbers x and y where x is drawn from
     // 1 to M and y is drawn from 1 to N
     for (x &lt;- 1 to M; y &lt;- 1 to N)
@@ -452,7 +452,7 @@ You can submit a pull request directly from there without checking out the git r
 <pre class="scala"><code>    (1 to M) flatMap (x =&gt; (1 to N) map (y =&gt; (x, y)))</code></pre>
 </section>
 <section id="translation-rules" class="level3">
-<h3>Translation Rules</h3>
+<h3>#Translation Rules</h3>
 <p>A for-expression looks like a traditional for loop but works differently internally</p>
 <p><code>for (x &lt;- e1) yield e2</code> is translated to <code>e1.map(x =&gt; e2)</code></p>
 <p><code>for (x &lt;- e1 if f) yield e2</code> is translated to <code>for (x &lt;- e1.filter(x =&gt; f)) yield e2</code></p>
@@ -461,7 +461,7 @@ You can submit a pull request directly from there without checking out the git r
 <p>For more, see <a href="https://class.coursera.org/progfun-2012-001/lecture/111">lecture 6.5</a>.</p>
 </section>
 <section id="example-2" class="level3">
-<h3>Example 2</h3>
+<h3>#Example 2</h3>
 <pre class="scala"><code>    for {  
       i &lt;- 1 until n  
       j &lt;- 1 until i  
