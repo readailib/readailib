@@ -24,6 +24,16 @@ You can submit a pull request directly from there without checking out the git r
     </item>
     
     <item>
+      <title>Scala Learning Resources</title>
+      <link>/2018/01/08/scala-learning-resources/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/08/scala-learning-resources/</guid>
+      <description>Quick ReferencesScala Standard Library APIScala School!: A Scala tutorial by TwitterA Tour of Scala: Tutorial indroducing the main concepts of ScalaScala Overview on StackOverflow: A list of useful questions sorted by topicWeek 1Martin’s talk at OSCON 2011: Working Hard to Keep it Simple (slides)Books:
+Structure and Interpretation of Computer Programs. Harold Abelson and Gerald J. Sussman. 2nd edition. MIT Press 1996.</description>
+    </item>
+    
+    <item>
       <title>Scala Style Guide</title>
       <link>/2018/01/08/scala-style/</link>
       <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
