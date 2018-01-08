@@ -109,14 +109,14 @@ var _hmt = _hmt || [];
 <h3>#3 Line Length and Whitespace</h3>
 <p>Make sure the lines are not too long, otherwise your code is very hard to read. Instead of writing very long lines, introduce some local value bindings. Using whitespace uniformly makes your code more readable.</p>
 <p>Example (long line, missing spaces):</p>
-<pre><code>if(p(this.head))this.tail.filter0(p, accu.incl(this.head))else this.tail.filter0(p, accu)</code></pre>
+<pre class="scala"><code>if(p(this.head))this.tail.filter0(p, accu.incl(this.head))else this.tail.filter0(p, accu)</code></pre>
 <p>Better:</p>
-<pre><code>if (p(this.head))
+<pre class="scala"><code>if (p(this.head))
   this.tail.filter0(p, accu.incl(this.head))
 else
   this.tail.filter0(p, accu)</code></pre>
 <p>Even better (see #4 and #6 below):</p>
-<pre><code>val newAccu =
+<pre class="scala"><code>val newAccu =
   if (p(this.head)) accu.incl(this.head)
   else accu
 this.tail.filter0(p, newAccu)</code></pre>
@@ -130,7 +130,7 @@ this.tail.filter0(p, newAccu)</code></pre>
 <h3>#5 Choose meaningful Names for Methods and Values</h3>
 <p>The names of methods, fields and values should be carefully chosen so that the source code is easy to understand. A method name should make it clear what the method does. No, <code>temp</code> is never a good name :-)</p>
 <p>A few improvable examples:</p>
-<pre><code>val temp = sortFuntion0(list.head, tweet)   // what does sortFunction0 do?
+<pre class="scala"><code>val temp = sortFuntion0(list.head, tweet)   // what does sortFunction0 do?
 def temp(first: TweetSet, second : TweetSet): TweetSet = ...
 def un(th: TweetSet,acc: TweetSet): TweetSet = ...
 val c = if (p(elem)) accu.incl(elem) else accu
@@ -141,9 +141,9 @@ def help2(L: List[(Char, Int)], L2: List[Char]): List[(Char, Int)] = ...</code><
 <section id="common-subexpressions" class="level3">
 <h3>#6 Common Subexpressions</h3>
 <p>You should avoid unnecessary invocations of computation-intensive methods. For example</p>
-<pre><code>this.remove(this.findMin).ascending(t + this.findMin)</code></pre>
+<pre class="scala"><code>this.remove(this.findMin).ascending(t + this.findMin)</code></pre>
 <p>invokes the <code>this.findMin</code> method twice. If each invocation is expensive (e.g. has to traverse an entire data structure) and does not have a side-effect, you can save one by introducing a local value binding:</p>
-<pre><code>val min = this.findMin
+<pre class="scala"><code>val min = this.findMin
 this.remove(min).ascending(t + min)</code></pre>
 <p>This becomes even more important if the function is invoked recursively: in this case the method is not only invoked multiple times, but an exponential number of times.</p>
 </section>
@@ -157,12 +157,12 @@ this.remove(min).ascending(t + min)</code></pre>
 <li>The amount of work required to make changes to the code is multiplied</li>
 </ul>
 <p>You should factor out common parts into separate methods instead of copying code around. Example (see also #3 above for another example):</p>
-<pre><code>val googleTweets: TweetSet = TweetReader.allTweets.filter(tweet =&gt;
+<pre class="scala"><code>val googleTweets: TweetSet = TweetReader.allTweets.filter(tweet =&gt;
   google.exists(word =&gt; tweet.text.contains(word)))
 val appleTweets: TweetSet = TweetReader.allTweets.filter(tweet =&gt;
   apple.exists(word =&gt; tweet.text.contains(word)))</code></pre>
 <p>This code is better written as follows:</p>
-<pre><code>def tweetsMentioning(dictionary: List[String]): TweetSet =
+<pre class="scala"><code>def tweetsMentioning(dictionary: List[String]): TweetSet =
   TweetReader.allTweets.filter(tweet =&gt;
     dictionary.exists(word =&gt; tweet.text.contains(word)))
 
@@ -172,7 +172,7 @@ val appleTweets  = tweetsMentioning(apple)</code></pre>
 <section id="scala-doesnt-require-semicolons" class="level3">
 <h3>#8 Scala doesn’t require Semicolons</h3>
 <p>Semicolons in Scala are only required when writing multiple statements on the same line. Writing unnecessary semicolons should be avoided, for example:</p>
-<pre><code>def filter(p: Tweet =&gt; Boolean): TweetSet = filter0(p, new Empty);</code></pre>
+<pre class="scala"><code>def filter(p: Tweet =&gt; Boolean): TweetSet = filter0(p, new Empty);</code></pre>
 </section>
 <section id="dont-submit-code-with-print-statements" class="level3">
 <h3>#9 Don’t submit Code with “print” Statements</h3>
@@ -181,7 +181,7 @@ val appleTweets  = tweetsMentioning(apple)</code></pre>
 <section id="avoid-using-return" class="level3">
 <h3>#10 Avoid using Return</h3>
 <p>In Scala, you often don’t need to use explicit <code>return</code>s because control structures such as <code>if</code> are expressions. For example, in</p>
-<pre><code>def factorial(n: Int): Int = {
+<pre class="scala"><code>def factorial(n: Int): Int = {
   if (n &lt;= 0) return 1
   else return (n * factorial(n-1))
 }</code></pre>
@@ -190,20 +190,20 @@ val appleTweets  = tweetsMentioning(apple)</code></pre>
 <section id="avoid-mutable-local-variables" class="level3">
 <h3>#11 Avoid mutable local Variables</h3>
 <p>Since this is a course on functional programming, we want you to get used to writing code in a purely functional style, without using side-effecting operations. You can often rewrite code that uses mutable local variables to code with helper functions that take accumulators. Instead of:</p>
-<pre><code>def fib(n: Int): Int = {
-  var a = 0
-  var b = 1
-  var i = 0
-  while (i &lt; n) {
+<pre class="scala"><code>def fib(n: Int): Int = {
+var a = 0
+var b = 1
+var i = 0
+while (i &lt; n) {
     val prev_a = a
     a = b
     b = prev_a + b
     i = i + 1
-  }
-  a
+}
+a
 }</code></pre>
 <p>prefer:</p>
-<pre><code>def fib(n: Int): Int = {
+<pre class="scala"><code>def fib(n: Int): Int = {
   def fibIter(i: Int, a: Int, b: Int): Int =
     if (i == n) a else fibIter(i+1, b, a+b)
   fibIter(0, 0, 1)
@@ -212,7 +212,7 @@ val appleTweets  = tweetsMentioning(apple)</code></pre>
 <section id="eliminate-redundant-if-expressions" class="level3">
 <h3>#12 Eliminate redundant “If” Expressions</h3>
 <p>Instead of</p>
-<pre><code>if (cond) true else false</code></pre>
+<pre class="scala"><code>if (cond) true else false</code></pre>
 <p>you can simply write</p>
 <pre><code>cond</code></pre>
 <p>(Similarly for the negaitve case).</p>
