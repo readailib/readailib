@@ -6,10 +6,33 @@
     <description>Recent content in Posts on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Scala CheatSheet</title>
+      <link>/2018/01/08/scala-cheatsheet/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/08/scala-cheatsheet/</guid>
+      <description>This cheat sheet originated from the forum, credits to Laurent Poulain. We copied it and changed or added a few things. There are certainly a lot of things that can be improved! If you would like to contribute, you have two options:
+Click the “Edit” button on this file on GitHub:
+https://github.com/lampepfl/progfun-wiki/blob/gh-pages/CheatSheet.md
+You can submit a pull request directly from there without checking out the git repository to your local machine.</description>
+    </item>
+    
+    <item>
+      <title>Scala Style Guide</title>
+      <link>/2018/01/08/scala-style/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/08/scala-style/</guid>
+      <description>On this page you can find a list of common issues that we detected while looking at some submissions.
+Some of the style issues can be detected by the automated style checker that we also use for the grading process. The style checker, which is based on Scalastyle, can be executed locally in sbt by running the styleCheck task.
+Common Issues#1 Avoid Casts and Type TestsNever use isInstanceOf or asInstanceOf - there’s always a better solution, both for the assignments, and also for any real-world Scala project.</description>
+    </item>
     
     <item>
       <title>分布式编程第三周课堂笔记</title>

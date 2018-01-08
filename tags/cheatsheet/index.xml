@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cheatsheet on ReadAILib Official Website </title>
+    <link>/tags/cheatsheet/</link>
+    <description>Recent content in Cheatsheet on ReadAILib Official Website </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 08 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/cheatsheet/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Scala CheatSheet</title>
+      <link>/2018/01/08/scala-cheatsheet/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/08/scala-cheatsheet/</guid>
+      <description>This cheat sheet originated from the forum, credits to Laurent Poulain. We copied it and changed or added a few things. There are certainly a lot of things that can be improved! If you would like to contribute, you have two options:
+Click the “Edit” button on this file on GitHub:
+https://github.com/lampepfl/progfun-wiki/blob/gh-pages/CheatSheet.md
+You can submit a pull request directly from there without checking out the git repository to your local machine.</description>
+    </item>
+    
+  </channel>
+</rss>

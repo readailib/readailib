@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  	<link rel="shortcut icon" href="http://rh01.github.io/favicon.ico" type="image/x-icon" />
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<title>Scala CheatSheet - ReadAILib Official Website </title>
+<meta property="og:title" content="Scala CheatSheet - ReadAILib Official Website ">
+<meta property="author" content="{        map[]} - rh01">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/readailib">GitHub</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCTOuJy4b9E89zCwffX-qC3A">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title" style="text-align: center">Scala CheatSheet</h1>
+
+    
+    
+    <div class="post-meta" style="text-align: center">  <a href="http://github.com/lampepfl" >lampepfl</a>  &nbsp;•&nbsp; 2018/01/08 &nbsp;•&nbsp; 13 min read </div>
+    
+
+    <div class="article-content">
+      <p>This cheat sheet originated from the forum, credits to Laurent Poulain. We copied it and changed or added a few things. There are certainly a lot of things that can be improved! If you would like to contribute, you have two options:</p>
+<ul>
+<li><p>Click the “Edit” button on this file on GitHub:<br />
+<a href="https://github.com/lampepfl/progfun-wiki/blob/gh-pages/CheatSheet.md" class="uri">https://github.com/lampepfl/progfun-wiki/blob/gh-pages/CheatSheet.md</a><br />
+You can submit a pull request directly from there without checking out the git repository to your local machine.</p></li>
+<li><p>Fork the repository <a href="https://github.com/lampepfl/progfun-wiki" class="uri">https://github.com/lampepfl/progfun-wiki</a> and check it out locally. To preview your changes, you need <a href="http://jekyllrb.com/">jekyll</a>. Navigate to your checkout and invoke <code>jekyll serve</code>, then open the page <a href="http://localhost:4000/CheatSheet.html" class="uri">http://localhost:4000/CheatSheet.html</a>.</p></li>
+</ul>
+<section id="evaluation-rules" class="level2">
+<h2>Evaluation Rules</h2>
+<ul>
+<li>Call by value: evaluates the function arguments before calling the function</li>
+<li>Call by name: evaluates the function first, and then evaluates the arguments if need be</li>
+</ul>
+<!-- code -->
+<pre class="scala"><code>    def example = 2      // evaluated when called
+    val example = 2      // evaluated immediately
+    lazy val example = 2 // evaluated once when needed
+    
+    def square(x: Double)    // call by value
+    def square(x: =&gt; Double) // call by name
+    def myFct(bindings: Int*) = { ... } // bindings is a sequence of int, containing a varying # of arguments</code></pre>
+</section>
+<section id="higher-order-functions" class="level2">
+<h2>Higher order functions</h2>
+<p>These are functions that take a function as a parameter or return functions.</p>
+<pre class="scala"><code>    // sum() returns a function that takes two integers and returns an integer  
+    def sum(f: Int =&gt; Int): (Int, Int) =&gt; Int = {  
+      def sumf(a: Int, b: Int): Int = {...}  
+      sumf  
+    } 
+    
+    // same as above. Its type is (Int =&gt; Int) =&gt; (Int, Int) =&gt; Int  
+    def sum(f: Int =&gt; Int)(a: Int, b: Int): Int = { ... } 
+
+    // Called like this
+    sum((x: Int) =&gt; x * x * x)          // Anonymous function, i.e. does not have a name  
+    sum(x =&gt; x * x * x)                 // Same anonymous function with type inferred
+
+    def cube(x: Int) = x * x * x  
+    sum(x =&gt; x * x * x)(1, 10) // sum of cubes from 1 to 10
+    sum(cube)(1, 10)           // same as above      </code></pre>
+</section>
+<section id="currying" class="level2">
+<h2>Currying</h2>
+<p>Converting a function with multiple arguments into a function with a single argument that returns another function.</p>
+<pre class="scala"><code>    def f(a: Int, b: Int): Int // uncurried version (type is (Int, Int) =&gt; Int)
+    def f(a: Int)(b: Int): Int // curried version (type is Int =&gt; Int =&gt; Int)</code></pre>
+</section>
+<section id="classes" class="level2">
+<h2>Classes</h2>
+<pre class="scala"><code>    class MyClass(x: Int, y: Int) {           // Defines a new type MyClass with a constructor  
+      require(y &gt; 0, &quot;y must be positive&quot;)    // precondition, triggering an IllegalArgumentException if not met  
+      def this (x: Int) = { ... }             // auxiliary constructor   
+      def nb1 = x                             // public method computed every time it is called  
+      def nb2 = y  
+      private def test(a: Int): Int = { ... } // private method  
+      val nb3 = x + y                         // computed only once  
+      override def toString =                 // overridden method  
+          member1 + &quot;, &quot; + member2 
+    }
+
+    new MyClass(1, 2) // creates a new object of type</code></pre>
+<p><code>this</code> references the current object, <code>assert(&lt;condition&gt;)</code> issues <code>AssertionError</code> if condition is not met. See <code>scala.Predef</code> for <code>require</code>, <code>assume</code> and <code>assert</code>.</p>
+</section>
+<section id="operators" class="level2">
+<h2>Operators</h2>
+<p><code>myObject myMethod 1</code> is the same as calling <code>myObject.myMethod(1)</code></p>
+<p>Operator (i.e. function) names can be alphanumeric, symbolic (e.g. <code>x1</code>, <code>*</code>, <code>+?%&amp;</code>, <code>vector_++</code>, <code>counter_=</code>)</p>
+<p>The precedence of an operator is determined by its first character, with the following increasing order of priority:</p>
+<pre><code>(all letters)
+|
+^
+&amp;
+&lt; &gt;
+= !
+:
++ -
+* / %
+(all other special characters)</code></pre>
+<p>The associativity of an operator is determined by its last character: Right-associative if ending with <code>:</code>, Left-associative otherwise.</p>
+<p>Note that assignment operators have lowest precedence. (Read Scala Language Specification 2.9 sections 6.12.3, 6.12.4 for more info)</p>
+</section>
+<section id="class-hierarchies" class="level2">
+<h2>Class hierarchies</h2>
+<pre class="scala"><code>    abstract class TopLevel {    // abstract class  
+      def method1(x: Int): Int   // abstract method  
+      def method2(x: Int): Int = { ... }  
+    }
+
+    class Level1 extends TopLevel {  
+      def method1(x: Int): Int = { ... }  
+      override def method2(x: Int): Int = { ...} // TopLevel&#39;s method2 needs to be explicitly overridden  
+    }
+
+    object MyObject extends TopLevel { ... } // defines a singleton object. No other instance can be created</code></pre>
+<p>To create a runnable application in Scala:</p>
+<pre class="scala"><code>    object Hello {  
+      def main(args: Array[String]) = println(&quot;Hello world&quot;)  
+    }</code></pre>
+<p>or</p>
+<pre class="scala"><code>    object Hello extends App {
+      println(&quot;Hello World&quot;)
+    }</code></pre>
+</section>
+<section id="class-organization" class="level2">
+<h2>Class Organization</h2>
+<ul>
+<li><p>Classes and objects are organized in packages (<code>package myPackage</code>).</p></li>
+<li><p>They can be referenced through import statements (<code>import myPackage.MyClass</code>, <code>import myPackage._</code>, <code>import myPackage.{MyClass1, MyClass2}</code>, <code>import myPackage.{MyClass1 =&gt; A}</code>)</p></li>
+<li><p>They can also be directly referenced in the code with the fully qualified name (<code>new myPackage.MyClass1</code>)</p></li>
+<li><p>All members of packages <code>scala</code> and <code>java.lang</code> as well as all members of the object <code>scala.Predef</code> are automatically imported.</p></li>
+<li>Traits are similar to Java interfaces, except they can have non-abstract members:</li>
+</ul>
+<pre class="scala"><code>        trait Planar { ... }
+        class Square extends Shape with Planar</code></pre>
+<ul>
+<li><p>General object hierarchy:</p>
+<ul>
+<li><code>scala.Any</code> base type of all types. Has methods <code>hashCode</code> and <code>toString</code> that can be overridden</li>
+<li><code>scala.AnyVal</code> base type of all primitive types. (<code>scala.Double</code>, <code>scala.Float</code>, etc.)</li>
+<li><code>scala.AnyRef</code> base type of all reference types. (alias of <code>java.lang.Object</code>, supertype of <code>java.lang.String</code>, <code>scala.List</code>, any user-defined class)</li>
+<li><code>scala.Null</code> is a subtype of any <code>scala.AnyRef</code> (<code>null</code> is the only instance of type <code>Null</code>), and <code>scala.Nothing</code> is a subtype of any other type without any instance.</li>
+</ul></li>
+</ul>
+</section>
+<section id="type-parameters" class="level2">
+<h2>Type Parameters</h2>
+<p>Conceptually similar to C++ templates or Java generics. These can apply to classes, traits or functions.</p>
+<pre class="scala"><code>    class MyClass[T](arg1: T) { ... }  
+    new MyClass[Int](1)  
+    new MyClass(1)   // the type is being inferred, i.e. determined based on the value arguments  </code></pre>
+<p>It is possible to restrict the type being used, e.g.</p>
+<pre class="scala"><code>    def myFct[T &lt;: TopLevel](arg: T): T = { ... } // T must derive from TopLevel or be TopLevel
+    def myFct[T &gt;: Level1](arg: T): T = { ... }   // T must be a supertype of Level1
+    def myFct[T &gt;: Level1 &lt;: Top Level](arg: T): T = { ... }</code></pre>
+</section>
+<section id="variance" class="level2">
+<h2>Variance</h2>
+<p>Given <code>A &lt;: B</code></p>
+<p>If <code>C[A] &lt;: C[B]</code>, <code>C</code> is covariant</p>
+<p>If <code>C[A] &gt;: C[B]</code>, <code>C</code> is contravariant</p>
+<p>Otherwise C is nonvariant</p>
+<pre class="scala"><code>    class C[+A] { ... } // C is covariant
+    class C[-A] { ... } // C is contravariant
+    class C[A]  { ... } // C is nonvariant</code></pre>
+<p>For a function, if <code>A2 &lt;: A1</code> and <code>B1 &lt;: B2</code>, then <code>A1 =&gt; B1 &lt;: A2 =&gt; B2</code>.</p>
+<p>Functions must be contravariant in their argument types and covariant in their result types, e.g.</p>
+<pre class="scala"><code>    trait Function1[-T, +U] {
+      def apply(x: T): U
+    } // Variance check is OK because T is contravariant and U is covariant
+
+    class Array[+T] {
+      def update(x: T)
+    } // variance checks fails</code></pre>
+<p>Find out more about variance in <a href="https://class.coursera.org/progfun-2012-001/lecture/81">lecture 4.4</a> and <a href="https://class.coursera.org/progfun-2012-001/lecture/83">lecture 4.5</a></p>
+</section>
+<section id="pattern-matching" class="level2">
+<h2>Pattern Matching</h2>
+<p>Pattern matching is used for decomposing data structures:</p>
+<pre class="scala"><code>    unknownObject match {
+      case MyClass(n) =&gt; ...
+      case MyClass2(a, b) =&gt; ...
+    }</code></pre>
+<p>Here are a few example patterns</p>
+<pre class="scala"><code>    (someList: List[T]) match {
+      case Nil =&gt; ...          // empty list
+      case x :: Nil =&gt; ...     // list with only one element
+      case List(x) =&gt; ...      // same as above
+      case x :: xs =&gt; ...      // a list with at least one element. x is bound to the head,
+                               // xs to the tail. xs could be Nil or some other list.
+      case 1 :: 2 :: cs =&gt; ... // lists that starts with 1 and then 2
+      case (x, y) :: ps =&gt; ... // a list where the head element is a pair
+      case _ =&gt; ...            // default case if none of the above matches
+    }</code></pre>
+<p>The last example shows that every pattern consists of sub-patterns: it only matches lists with at least one element, where that element is a pair. <code>x</code> and <code>y</code> are again patterns that could match only specific types.</p>
+<section id="options" class="level3">
+<h3>Options</h3>
+<p>Pattern matching can also be used for <code>Option</code> values. Some functions (like <code>Map.get</code>) return a value of type <code>Option[T]</code> which is either a value of type <code>Some[T]</code> or the value <code>None</code>:</p>
+<pre class="scala"><code>    val myMap = Map(&quot;a&quot; -&gt; 42, &quot;b&quot; -&gt; 43)
+    def getMapValue(s: String): String = {
+      myMap get s match {
+        case Some(nb) =&gt; &quot;Value found: &quot; + nb
+        case None =&gt; &quot;No value found&quot;
+      }
+    }
+    getMapValue(&quot;a&quot;)  // &quot;Value found: 42&quot;
+    getMapValue(&quot;c&quot;)  // &quot;No value found&quot;</code></pre>
+<p>Most of the times when you write a pattern match on an option value, the same expression can be written more concisely using combinator methods of the <code>Option</code> class. For example, the function <code>getMapValue</code> can be written as follows:</p>
+<pre class="scala"><code>    def getMapValue(s: String): String =
+      myMap.get(s).map(&quot;Value found: &quot; + _).getOrElse(&quot;No value found&quot;)</code></pre>
+</section>
+<section id="pattern-matching-in-anonymous-functions" class="level3">
+<h3>Pattern Matching in Anonymous Functions</h3>
+<p>Pattern matches are also used quite often in anonymous functions:</p>
+<pre class="scala"><code>    val pairs: List[(Char, Int)] = (&#39;a&#39;, 2) :: (&#39;b&#39;, 3) :: Nil
+    val chars: List[Char] = pairs.map(p =&gt; p match {
+      case (ch, num) =&gt; ch
+    })</code></pre>
+<p>Instead of <code>p =&gt; p match { case ... }</code>, you can simply write <code>{case ...}</code>, so the above example becomes more concise:</p>
+<pre class="scala"><code>    val chars: List[Char] = pairs map {
+      case (ch, num) =&gt; ch
+    }</code></pre>
+</section>
+</section>
+<section id="collections" class="level2">
+<h2>Collections</h2>
+<p>Scala defines several collection classes:</p>
+<section id="base-classes" class="level3">
+<h3>Base Classes</h3>
+<ul>
+<li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.Iterable"><code>Iterable</code></a> (collections you can iterate on)</li>
+<li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.Seq"><code>Seq</code></a> (ordered sequences)</li>
+<li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.Set"><code>Set</code></a></li>
+<li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.Map"><code>Map</code></a> (lookup data structure)</li>
+</ul>
+</section>
+<section id="immutable-collections" class="level3">
+<h3>Immutable Collections</h3>
+<ul>
+<li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.List"><code>List</code></a> (linked list, provides fast sequential access)</li>
+<li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Stream"><code>Stream</code></a> (same as List, except that the tail is evaluated only on demand)</li>
+<li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Vector"><code>Vector</code></a> (array-like type, implemented as tree of blocks, provides fast random access)</li>
+<li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Range"><code>Range</code></a> (ordered sequence of integers with equal spacing)</li>
+<li><a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/lang/String.html"><code>String</code></a> (Java type, implicitly converted to a character sequence, so you can treat every string like a <code>Seq[Char]</code>)</li>
+<li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Map"><code>Map</code></a> (collection that maps keys to values)</li>
+<li><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Set"><code>Set</code></a> (collection without duplicate elements)</li>
+</ul>
+</section>
+<section id="mutable-collections" class="level3">
+<h3>Mutable Collections</h3>
+<ul>
+<li><a href="http://www.scala-lang.org/api/current/index.html#scala.Array"><code>Array</code></a> (Scala arrays are native JVM arrays at runtime, therefore they are very performant)</li>
+<li>Scala also has mutable maps and sets; these should only be used if there are performance issues with immutable types</li>
+</ul>
+</section>
+<section id="examples" class="level3">
+<h3>Examples</h3>
+<pre class="scala"><code>    val fruitList = List(&quot;apples&quot;, &quot;oranges&quot;, &quot;pears&quot;)
+    // Alternative syntax for lists
+    val fruit = &quot;apples&quot; :: (&quot;oranges&quot; :: (&quot;pears&quot; :: Nil)) // parens optional, :: is right-associative
+    fruit.head   // &quot;apples&quot;
+    fruit.tail   // List(&quot;oranges&quot;, &quot;pears&quot;)
+    val empty = List()
+    val empty = Nil
+
+    val nums = Vector(&quot;louis&quot;, &quot;frank&quot;, &quot;hiromi&quot;)
+    nums(1)                     // element at index 1, returns &quot;frank&quot;, complexity O(log(n))
+    nums.updated(2, &quot;helena&quot;)   // new vector with a different string at index 2, complexity O(log(n))
+    
+    val fruitSet = Set(&quot;apple&quot;, &quot;banana&quot;, &quot;pear&quot;, &quot;banana&quot;)
+    fruitSet.size    // returns 3: there are no duplicates, only one banana
+
+    val r: Range = 1 until 5 // 1, 2, 3, 4
+    val s: Range = 1 to 5    // 1, 2, 3, 4, 5
+    1 to 10 by 3  // 1, 4, 7, 10
+    6 to 1 by -2  // 6, 4, 2
+
+    val s = (1 to 6).toSet
+    s map (_ + 2) // adds 2 to each element of the set
+
+    val s = &quot;Hello World&quot;
+    s filter (c =&gt; c.isUpper) // returns &quot;HW&quot;; strings can be treated as Seq[Char]
+
+    // Operations on sequences
+    val xs = List(...)
+    xs.length   // number of elements, complexity O(n)
+    xs.last     // last element (exception if xs is empty), complexity O(n)
+    xs.init     // all elements of xs but the last (exception if xs is empty), complexity O(n)
+    xs take n   // first n elements of xs
+    xs drop n   // the rest of the collection after taking n elements
+    xs(n)       // the nth element of xs, complexity O(n)
+    xs ++ ys    // concatenation, complexity O(n)
+    xs.reverse  // reverse the order, complexity O(n)
+    xs updated(n, x)  // same list than xs, except at index n where it contains x, complexity O(n)
+    xs indexOf x      // the index of the first element equal to x (-1 otherwise)
+    xs contains x     // same as xs indexOf x &gt;= 0
+    xs filter p       // returns a list of the elements that satisfy the predicate p
+    xs filterNot p    // filter with negated p 
+    xs partition p    // same as (xs filter p, xs filterNot p)
+    xs takeWhile p    // the longest prefix consisting of elements that satisfy p
+    xs dropWhile p    // the remainder of the list after any leading element satisfying p have been removed
+    xs span p         // same as (xs takeWhile p, xs dropWhile p)
+    
+    List(x1, ..., xn) reduceLeft op    // (...(x1 op x2) op x3) op ...) op xn
+    List(x1, ..., xn).foldLeft(z)(op)  // (...( z op x1) op x2) op ...) op xn
+    List(x1, ..., xn) reduceRight op   // x1 op (... (x{n-1} op xn) ...)
+    List(x1, ..., xn).foldRight(z)(op) // x1 op (... (    xn op  z) ...)
+    
+    xs exists p    // true if there is at least one element for which predicate p is true
+    xs forall p    // true if p(x) is true for all elements
+    xs zip ys      // returns a list of pairs which groups elements with same index together
+    xs unzip       // opposite of zip: returns a pair of two lists
+    xs.flatMap f   // applies the function to all elements and concatenates the result
+    xs.sum         // sum of elements of the numeric collection
+    xs.product     // product of elements of the numeric collection
+    xs.max         // maximum of collection
+    xs.min         // minimum of collection
+    xs.flatten     // flattens a collection of collection into a single-level collection
+    xs groupBy f   // returns a map which points to a list of elements
+    xs distinct    // sequence of distinct entries (removes duplicates)
+
+    x +: xs  // creates a new collection with leading element x
+    xs :+ x  // creates a new collection with trailing element x
+
+    // Operations on maps
+    val myMap = Map(&quot;I&quot; -&gt; 1, &quot;V&quot; -&gt; 5, &quot;X&quot; -&gt; 10)  // create a map
+    myMap(&quot;I&quot;)      // =&gt; 1  
+    myMap(&quot;A&quot;)      // =&gt; java.util.NoSuchElementException  
+    myMap get &quot;A&quot;   // =&gt; None 
+    myMap get &quot;I&quot;   // =&gt; Some(1)
+    myMap.updated(&quot;V&quot;, 15)  // returns a new map where &quot;V&quot; maps to 15 (entry is updated)
+                            // if the key (&quot;V&quot; here) does not exist, a new entry is added
+
+    // Operations on Streams
+    val xs = Stream(1, 2, 3)
+    val xs = Stream.cons(1, Stream.cons(2, Stream.cons(3, Stream.empty))) // same as above
+    (1 to 1000).toStream // =&gt; Stream(1, ?)
+    x #:: xs // Same as Stream.cons(x, xs)
+             // In the Stream&#39;s cons operator, the second parameter (the tail)
+             // is defined as a &quot;call by name&quot; parameter.
+             // Note that x::xs always produces a List</code></pre>
+</section>
+</section>
+<section id="pairs-similar-for-larger-tuples" class="level2">
+<h2>Pairs (similar for larger Tuples)</h2>
+<pre class="scala"><code>    val pair = (&quot;answer&quot;, 42)   // type: (String, Int)
+    val (label, value) = pair   // label = &quot;answer&quot;, value = 42  
+    pair._1 // &quot;answer&quot;  
+    pair._2 // 42  </code></pre>
+</section>
+<section id="ordering" class="level2">
+<h2>Ordering</h2>
+<p>There is already a class in the standard library that represents orderings: <code>scala.math.Ordering[T]</code> which contains comparison functions such as <code>lt()</code> and <code>gt()</code> for standard types. Types with a single natural ordering should inherit from the trait <code>scala.math.Ordered[T]</code>.</p>
+<pre class="scala"><code>    import math.Ordering  
+
+    def msort[T](xs: List[T])(implicit ord: Ordering) = { ...}  
+    msort(fruits)(Ordering.String)  
+    msort(fruits)   // the compiler figures out the right ordering  </code></pre>
+</section>
+<section id="for-comprehensions" class="level2">
+<h2>For-Comprehensions</h2>
+<p>A for-comprehension is syntactic sugar for <code>map</code>, <code>flatMap</code> and <code>filter</code> operations on collections.</p>
+<p>The general form is <code>for (s) yield e</code></p>
+<ul>
+<li><code>s</code> is a sequence of generators and filters</li>
+<li><code>p &lt;- e</code> is a generator</li>
+<li><code>if f</code> is a filter</li>
+<li>If there are several generators (equivalent of a nested loop), the last generator varies faster than the first</li>
+<li>You can use <code>{ s }</code> instead of <code>( s )</code> if you want to use multiple lines without requiring semicolons</li>
+<li><code>e</code> is an element of the resulting collection</li>
+</ul>
+<section id="example-1" class="level3">
+<h3>Example 1</h3>
+<pre class="scala"><code>    // list all combinations of numbers x and y where x is drawn from
+    // 1 to M and y is drawn from 1 to N
+    for (x &lt;- 1 to M; y &lt;- 1 to N)
+      yield (x,y)</code></pre>
+<p>is equivalent to</p>
+<pre class="scala"><code>    (1 to M) flatMap (x =&gt; (1 to N) map (y =&gt; (x, y)))</code></pre>
+</section>
+<section id="translation-rules" class="level3">
+<h3>Translation Rules</h3>
+<p>A for-expression looks like a traditional for loop but works differently internally</p>
+<p><code>for (x &lt;- e1) yield e2</code> is translated to <code>e1.map(x =&gt; e2)</code></p>
+<p><code>for (x &lt;- e1 if f) yield e2</code> is translated to <code>for (x &lt;- e1.filter(x =&gt; f)) yield e2</code></p>
+<p><code>for (x &lt;- e1; y &lt;- e2) yield e3</code> is translated to <code>e1.flatMap(x =&gt; for (y &lt;- e2) yield e3)</code></p>
+<p>This means you can use a for-comprehension for your own type, as long as you define <code>map</code>, <code>flatMap</code> and <code>filter</code>.</p>
+<p>For more, see <a href="https://class.coursera.org/progfun-2012-001/lecture/111">lecture 6.5</a>.</p>
+</section>
+<section id="example-2" class="level3">
+<h3>Example 2</h3>
+<pre class="scala"><code>    for {  
+      i &lt;- 1 until n  
+      j &lt;- 1 until i  
+      if isPrime(i + j)  
+    } yield (i, j)  </code></pre>
+<p>is equivalent to</p>
+<pre class="scala"><code>    for (i &lt;- 1 until n; j &lt;- 1 until i if isPrime(i + j))
+        yield (i, j)  </code></pre>
+<p>is equivalent to</p>
+<pre class="scala"><code>    (1 until n).flatMap(i =&gt; (1 until i).filter(j =&gt; isPrime(i + j)).map(j =&gt; (i, j)))</code></pre>
+</section>
+</section>
+
+        <hr />
+
+    </div>
+    
+
+
+
+  </article>
+
+      <footer class="footer">
+
+        
+
+          <div class="generic-box">
+Subscribe to our <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>.
+
+  <div class="share-page">
+<div class="share-links" style="text-align:center;">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</div>
+</div>
+
+
+</div>
+
+        
+      </footer>
+
+    
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/Dockerfile.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/python.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/scala.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-111305334-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
+
+
+  
+  
+
+  <div id="gitalk-container"></div>
+</div>
+
+<link rel="stylesheet" href="/css/gitalk.css" media="all">
+<style type="text/css">
+	
+.gt-container .gt-comment-admin .gt-header-comment .gt-comment-content {
+    background-color: #f5f3d5;
+}
+
+textarea {
+   background-color: #f5f3d5;
+}
+</style>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: 'a98bac7d9ab86f4813de',
+        clientSecret: '307c20444af8207286b5f78f7a5ed941786edad0',
+        repo: 'readailib',
+        owner: 'rh01',
+        admin: ['rh01'],
+        body: location.href,
+      });
+      gitalk.render('gitalk-container');
+ </script>
+
+
+
+</main>
+
+

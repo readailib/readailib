@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Scala Style on ReadAILib Official Website </title>
+    <link>/tags/scala-style/</link>
+    <description>Recent content in Scala Style on ReadAILib Official Website </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 08 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/scala-style/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Scala Style Guide</title>
+      <link>/2018/01/08/scala-style/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/08/scala-style/</guid>
+      <description>On this page you can find a list of common issues that we detected while looking at some submissions.
+Some of the style issues can be detected by the automated style checker that we also use for the grading process. The style checker, which is based on Scalastyle, can be executed locally in sbt by running the styleCheck task.
+Common Issues#1 Avoid Casts and Type TestsNever use isInstanceOf or asInstanceOf - there’s always a better solution, both for the assignments, and also for any real-world Scala project.</description>
+    </item>
+    
+  </channel>
+</rss>
