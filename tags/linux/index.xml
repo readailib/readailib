@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>2018 on ReadAILib Official Website </title>
-    <link>/categories/2018/</link>
-    <description>Recent content in 2018 on ReadAILib Official Website </description>
+    <title>Linux on ReadAILib Official Website </title>
+    <link>/tags/linux/</link>
+    <description>Recent content in Linux on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 04 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/2018/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -23,19 +23,6 @@ wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-boost-5.7.20.tar.gz使
 tar -xvzf mysql-boost-5.7.20.tar.gzcd mysql-5.7.20/cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/local/mysql \-DWITH_BOOST=/root/mysql-5.7.20/boost/然后执行make和make install命令，这会持续很长时间（在我的虚拟机上有一个小时左右），耐心等待即可。
 make &amp;amp; make install出现下面的信息，基本就是安装成功了。
 -- Installing: /usr/local/mysql/mysql-test/./collections/mysql-5.7-stage.push-- Installing: /usr/local/mysql/mysql-test/./collections/default.weekly-- Installing: /usr/local/mysql/mysql-test/./collections/disabled-weekly.list-- Installing: /usr/local/mysql/mysql-test/./collections/default.push-valgrind-- Installing: /usr/local/mysql/mysql-test/./collections/disabled-gtid-on.list-- Installing: /usr/local/mysql/mysql-test/./collections/default.release.done-- Installing: /usr/local/mysql/mysql-test/./collections/default.push-- Installing: /usr/local/mysql/mysql-test/./collections/disabled-daily.list-- Installing: /usr/local/mysql/mysql-test/./collections/README.experimental-- Installing: /usr/local/mysql/mysql-test/./collections/default.daily-valgrind-- Installing: /usr/local/mysql/mysql-test/./collections/default.weekly-valgrind-- Installing: /usr/local/mysql/mysql-test/./collections/coverage.ignore-- Installing: /usr/local/mysql/mysql-test/./collections/default.push-ndbcluster-- Installing: /usr/local/mysql/mysql-test/.</description>
-    </item>
-    
-    <item>
-      <title>Happy New Year</title>
-      <link>/2017/12/31/happy-new-year-on-2018/</link>
-      <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/31/happy-new-year-on-2018/</guid>
-      <description>我们ReadAILib全体成员祝大家新年快乐，祝大家在2018年工作顺利，下面是每个人新年愿望！
-“2018新目标-考入自己的目标大学，一切事物都越来越好！”
-— Bing-Hao Jia“希望2018顺顺利利的，考研成功！一切会更好！”
-— Yan-Yue Zhang“我希望在2018年能够在性格上更加成熟些，更加稳重些，为人低调些，工作积极些. 期待2018年年能去潮汕！”
-— Heng-Heng Shen</description>
     </item>
     
   </channel>

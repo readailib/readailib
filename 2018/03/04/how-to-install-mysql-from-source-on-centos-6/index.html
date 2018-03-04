@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  	<link rel="shortcut icon" href="http://rh01.github.io/favicon.ico" type="image/x-icon" />
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<title>CentOS6源码安装MySQL - ReadAILib Official Website </title>
+<meta property="og:title" content="CentOS6源码安装MySQL - ReadAILib Official Website ">
+<meta property="author" content="{        map[]} - rh01">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7a2217d87addd378e56b4f1e1f6f6019";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/readailib">GitHub</a></li>
+    
+    <li><a href="https://www.youtube.com/channel/UCTOuJy4b9E89zCwffX-qC3A">YouTube</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title" style="text-align: center">CentOS6源码安装MySQL</h1>
+
+    
+    
+    <div class="post-meta" style="text-align: center">  <a href="http://github.com/rh01" >Heng-heng Shen</a>  &nbsp;•&nbsp; 2018/03/04 &nbsp;•&nbsp; 3 min read </div>
+    
+
+    <div class="article-content">
+      <p>首先确定本机是安装了开发工具包套件（里面含有gcc等编译器）以及相关的make套件。使用下面命令进行安装。</p>
+<pre class="bash"><code>yum groupinstall &quot;Development Tools&quot; –y
+yum install cmake ncurses-devel -y</code></pre>
+<p>然后依照下面的命令从官方网站上下载源码包。</p>
+<pre class="bash"><code>wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-boost-5.7.20.tar.gz</code></pre>
+<p>使用下面的命令进行解压缩并切换到该目录下，并使用cmake命令进行编译。</p>
+<pre class="bash"><code>tar -xvzf mysql-boost-5.7.20.tar.gz
+cd mysql-5.7.20/
+cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/local/mysql \
+-DWITH_BOOST=/root/mysql-5.7.20/boost/</code></pre>
+<p>然后执行make和make install命令，这会持续很长时间（在我的虚拟机上有一个小时左右），耐心等待即可。</p>
+<pre class="bash"><code>make &amp; make install</code></pre>
+<p>出现下面的信息，基本就是安装成功了。</p>
+<pre class="bash"><code>-- Installing: /usr/local/mysql/mysql-test/./collections/mysql-5.7-stage.push
+-- Installing: /usr/local/mysql/mysql-test/./collections/default.weekly
+-- Installing: /usr/local/mysql/mysql-test/./collections/disabled-weekly.list
+-- Installing: /usr/local/mysql/mysql-test/./collections/default.push-valgrind
+-- Installing: /usr/local/mysql/mysql-test/./collections/disabled-gtid-on.list
+-- Installing: /usr/local/mysql/mysql-test/./collections/default.release.done
+-- Installing: /usr/local/mysql/mysql-test/./collections/default.push
+-- Installing: /usr/local/mysql/mysql-test/./collections/disabled-daily.list
+-- Installing: /usr/local/mysql/mysql-test/./collections/README.experimental
+-- Installing: /usr/local/mysql/mysql-test/./collections/default.daily-valgrind
+-- Installing: /usr/local/mysql/mysql-test/./collections/default.weekly-valgrind
+-- Installing: /usr/local/mysql/mysql-test/./collections/coverage.ignore
+-- Installing: /usr/local/mysql/mysql-test/./collections/default.push-ndbcluster
+-- Installing: /usr/local/mysql/mysql-test/./collections/default.daily
+-- Installing: /usr/local/mysql/mysql-test/./collections/default.experimental
+-- Installing: /usr/local/mysql/mysql-test/./README.gcov
+-- Installing: /usr/local/mysql/./COPYING-test
+-- Installing: /usr/local/mysql/./README-test
+-- Up-to-date: /usr/local/mysql/mysql-test/mtr
+-- Up-to-date: /usr/local/mysql/mysql-test/mysql-test-run
+-- Installing: /usr/local/mysql/mysql-test/lib/My/SafeProcess/my_safe_process
+-- Up-to-date: /usr/local/mysql/mysql-test/lib/My/SafeProcess/my_safe_process
+-- Installing: /usr/local/mysql/mysql-test/lib/My/SafeProcess/Base.pm
+-- Installing: /usr/local/mysql/support-files/mysqld_multi.server
+-- Installing: /usr/local/mysql/support-files/mysql-log-rotate
+-- Installing: /usr/local/mysql/support-files/magic
+-- Installing: /usr/local/mysql/share/aclocal/mysql.m4
+-- Installing: /usr/local/mysql/support-files/mysql.server</code></pre>
+<p>但是安装完成之后，如果此时立即启动MySQL服务，将会出错。</p>
+<pre class="bash"><code>[root@node1 ~]# /usr/local/mysql/bin/mysqld
+mysqld: Can&#39;t change dir to &#39;/var/lib/mysql/&#39; (Errcode: 2 - No such file or directory)
+2018-03-04T20:45:59.080932Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2018-03-04T20:45:59.082318Z 0 [Note] --secure-file-priv is set to NULL. Operations related to importing and exporting data are disabled
+2018-03-04T20:45:59.082361Z 0 [Note] /usr/local/mysql/bin/mysqld (mysqld 5.7.20) starting as process 10737 ...
+2018-03-04T20:45:59.091700Z 0 [Warning] Can&#39;t create test file /var/lib/mysql/node1.lower-test
+2018-03-04T20:45:59.091727Z 0 [Warning] Can&#39;t create test file /var/lib/mysql/node1.lower-test
+2018-03-04T20:45:59.092092Z 0 [ERROR] failed to set datadir to /var/lib/mysql/
+2018-03-04T20:45:59.092112Z 0 [ERROR] Aborting
+
+2018-03-04T20:45:59.092123Z 0 [Note] Binlog end
+2018-03-04T20:45:59.092824Z 0 [Note] /usr/local/mysql/bin/mysqld: Shutdown complete</code></pre>
+<p>大致意思就是没有配置相关的服务器配置文件，balabala…… 下面编辑MySQL的服务器配置文件my.cnf，编辑内容为</p>
+<pre class="bash"><code>[client]
+port=3306
+socket=/usr/local/mysql/mysql.sock
+
+[mysqld]
+port=3306
+socket=/usr/local/mysql/mysql.sock
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/usr/local/mysql/mysqld.pid</code></pre>
+<p>接下来，创建一个用户mysql，并将MySQL安装目录授权给mysql用户。</p>
+<pre class="bash"><code>useradd mysql -s /sbin/nologin
+chown -R mysql.mysql /usr/local/mysql/</code></pre>
+<p>使用下面的命令将会生成一个临时的root用户登陆密码。</p>
+<pre class="bash"><code>[root@node1 mysql]# bin/mysqld --initialize --user=mysql
+2018-03-04T20:47:08.630847Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2018-03-04T20:47:10.123348Z 0 [Warning] InnoDB: New log files created, LSN=45790
+2018-03-04T20:47:10.573382Z 0 [Warning] InnoDB: Creating foreign key constraint system tables.
+2018-03-04T20:47:11.072424Z 0 [Warning] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: 36223d2c-1fed-11e8-8868-000c29d37a7d.
+2018-03-04T20:47:11.312940Z 0 [Warning] Gtid table is not ready to be used. Table &#39;mysql.gtid_executed&#39; cannot be opened.
+2018-03-04T20:47:11.314267Z 1 [Note] A temporary password is generated for root@localhost: Ha:Rj-K9&amp;kc(</code></pre>
+<p>使用临时密码进行登陆，并在MySQL控制台里修改root密码。</p>
+<pre class="bash"><code>[root@node1 mysql]# bin/mysql -u root -p -S /usr/local/mysql/mysql.sock
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 5.7.20
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.</code></pre>
+<p>使用下面的命令进行修改密码</p>
+<pre class="bash"><code>mysql&gt; ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;YOURPASSWORD&#39;;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; exit
+Bye</code></pre>
+<p>接下来，查找MySQL的进程，并杀死。</p>
+<pre class="bash"><code>[root@node1 mysql]# ps -aux | grep mysqld | grep -v grep
+root     10778  0.0  0.1   6684  1296 pts/1    S    04:47   0:00 /bin/sh bin/mysqld_safe --user=mysql
+mysql    10978  0.0 15.2 615176 156408 pts/1   Sl   04:47   0:00 /usr/local/mysql/bin/mysqld --basedir=/usr/local/mysql --datadir=/var/lib/mysql --plugin-dir=/usr/local/mysql/lib/plugin --user=mysql --log-error=/var/log/mysqld.log --pid-file=/usr/local/mysql/mysqld.pid --socket=/usr/local/mysql/mysql.sock --port=3306
+[root@node1 mysql]# kill -9 10778
+[root@node1 mysql]# kill -9 10978
+[1]+  已杀死               bin/mysqld_safe --user=mysql</code></pre>
+<p>为了更好的管理服务，因此使用下面的两条命令就可以使用service mysqld start|stop|status进行方便的管理了。</p>
+<pre class="bash"><code>[root@node1 mysql]# cp /root/mysql-5.7.20/support-files/mysql.server /etc/init.d/mysqld
+[root@node1 mysql]# chmod +x /etc/init.d/mysqld</code></pre>
+<p>下面就可以使用service mysqld xxx进行很方便的管理了。</p>
+<pre class="bash"><code>[root@node1 mysql]# service mysqld start</code></pre>
+
+        <hr />
+
+    </div>
+    
+
+
+
+  </article>
+
+      <footer class="footer">
+
+        
+
+          <div class="generic-box">
+Subscribe to our <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>.
+
+  <div class="share-page">
+<div class="share-links" style="text-align:center;">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</div>
+</div>
+
+
+</div>
+
+        
+      </footer>
+
+    
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/Dockerfile.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/python.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/scala.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-111305334-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
+
+
+  
+  
+
+  <div id="gitalk-container"></div>
+</div>
+
+<link rel="stylesheet" href="/css/gitalk.css" media="all">
+<style type="text/css">
+	
+.gt-container .gt-comment-admin .gt-header-comment .gt-comment-content {
+    background-color: #f5f3d5;
+}
+
+textarea {
+   background-color: #f5f3d5;
+}
+</style>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: 'a98bac7d9ab86f4813de',
+        clientSecret: '307c20444af8207286b5f78f7a5ed941786edad0',
+        repo: 'readailib',
+        owner: 'rh01',
+        admin: ['rh01'],
+        body: location.href,
+      });
+      gitalk.render('gitalk-container');
+ </script>
+
+
+
+</main>
+
+

@@ -102,6 +102,15 @@
     </item>
     
     <item>
+      <title>Linux</title>
+      <link>/tags/linux/</link>
+      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Machine Learning</title>
       <link>/tags/machine-learning/</link>
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
@@ -197,6 +206,15 @@
       <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/scala-style/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>运维</title>
+      <link>/tags/%E8%BF%90%E7%BB%B4/</link>
+      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E8%BF%90%E7%BB%B4/</guid>
       <description></description>
     </item>
     

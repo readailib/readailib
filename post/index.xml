@@ -6,10 +6,24 @@
     <description>Recent content in Posts on ReadAILib Official Website </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CentOS6源码安装MySQL</title>
+      <link>/2018/03/04/how-to-install-mysql-from-source-on-centos-6/</link>
+      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/03/04/how-to-install-mysql-from-source-on-centos-6/</guid>
+      <description>首先确定本机是安装了开发工具包套件（里面含有gcc等编译器）以及相关的make套件。使用下面命令进行安装。
+yum groupinstall &amp;quot;Development Tools&amp;quot; –yyum install cmake ncurses-devel -y然后依照下面的命令从官方网站上下载源码包。
+wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-boost-5.7.20.tar.gz使用下面的命令进行解压缩并切换到该目录下，并使用cmake命令进行编译。
+tar -xvzf mysql-boost-5.7.20.tar.gzcd mysql-5.7.20/cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/local/mysql \-DWITH_BOOST=/root/mysql-5.7.20/boost/然后执行make和make install命令，这会持续很长时间（在我的虚拟机上有一个小时左右），耐心等待即可。
+make &amp;amp; make install出现下面的信息，基本就是安装成功了。
+-- Installing: /usr/local/mysql/mysql-test/./collections/mysql-5.7-stage.push-- Installing: /usr/local/mysql/mysql-test/./collections/default.weekly-- Installing: /usr/local/mysql/mysql-test/./collections/disabled-weekly.list-- Installing: /usr/local/mysql/mysql-test/./collections/default.push-valgrind-- Installing: /usr/local/mysql/mysql-test/./collections/disabled-gtid-on.list-- Installing: /usr/local/mysql/mysql-test/./collections/default.release.done-- Installing: /usr/local/mysql/mysql-test/./collections/default.push-- Installing: /usr/local/mysql/mysql-test/./collections/disabled-daily.list-- Installing: /usr/local/mysql/mysql-test/./collections/README.experimental-- Installing: /usr/local/mysql/mysql-test/./collections/default.daily-valgrind-- Installing: /usr/local/mysql/mysql-test/./collections/default.weekly-valgrind-- Installing: /usr/local/mysql/mysql-test/./collections/coverage.ignore-- Installing: /usr/local/mysql/mysql-test/./collections/default.push-ndbcluster-- Installing: /usr/local/mysql/mysql-test/.</description>
+    </item>
     
     <item>
       <title>Scala CheatSheet</title>
